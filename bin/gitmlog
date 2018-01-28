@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+set -e
+
+if [ $# -gt 2 ] ; then
+    >&2 echo "Usage: $(basename $0) <ref1> <ref2>"
+    exit 1
+fi
+
+if [ $# -lt 1 ]; then
+    BRANCH1=HEAD
+else
+    BRANCH1=$1
+fi
+
+if [ $# -lt 2 ]; then
+    BRANCH2=origin/${BRANCH1}
+else
+    BRANCH2=$2
+fi
+
+MB=$(git merge-base "${BRANCH1}" "${BRANCH2}")
+
+run() {
+    echo "Merge base: ${MB}"
+    echo
+    echo "==== ${BRANCH1} commits: ============================================================"
+    git --no-pager log ${MB}..${BRANCH1} --graph --decorate --color=always
+    echo
+    echo
+    echo "==== ${BRANCH2} commits: ============================================================"
+    git --no-pager log ${MB}..${BRANCH2} --graph --decorate --color=always
+}
+run | less -R
