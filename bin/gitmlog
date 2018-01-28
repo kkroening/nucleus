@@ -6,15 +6,15 @@ if [ $# -gt 2 ] ; then
     exit 1
 fi
 
-if [ $# -lt 1 ]; then
-    BRANCH1=HEAD
+if [ $# -lt 2 ]; then
+    BRANCH1=$(git rev-parse --abbrev-ref HEAD)
+    if [ $# -lt 1 ]; then
+        BRANCH2=origin/${BRANCH1}
+    else
+        BRANCH2=$1
+    fi
 else
     BRANCH1=$1
-fi
-
-if [ $# -lt 2 ]; then
-    BRANCH2=origin/${BRANCH1}
-else
     BRANCH2=$2
 fi
 
@@ -30,4 +30,4 @@ run() {
     echo "==== ${BRANCH2} commits: ============================================================"
     git --no-pager log ${MB}..${BRANCH2} --graph --decorate --color=always
 }
-run | less -R
+run | less -FRX
