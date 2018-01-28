@@ -12,10 +12,13 @@ MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 eval "$(pyenv init -)"
 export PIPENV_VENV_IN_PROJECT=true
+export PYTHONDONTWRITEBYTECODE=1
 
 #export LC_ALL=en_US.UTF-8
 #export LANG=en_US.UTF-8
 
+alias vc='virtualenv .venv --no-site-packages'
+alias va='. venv/bin/activate'
 alias .va='. .venv/bin/activate'
 alias vd='deactivate'
 alias ls='ls --color=auto'

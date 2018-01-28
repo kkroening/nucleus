@@ -1,0 +1,5 @@
+[user]
+	email = karlk@kralnet.us
+	name = Karl Kroening
+[core]
+	excludesfile = /Users/karlk/.gitignore_global
