@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+gce ssh --ssh-flag="-L 6006:localhost:6006" instance-1

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+find . \
+    \( \
+        -name .venv -o \
+        -name .sw\* -o \
+        -name venv \
+    \) -prune -o -type f -print
