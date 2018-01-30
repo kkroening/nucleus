@@ -1,5 +1,8 @@
-filetype plugin on
-set directory^=$HOME/.vim/tmp//
+runtime bundle/vim-pathogen/autoload/pathogen.vim
+execute pathogen#infect()
+
+filetype plugin indent on
+"set directory^=$HOME/.vim/tmp//
 set et hls sts=4 sw=4 ts=4
 syn on
 
