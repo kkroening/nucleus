@@ -1,7 +1,17 @@
 #!/usr/bin/env bash
 find . \
     \( \
-        -name .venv -o \
-        -name .sw\* -o \
-        -name venv \
+        -name .git -o \
+        -name .ipynb_checkpoints -o \
+        -name .venv\* -o \
+        -name build -o \
+        -name deploy -o \
+        -name node_modules -o \
+        -name venv -o \
+        -name \*.bundle.js -o \
+        -name \*.map -o \
+        -name \*.min.js -o \
+        -name \*.pyc -o \
+        -name \*.pyo -o \
+        -name \*.sw\* \
     \) -prune -o -type f -print

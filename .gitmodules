@@ -4,3 +4,6 @@
 [submodule ".vim/bundle/pyflakes-vim"]
 	path = .vim/bundle/pyflakes-vim
 	url = https://github.com/kevinw/pyflakes-vim
+[submodule ".vim/bundle/vimpdb"]
+	path = .vim/bundle/vimpdb
+	url = git@github.com:gotcha/vimpdb.git
