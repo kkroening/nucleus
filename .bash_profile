@@ -27,7 +27,7 @@ alias vc='virtualenv venv --no-site-packages'
 alias .vc='virtualenv .venv --no-site-packages'
 alias va='. venv/bin/activate'
 alias .va='. .venv/bin/activate'
-alias .vc3='virtualenv .venv3 -p $(pyenv which 3.6.4) --no-site-packages'
+alias .vc3='virtualenv .venv3 -p $(pyenv shell --unset; pyenv which python3) --no-site-packages'
 alias va3='. venv3/bin/activate'
 alias .va3='. .venv3/bin/activate'
 alias vd='deactivate'
@@ -64,3 +64,25 @@ export NVM_DIR="$HOME/.nvm"
 export PATH="/usr/local/opt/qt/bin:$PATH"
 
 export PKG_CONFIG_PATH="/usr/local/opt/openssl/lib/pkgconfig"
+
+
+
+alias kw='watch -n 0.5 kubectl'
+alias kc='kubectl'
+alias kcc='kc create'
+alias kcg='kc get'
+alias kwg='kw get'
+alias kcgd='kc get deployments'
+alias kwgd='kw get deployments'
+alias kcgp='kc get pods'
+alias kwgp='kw get pods'
+alias kcd='kc describe'
+alias kwd='kw describe'
+alias kcdp='kc describe pod'
+alias kwdp='kw describe pod'
+alias kcl='kc logs'
+alias kwl='kw logs'
+alias tf=terraform
+
+export DIRENV_LOG_FORMAT=
+eval $(direnv hook bash)

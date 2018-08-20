@@ -18,6 +18,7 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o n
 autocmd BufRead,BufNewFile *.txt setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.yaml setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.py setlocal colorcolumn=100
+autocmd BufRead,BufNewFile *.tf setlocal sts=2 sw=2 ts=2
 
 "
 " Fix shift+arrow key combinations.
