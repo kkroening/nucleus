@@ -1,0 +1,308 @@
+# OS Customization
+
+## Set hostname:
+
+Run the following in a terminal:
+```bash
+sudo scutil --set HostName "newname"
+sudo scutil --set LocalHostName "newname"
+dscacheutil -flushcache
+sudo reboot
+```
+
+## Auto-hide dock
+
+Right click Dock and choose "Dock preferences", then auto-hide dock
+
+## Remove extra dock icons
+
+Drag and drop each unnecessary icon on the dock to the trash.
+
+## Make TouchBar buttons behave like a reasonable keyboard
+
+Touch Bar Shows => Extended Control Strip
+Customize Control Strip => drag `Screen Lock` in place of Siri icon
+
+## Disable capslock
+
+System Preferences => Keyboard => Keyboard => Modifier Keys => set capslock to "No action"
+
+## Disable all keyboard autocorrect nonsense
+
+System Preferences => Keyboard => Text => uncheck everything
+
+## Disable OS X sounds
+
+System Preferences => Sound
+- uncheck "Play user interface sound effects"
+- set alert volume to 0
+
+## Enable bluetooth icon in menu bar
+
+- System Preferences => Bluetooth => Show Bluetooth in menu bar
+
+## Show battery percentage
+
+Click battery indicator in top menu and choose "Show Percentage"
+
+## Require password on screen lock
+
+- System Preferences => Security & Privacy => General => Require password immediately
+
+## Enable firewall
+
+- System Preferences => Security & Privacy => Turn On Firewall
+- System Preferences => Security & Privacy => Firewall Options => Uncheck "Automatically allow ..." checkboxes
+- System Preferences => Security & Privacy => Firewall Options => Check "Enable stealth mode"
+
+
+# Application installation/setup
+
+## Chrome
+
+```bash
+curl -O 'https://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg'
+open googlechrome.dmg
+```
+
+- Setup default chrome profile
+  - People => Edit => rename "Person 1" to "Personal"
+- Setup work profile:
+  - People => Add Person, People => Edit => Rename to "Work"
+- Do in all profiles:
+  - Sign into chrome
+  - Configure sync settings
+  - Install ublock origin
+
+## iTerm2
+
+```bash
+curl -o - https://iterm2.com/downloads/stable/iTerm2-3_1_6.zip | bsdtar -x
+open .
+```
+
+Then drag and drop to Applications.
+
+Run iterm and configure:
+- iTerm => Preferences => Profiles
+  - General => reuse previous session's current directory
+  - Colors => Color Presets => Light Background
+  - Text => Font => font size 16
+  - Terminal => check "Silence bell"
+  - Session => "Prompt before closing if there are jobs running besides..."
+  - Keys:
+    - Set Left ⎇  Key: Esc+
+    - Add ⎇ +← mapping: Send Escape Sequence: b
+    - Add ⎇ +→ mapping: Send Escape Sequence: f
+    - (Note that the alt symbol is reversed in this doc for some reason; fixme)
+  - Other actions => Set as default
+
+## Slack
+
+```bash
+curl -o slack.dmg https://slack.com/ssb/download-osx
+```
+
+## Homebrew
+
+[https://brew.sh](https://brew.sh)
+
+## Git
+
+```bash
+brew install git
+git config --global user.email "karlk@kralnet.us"
+git config --global user.name "Karl Kroening"
+```
+
+## Add github ssh key
+
+Run the following and then paste into github:
+```bash
+ssh-keygen -t dsa
+cat ~/.ssh/id_dsa.pub | pbcopy
+```
+
+## Setup gpg key
+
+```bash
+brew install gpg
+gpg --full-generate-key
+```
+
+## Install coreutils
+
+```bash
+brew install coreutils
+```
+
+Follow instructions for setting PATH and MANPATH.  i.e., add to bash_profile:
+```bash
+PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
+MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+```
+
+## Install nucleus repo
+
+```bash
+git clone https://github.com/kkroening/nucleus.git
+mkdir -p ~/bin
+ln -s ~/nucleus/keygen/keygen.py ~/bin/key
+```
+
+Setup symlinks (manually for now).
+
+```bash
+cd ~
+ln -s ~/nucleus/.* .
+rm .vim
+mkdir .vim .vim/bundle .vim/ftplugin
+pushd .vim/bundle
+  ln -s ~/nucleus/.vim/bundle/* .
+popd
+pushd .vim/ftplugin
+  ln -s ~/nucleus/.vim/ftplugin/* .
+popd
+```
+
+## Alternative to nucleus: configure minimal bash_profile
+
+Fix prompt (inspired by GCE) and setup `$PATH`:
+```bash
+PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+PATH=~/bin:${PATH}
+```
+
+
+## Install packages via homebrew
+
+- `brew install htop`
+- `brew install watch`
+- `brew install ffmpeg --with-sdl2 --with-freetype --with-fontconfig`
+- `brew install go`
+  - add to .bash_profile:
+    ```
+    (fixme: add goroot to $PATH)
+    ```
+
+## Python
+
+- `brew install pyenv direnv`
+  - add to .bash_profile:
+    ```
+    eval "$(pyenv init -)"
+    ```
+
+- install python versions:
+  ```
+  pyenv install 2.7.14
+  pyenv install 3.6.4
+  ```
+
+- Install latest virtualenv + pip in each pyenv:
+  ```
+  pyenv shell 2.7.14
+  pip install -U pip
+  pip install -U virtualenv
+
+  pyenv shell 3.6.4
+  pip install -U pip
+  pip install -U virtualenv
+  ```
+
+## gcloud sdk
+
+```bash
+curl https://sdk.cloud.google.com | bash
+```
+- Refer to https://cloud.google.com/sdk/downloads
+- run `install.sh` to add to bash_profile
+
+## vim
+
+`.vimrc`:
+```
+filetype plugin indent on
+set directory^=$HOME/.vim/tmp//
+set et hls sts=4 sw=4 ts=4
+syn on
+
+"
+" Fix shift+arrow key combinations.
+"
+nmap <S-Up>    <Up>
+nmap <S-Down>  <Down>
+nmap <S-Left>  <Left>
+nmap <S-Right> <Right>
+imap <S-Up>    <Up>
+imap <S-Down>  <Down>
+imap <S-Left>  <Left>
+imap <S-Right> <Right>
+vmap <S-Up>    <Up>
+vmap <S-Down>  <Down>
+vmap <S-Left>  <Left>
+vmap <S-Right> <Right>
+
+map <Esc>[A <Up>
+map <Esc>[B <Down>
+map <Esc>[C <Right>
+map <Esc>[D <Left>
+```
+
+`~/.vim/ftplugin/text.vim`:
+```
+setlocal sts=2 sw=2 ts=2
+```
+
+Install pathogen.vim:
+``` bash
+mkdir -p ~/.vim/autoload ~/.vim/bundle && \
+curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+```
+
+## Docker
+
+- https://store.docker.com/edititions/community/docker-ce-desktop-mac
+
+```bash
+curl -O https://download.docker.com/mac/stable/Docker.dmg
+```
+
+TODO: see if there's a way to download/install without logging into docker store
+
+## Minikube
+
+```bash
+brew cask install minikube
+brew install kubernetes-cli
+```
+
+# Extra
+
+## f.lux
+
+[f.lux download](https://justgetflux.com)
+
+Set bedtime color to 2700K.
+
+## Spotify
+
+```bash
+curl -Lo - https://download.scdn.co/SpotifyInstaller.zip | bsdtar -x
+open "Install Spotify.app"
+```
+
+
+## Karabiner Elements
+
+Karabiner elements for emulating numpad with Blender:
+- https://github.com/tekezo/Karabiner-Elements/issues/127
+
+
+## Fix monitor issue:
+
+- Remove /Library/Preferences/com.apple.windowserver.plist
+- Remove Users/karlk/Library/Preferences/com.apple.windowserver.*
+- nvram/pram reset: power off, then hit power then hold command+option+p+r for about 30 seconds; screen should flash twice
+- smc reset: power off then cmd+option+shift+power
+- edit: this doesn't actually fix it or even seem to make a difference.
