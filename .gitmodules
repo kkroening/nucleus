@@ -9,7 +9,7 @@
 	url = git@github.com:gotcha/vimpdb.git
 [submodule ".vim/bundle/vim-markdown"]
 	path = .vim/bundle/vim-markdown
-	url = https://github.com/gabrielelana/vim-markdown.git
+	url = git@github.com:gabrielelana/vim-markdown.git
 [submodule ".vim/bundle/vim-terraform"]
 	path = .vim/bundle/vim-terraform
-	url = https://github.com/hashivim/vim-terraform.git
+	url = git@github.com:hashivim/vim-terraform.git
