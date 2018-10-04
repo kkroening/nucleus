@@ -7,6 +7,8 @@ set et hls sts=4 sw=4 ts=4
 syn on
 set number
 highlight LineNr ctermfg=grey ctermbg=lightgrey
+highlight Italic ctermbg=lightgrey
+highlight BoldItalic ctermbg=lightgrey
 
 " Show 120-column limit.
 set colorcolumn=120
@@ -40,3 +42,6 @@ map <Esc>[A <Up>
 map <Esc>[B <Down>
 map <Esc>[C <Right>
 map <Esc>[D <Left>
+
+" disable markdown fucking spellcheck (I know how to spell, you cunt)
+let g:markdown_enable_spell_checking = 0

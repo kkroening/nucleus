@@ -9,11 +9,16 @@ setup(
     url='https://github.com/kkroening/nucleus',
     packages=['nucleus'],
     tests_require=['pytest'],
-    install_requires=['pydash'],
+    install_requires=[
+        'IPython',
+        'pandas',
+        'pydash',
+    ],
     entry_points={
         'console_scripts': [
             'camel=nucleus.camel:main',
             'snake=nucleus.snake:main',
+            'csview=nucleus.csview:main',
         ],
     },
 )

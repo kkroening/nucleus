@@ -55,6 +55,10 @@ Click battery indicator in top menu and choose "Show Percentage"
 - System Preferences => Security & Privacy => Firewall Options => Uncheck "Automatically allow ..." checkboxes
 - System Preferences => Security & Privacy => Firewall Options => Check "Enable stealth mode"
 
+## Disable automatic screen brightness
+
+- System Preferences => Displays => Uncheck "Automatically adjust brightness"
+
 
 # Application installation/setup
 
@@ -113,14 +117,15 @@ curl -o slack.dmg https://slack.com/ssb/download-osx
 brew install git
 git config --global user.email "karlk@kralnet.us"
 git config --global user.name "Karl Kroening"
+git config --global core.excludesfile ~/.global_gitignore
 ```
 
 ## Add github ssh key
 
 Run the following and then paste into github:
 ```bash
-ssh-keygen -t dsa
-cat ~/.ssh/id_dsa.pub | pbcopy
+ssh-keygen
+cat ~/.ssh/id_rsa.pub | pbcopy
 ```
 
 ## Setup gpg key
@@ -146,6 +151,8 @@ MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 ```bash
 git clone https://github.com/kkroening/nucleus.git
+cd nucleus
+git submodule update --init
 mkdir -p ~/bin
 ln -s ~/nucleus/keygen/keygen.py ~/bin/key
 ```
@@ -210,15 +217,39 @@ PATH=~/bin:${PATH}
   pip install -U virtualenv
   ```
 
+## Nucleus setup (part 2)
+
+This must be done *after* Python is set up, and the Python setup should happen after the initial nucleus setup - hence having the nucleus setup being broken up into two parts.
+
+```
+cd ~/nucleus
+(vc3 && va3 && pip install -e .)
+ln -sf .venv3/bin/{csview,snake,camel} ~/bin
+```
+
 ## gcloud sdk
 
 ```bash
+cd ~
 curl https://sdk.cloud.google.com | bash
 ```
 - Refer to https://cloud.google.com/sdk/downloads
 - run `install.sh` to add to bash_profile
 
 ## vim
+
+
+FUCKING CANCER:
+```
+sudo /System/Library/Frameworks/Python.framework/Versions/2.7/bin/python -m ensurepip
+sudo /System/Library/Frameworks/Python.framework/Versions/2.7/bin/python -m pip install pyflakes
+```
+There's apparently no way to get vim to work with another python environment, and it gives a worthless erorr message, so the only way to instdall pytholn deps is to fucking use sudo against system python. wtfffvfffgffffdfguysdffssdgfuysufysugdyfasdfgiuadfsgiadfisghadfs;hioadfshoiuadfshio;dfsadfsadsddfAS;;
+
+Probably not needed:
+```
+brew reinstall vim --with-custom-python
+```
 
 `.vimrc`:
 ```
@@ -297,6 +328,14 @@ open "Install Spotify.app"
 
 Karabiner elements for emulating numpad with Blender:
 - https://github.com/tekezo/Karabiner-Elements/issues/127
+
+
+## yEd
+
+- [Download yEd](https://www.yworks.com/products/yed/download#download)
+- File => Preferences => Editor:
+  - Check _Edit Label on Create Node_
+  - Check _Dynamically Adjust Node Size to Label Size_
 
 
 ## Fix monitor issue:

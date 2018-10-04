@@ -3,7 +3,9 @@ PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
 MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 # Setup python (pyenv, pip, virtualenv, etc.)
-eval "$(pyenv init -)"
+if which pyenv > /dev/null; then
+    eval "$(pyenv init -)"
+fi
 export PIPENV_VENV_IN_PROJECT=true
 export PIP_REQUIRE_VIRTUALENV=true
 export PYTHONDONTWRITEBYTECODE=true
@@ -34,26 +36,24 @@ alias vd='deactivate'
 alias ls='ls --color=auto'
 alias less='less -FRX'
 alias ..='cd ..'
-#alias vi='PYTHONHOME=~/.pyenv/versions/2.7.14 vi'
-#alias vim='PYTHONHOME=~/.pyenv/versions/2.7.14 vi'
-#alias vimdiff='PYTHONHOME=~/.pyenv/versions/2.7.14 vi'
+#alias vi='PYTHONHOME=~/nucleus/.venv vi'
+#alias vim='PYTHONHOME=~/nucleus/.venv vim'
+#alias vimdiff='PYTHONHOME=~/nucleus/.venv vimdiff'
 
 # Setup gcloud.
-if [ -f '/Users/karlk/usr/google-cloud-sdk/path.bash.inc' ]; then source '/Users/karlk/usr/google-cloud-sdk/path.bash.inc'; fi
-if [ -f '/Users/karlk/usr/google-cloud-sdk/completion.bash.inc' ]; then source '/Users/karlk/usr/google-cloud-sdk/completion.bash.inc'; fi
+if [ -f '/Users/karlk/google-cloud-sdk/path.bash.inc' ]; then source '/Users/karlk/google-cloud-sdk/path.bash.inc'; fi
+if [ -f '/Users/karlk/google-cloud-sdk/completion.bash.inc' ]; then source '/Users/karlk/google-cloud-sdk/completion.bash.inc'; fi
 
 # Include nucleus tools.
 NUCLEUS_DIR="$(dirname $(readlink -f ~/.bashrc))"
 PATH=~/bin:${NUCLEUS_DIR}/bin:${PATH}
-PATH=${PATH}:$(readlink -f ~/src/notmine/apitrace/build)
 
-export APPENGINE_SDK="${HOME}/usr/google-cloud-sdk/platform/google_appengine"
+export APPENGINE_SDK="${HOME}/google-cloud-sdk/platform/google_appengine"
 export PATH="${APPENGINE_SDK}:${PATH}"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 
 
 ## QT stuff (log during `brew install qt5`):
@@ -65,24 +65,38 @@ export PATH="/usr/local/opt/qt/bin:$PATH"
 
 export PKG_CONFIG_PATH="/usr/local/opt/openssl/lib/pkgconfig"
 
-
-
-alias kw='watch -n 0.5 kubectl'
+alias kw='watch -n 1 kubectl'
 alias kc='kubectl'
+alias kca='kc apply'
 alias kcc='kc create'
+alias kcfg='kc config'
+alias kcfggc='kcfg get-contexts'
+alias kcfgsc='kcfg set-context'
 alias kcg='kc get'
 alias kwg='kw get'
 alias kcgd='kc get deployments'
 alias kwgd='kw get deployments'
 alias kcgp='kc get pods'
 alias kwgp='kw get pods'
-alias kcd='kc describe'
-alias kwd='kw describe'
-alias kcdp='kc describe pod'
-alias kwdp='kw describe pod'
+alias kcgs='kc get services'
+alias kwgs='kw get services'
+alias kcgj='kc get jobs'
+alias kwgj='kw get jobs'
 alias kcl='kc logs'
 alias kwl='kw logs'
+alias kcd='kc describe'
+alias kwd='kw describe'
+alias kcD='kc delete'
+alias kcdp='kc describe pod'
+alias kwdp='kw describe pod'
+alias kcds='kc describe service'
+alias kwds='kw describe service'
+alias kcl='kc logs'
+alias kwl='kw logs'
+alias kcpf='kc port-forward'
 alias tf=terraform
 
 export DIRENV_LOG_FORMAT=
-eval $(direnv hook bash)
+#if which direnv > /dev/null; then
+#    eval $(direnv hook bash)
+#fi

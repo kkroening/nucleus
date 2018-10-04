@@ -13,5 +13,8 @@ find . \
         -name \*.min.js -o \
         -name \*.pyc -o \
         -name \*.pyo -o \
-        -name \*.sw\* \
-    \) -prune -o -type f -print
+        -name \*.sw\* -o \
+        -name \*.js -o \
+        -name \*.vue -o \
+        -name .lab_cache \
+    \) -prune -o -type f -print0
