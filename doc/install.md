@@ -77,7 +77,7 @@ open googlechrome.dmg
 ## iTerm2
 
 ```bash
-curl -o - https://iterm2.com/downloads/stable/iTerm2-3_1_6.zip | bsdtar -x
+curl -o - https://iterm2.com/downloads/stable/iTerm2-3_2_6.zip | bsdtar -x
 open .
 ```
 
@@ -87,6 +87,7 @@ Run iterm and configure:
 - iTerm => Preferences => Profiles
   - General => reuse previous session's current directory
   - Colors => Color Presets => Light Background
+    - Change color for yellow to something more visible.
   - Text => Font => font size 16
   - Terminal => check "Silence bell"
   - Session => "Prompt before closing if there are jobs running besides..."
