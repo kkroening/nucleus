@@ -7,3 +7,6 @@
 [submodule ".vim/bundle/vimpdb"]
 	path = .vim/bundle/vimpdb
 	url = git@github.com:gotcha/vimpdb.git
+[submodule ".vim/bundle/ale"]
+	path = .vim/bundle/ale
+	url = git@github.com:w0rp/ale.git

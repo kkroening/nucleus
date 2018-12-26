@@ -18,6 +18,8 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o n
 autocmd BufRead,BufNewFile *.txt setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.yaml setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.py setlocal colorcolumn=100
+autocmd BufRead,BufNewFile *.js setlocal sts=2 sw=2 ts=2
+autocmd BufRead,BufNewFile *.jsx setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.tf setlocal sts=2 sw=2 ts=2
 
 "
@@ -40,3 +42,5 @@ map <Esc>[A <Up>
 map <Esc>[B <Down>
 map <Esc>[C <Right>
 map <Esc>[D <Left>
+
+let g:ale_set_signs = 0

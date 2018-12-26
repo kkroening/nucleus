@@ -14,4 +14,4 @@ find . \
         -name \*.pyc -o \
         -name \*.pyo -o \
         -name \*.sw\* \
-    \) -prune -o -type f -print
+    \) -prune -o -type f -print0

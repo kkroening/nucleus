@@ -20,8 +20,8 @@ Drag and drop each unnecessary icon on the dock to the trash.
 
 ## Make TouchBar buttons behave like a reasonable keyboard
 
-Touch Bar Shows => Extended Control Strip
-Customize Control Strip => drag `Screen Lock` in place of Siri icon
+Keyboard => Touch Bar Shows => Expanded Control Strip
+Keyboard => Customize Control Strip => drag `Screen Lock` in place of Siri icon
 
 ## Disable capslock
 
@@ -178,7 +178,7 @@ PATH=~/bin:${PATH}
 
 - `brew install htop`
 - `brew install watch`
-- `brew install ffmpeg --with-sdl2 --with-freetype --with-fontconfig`
+- `brew install ffmpeg --with-sdl2 --with-freetype --with-fontconfig --with-libass`
 - `brew install go`
   - add to .bash_profile:
     ```
