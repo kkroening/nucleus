@@ -16,5 +16,6 @@ find . \
         -name \*.sw\* -o \
         -name \*.js -o \
         -name \*.vue -o \
-        -name .lab_cache \
+        -name .lab_cache -o \
+        -name \*.sw\* \
     \) -prune -o -type f -print0

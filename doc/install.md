@@ -20,8 +20,8 @@ Drag and drop each unnecessary icon on the dock to the trash.
 
 ## Make TouchBar buttons behave like a reasonable keyboard
 
-Touch Bar Shows => Extended Control Strip
-Customize Control Strip => drag `Screen Lock` in place of Siri icon
+Keyboard => Touch Bar Shows => Expanded Control Strip
+Keyboard => Customize Control Strip => drag `Screen Lock` in place of Siri icon
 
 ## Disable capslock
 
@@ -81,7 +81,7 @@ open googlechrome.dmg
 ## iTerm2
 
 ```bash
-curl -o - https://iterm2.com/downloads/stable/iTerm2-3_1_6.zip | bsdtar -x
+curl -o - https://iterm2.com/downloads/stable/iTerm2-3_2_6.zip | bsdtar -x
 open .
 ```
 
@@ -91,6 +91,7 @@ Run iterm and configure:
 - iTerm => Preferences => Profiles
   - General => reuse previous session's current directory
   - Colors => Color Presets => Light Background
+    - Change color for yellow to something more visible.
   - Text => Font => font size 16
   - Terminal => check "Silence bell"
   - Session => "Prompt before closing if there are jobs running besides..."
@@ -185,7 +186,7 @@ PATH=~/bin:${PATH}
 
 - `brew install htop`
 - `brew install watch`
-- `brew install ffmpeg --with-sdl2 --with-freetype --with-fontconfig`
+- `brew install ffmpeg --with-sdl2 --with-freetype --with-fontconfig --with-libass`
 - `brew install go`
   - add to .bash_profile:
     ```
