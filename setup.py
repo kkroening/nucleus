@@ -10,6 +10,7 @@ setup(
     packages=['nucleus'],
     tests_require=['pytest'],
     install_requires=[
+        'black',
         'IPython',
         'pandas',
         'pydash',
