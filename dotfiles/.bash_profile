@@ -48,7 +48,7 @@ if [ -f '/Users/karlk/google-cloud-sdk/path.bash.inc' ]; then source '/Users/kar
 if [ -f '/Users/karlk/google-cloud-sdk/completion.bash.inc' ]; then source '/Users/karlk/google-cloud-sdk/completion.bash.inc'; fi
 
 # Include nucleus tools.
-PATH="~/bin:$~/nucleus/bin:${PATH}"
+PATH="~/bin:~/nucleus/bin:${PATH}"
 
 export APPENGINE_SDK="${HOME}/google-cloud-sdk/platform/google_appengine"
 export PATH="${APPENGINE_SDK}:${PATH}"
