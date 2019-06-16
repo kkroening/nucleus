@@ -1,6 +1,8 @@
 # Use gnu coreutils.
-PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
-MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+if [[ "${OSTYPE}" == "darwin"* ]]; then
+    PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
+    MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+fi
 
 # Setup python (pyenv, pip, virtualenv, etc.)
 if which pyenv > /dev/null; then
@@ -37,8 +39,8 @@ alias vd='deactivate'
 alias ls='ls --color=auto'
 alias less='less -FRX'
 alias ..='cd ..'
-#alias vi='PYTHONHOME=~/nucleus/.venv vi'
-#alias vim='PYTHONHOME=~/nucleus/.venv vim'
+#alias vi='PYTHONHOME=~/nucleus/.venv3/lib/python3.6/site-packages vi'
+#alias vim='PYTHONHOME=~/nucleus/.venv3/lib/python3.6/site-packages vim'
 #alias vimdiff='PYTHONHOME=~/nucleus/.venv vimdiff'
 
 # Setup gcloud.
@@ -46,15 +48,15 @@ if [ -f '/Users/karlk/google-cloud-sdk/path.bash.inc' ]; then source '/Users/kar
 if [ -f '/Users/karlk/google-cloud-sdk/completion.bash.inc' ]; then source '/Users/karlk/google-cloud-sdk/completion.bash.inc'; fi
 
 # Include nucleus tools.
-NUCLEUS_DIR="$(dirname $(readlink -f ~/.bashrc))"
-PATH=~/bin:${NUCLEUS_DIR}/bin:${PATH}
+PATH="~/bin:$~/nucleus/bin:${PATH}"
 
 export APPENGINE_SDK="${HOME}/google-cloud-sdk/platform/google_appengine"
 export PATH="${APPENGINE_SDK}:${PATH}"
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+#export NVM_DIR="/usr/local/opt/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
 
 
 ## QT stuff (log during `brew install qt5`):
@@ -66,6 +68,7 @@ export PATH="/usr/local/opt/qt/bin:$PATH"
 
 export PKG_CONFIG_PATH="/usr/local/opt/openssl/lib/pkgconfig"
 
+# Setup kubectl aliases:
 alias kw='watch -n 1 kubectl'
 alias kc='kubectl'
 alias kca='kc apply'
@@ -96,8 +99,3 @@ alias kcl='kc logs'
 alias kwl='kw logs'
 alias kcpf='kc port-forward'
 alias tf=terraform
-
-export DIRENV_LOG_FORMAT=
-#if which direnv > /dev/null; then
-#    eval $(direnv hook bash)
-#fi

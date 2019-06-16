@@ -14,6 +14,8 @@ setup(
         'IPython',
         'pandas',
         'pydash',
+        'pyflakes',
+        'pylint',
     ],
     entry_points={
         'console_scripts': [
