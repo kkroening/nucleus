@@ -59,6 +59,9 @@ Click battery indicator in top menu and choose "Show Percentage"
 
 - System Preferences => Displays => Uncheck "Automatically adjust brightness"
 
+## Link home directory in Finder
+
+- Open Finder, navigate to Documents, hit Command + up-arrow twice to navigate to `/Users`, then drag and drop your home directory onto the favorite bar on the left.
 
 # Application installation/setup
 
@@ -136,17 +139,17 @@ ln -s ~/nucleus/.vim/ftplugin/* ~/.vim/ftplugin/
 ```bash
 brew install pyenv
 pyenv install 2.7.14
-pyenv install 3.6.4
+pyenv install 3.7.3
 
 pyenv shell 2.7.14
 pip install -U pip
 pip install -U virtualenv
 
-pyenv shell 3.7.2
+pyenv shell 3.7.3
 pip install -U pip
 pip install -U virtualenv
 
-pyenv global 2.7.14 3.7.2
+pyenv global 2.7.14 3.7.3
 ```
 
 ## Nucleus installation (part 2)
