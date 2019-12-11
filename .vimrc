@@ -6,23 +6,32 @@ filetype plugin indent on
 set et hls sts=4 sw=4 ts=4
 syn on
 set number
+set bs=2
+set colorcolumn=100
+
 highlight LineNr ctermfg=grey ctermbg=lightgrey
 highlight Italic ctermbg=lightgrey
 highlight BoldItalic ctermbg=lightgrey
-
-" Show 120-column limit.
-set colorcolumn=120
 highlight ColorColumn ctermbg=lightgrey
+highlight DiffAdd ctermfg=black ctermbg=lightgreen
+highlight DiffDelete ctermfg=black ctermbg=red
+highlight DiffChange ctermfg=black ctermbg=lightmagenta
+highlight DiffText ctermfg=black ctermbg=magenta
 
-" disable horseshit auto-commenting.
+" disable auto-commenting.
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o noai nocin nosi inde=
+autocmd FileType sh setlocal sts=2 sw=2 ts=2 colorcolumn=80
 
-autocmd BufRead,BufNewFile *.txt setlocal sts=2 sw=2 ts=2
+autocmd BufRead,BufNewFile *.txt setlocal sts=2 sw=2 ts=2 colorcolumn=120
 autocmd BufRead,BufNewFile *.yaml setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.py setlocal colorcolumn=100
 autocmd BufRead,BufNewFile *.js setlocal sts=2 sw=2 ts=2
+autocmd BufRead,BufNewFile *.sh setlocal sts=2 sw=2 ts=2
+autocmd BufRead,BufNewFile *.json setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.jsx setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.tf setlocal sts=2 sw=2 ts=2
+autocmd BufRead,BufNewFile *.tf setlocal sts=2 sw=2 ts=2
+autocmd BufRead,BufNewFile *.docker setlocal filetype=dockerfile
 
 "
 " Fix shift+arrow key combinations.
@@ -45,6 +54,13 @@ map <Esc>[B <Down>
 map <Esc>[C <Right>
 map <Esc>[D <Left>
 
+map ,g :diffget
+map ,p :diffput
+map ,u :diffup
+
 " disable markdown fucking spellcheck (I know how to spell, you cunt)
 let g:markdown_enable_spell_checking = 0
 let g:ale_set_signs = 0
+
+let g:pyflakes_prefer_python_version = 3
+
