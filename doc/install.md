@@ -63,6 +63,10 @@ Click battery indicator in top menu and choose "Show Percentage"
 
 - Open Finder, navigate to Documents, hit Command + up-arrow twice to navigate to `/Users`, then drag and drop your home directory onto the favorite bar on the left.
 
+## Disable nonsensical automatic virtual desktop reordering
+
+- System Preferences => Mission Control => Uncheck "Automatically rearrange spaces"
+
 # Application installation/setup
 
 ## Chrome
@@ -89,6 +93,7 @@ Then drag and drop to Applications.
 Run iterm and configure:
 - iTerm => Preferences => Profiles
   - General => reuse previous session's current directory
+  - General => Characters considered part of word for selection => `/-+\~_.@`
   - Colors => Color Presets => Light Background
     - Change color for yellow to something more visible.
   - Text => Font => font size 16
@@ -191,6 +196,56 @@ brew install gpg
 gpg --full-generate-key
 ```
 
+## Install packages via homebrew
+
+- `brew install vim`
+- `brew install htop`
+- `brew install watch`
+- `brew install ffmpeg --with-sdl2 --with-freetype --with-fontconfig --with-libass`
+- `brew install go`
+  - add to .bash_profile:
+    ```
+    (fixme: add goroot to $PATH)
+    ```
+
+## Python
+
+- `brew install pyenv direnv`
+  - add to .bash_profile:
+    ```bash
+    eval "$(pyenv init -)"
+    ```
+
+- install python versions:
+  ```bash
+  pyenv install 2.7.14
+  pyenv install 3.7.3
+  ```
+
+- Install latest virtualenv + pip in each pyenv:
+  ```bash
+  pyenv shell 2.7.14
+  pip install -U pip
+  pip install -U virtualenv
+  pip install -U readline
+
+  pyenv shell 3.7.3
+  pip install -U pip
+  pip install -U virtualenv
+  pip install -U readline
+  ```
+
+- Set global default Python interpreters:
+  ```bash
+  pyenv global 3.7.3 2.7.14
+  ```
+
+- Install pyflakes for homebrew vim:
+  ```bash
+  (unset PIP_REQUIRE_VIRTUALENV; /usr/local/bin/pip3 install pyflakes)
+  ```
+>>>>>>> origin/new
+
 ## gcloud sdk
 
 ```bash
@@ -278,3 +333,7 @@ Karabiner elements for emulating numpad with Blender:
 - nvram/pram reset: power off, then hit power then hold Command+Option+P+R for about 30 seconds; screen should flash twice
 - smc reset: power off then cmd+option+shift+power
 - edit: this doesn't actually fix it or even seem to make a difference.
+
+## Various optional apps:
+
+- `brew install mdcat`

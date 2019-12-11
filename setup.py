@@ -11,11 +11,16 @@ setup(
     tests_require=['pytest'],
     install_requires=[
         'black',
+        'flake8',
+        'future',
         'IPython',
         'pandas',
         'pydash',
         'pyflakes',
         'pylint',
+        'pyyaml',
+        'requests',
+        'yq',
     ],
     entry_points={
         'console_scripts': [

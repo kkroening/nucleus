@@ -15,7 +15,7 @@ if [ ${#POSITIONAL_ARGS} -lt 1 ]; then
     exit 1
 fi
 
-GREP_ARGS+=${POSITIONAL_ARGS[0]}
-FIND_ARGS+=${POSITIONAL_ARGS[@]:1}
+GREP_ARGS+="${POSITIONAL_ARGS[0]}"
+FIND_ARGS+="${POSITIONAL_ARGS[@]:1}"
 
 kf "${FIND_ARGS}" | xargs -0 grep "${GREP_ARGS}" -B4 -A4 -n --color=always | less -FRX
