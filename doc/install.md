@@ -244,7 +244,6 @@ gpg --full-generate-key
   ```bash
   (unset PIP_REQUIRE_VIRTUALENV; /usr/local/bin/pip3 install pyflakes)
   ```
->>>>>>> origin/new
 
 ## gcloud sdk
 
