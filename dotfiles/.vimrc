@@ -11,8 +11,8 @@ highlight LineNr ctermfg=grey ctermbg=lightgrey
 highlight Italic ctermbg=lightgrey
 highlight BoldItalic ctermbg=lightgrey
 
-" Show 120-column limit.
-set colorcolumn=120
+" Show 100-column limit.
+set colorcolumn=100
 highlight ColorColumn ctermbg=lightgrey
 
 " disable horseshit auto-commenting.
@@ -64,3 +64,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 let g:syntastic_python_python_exec = '/Users/karlk/nucleus/.venv3/bin/python3'
+
+let g:vue_pre_processors = ['typescript']
+"let g:vue_pre_processors = 'detect_on_enter'
+
