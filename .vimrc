@@ -60,7 +60,6 @@ map ,u :diffup
 
 " disable markdown fucking spellcheck (I know how to spell, you cunt)
 let g:markdown_enable_spell_checking = 0
-let g:ale_set_signs = 0
 
 let g:vue_pre_processors = ['typescript']
 "let g:vue_pre_processors = 'detect_on_enter'
