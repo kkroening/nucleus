@@ -336,3 +336,63 @@ Karabiner elements for emulating numpad with Blender:
 ## Various optional apps:
 
 - `brew install mdcat`
+
+# Ubuntu installation instructions
+
+Follow _some_ of the above instructions (judiciously).
+
+_TODO: pull out common parts of the above and fill in this section.  For now it's just a collection of various notes._
+
+## pyenv
+
+Perform the `apt-get install` commands listed in pyenv's [Common build problems](https://github.com/pyenv/pyenv/wiki/Common-build-problems#prerequisites) article first, then follow the instructions in the [pyenv-installer readme](https://github.com/pyenv/pyenv-installer).  Be sure to make the `~/.bashrc` changes suggested in the `pyenv-installer` output.  Finally, set vim as the default editor using `sudo update-alternatives --config editor`.
+
+At the time of this writing, the entire process looks like this:
+```bash
+sudo apt-get install -y \
+  build-essential \
+  curl \
+  git
+  libbz2-dev \
+  libffi-dev \
+  liblzma-dev \
+  libncurses5-dev \
+  libncursesw5-dev \
+  libreadline-dev \
+  libsqlite3-dev \
+  libssl-dev \
+  llvm \
+  make \
+  python-openssl \
+  tk-dev \
+  wget \
+  xz-utils \
+  zlib1g-dev \
+curl https://pyenv.run | bash
+echo "export PATH=\"${PYENV_ROOT}/bin:\$PATH\""
+echo "eval \"\$(pyenv init -)\""
+echo "eval \"\$(pyenv virtualenv-init -)\""
+sudo update-alternatives --config editor
+```
+
+> _**Note*: Some of the above apt packages may be redundant/unnecessary._
+
+> _**Note**: The `~/.bashrc` changes are already included in nucleus' `.bashrc` file._
+
+## pyflakes-vim
+
+[pyflakes-vim](https://github.com/kevinw/pyflakes-vim) is officially deprecated, but it's still my favorite vim Python plugin due to its simplicity and speed (as compared to [ALE](https://github.com/dense-analysis/ale) and [Syntastic](https://github.com/vim-syntastic/syntastic) which are horrifyingly slow out of the box, to the point of being completely unusable).
+
+`pyflakes-vim` should work with a standard `apt install vim python-flake8`, so long as Pathogen and pyflakes-vim are present in the appropriate `~/.vim` directories (e.g. by symlinking the corresponding nucleus submodules).
+
+## NVIDIA GPU drivers / Tensorflow-GPU
+
+The NVIDIA GPU drivers should be installed as part of the Tensorflow-GPU setup to ensure that all the drivers and various CUDA/cuDNN libraries are compatible.  Currently, the best place to look for instructions is in the [Tensorflow GPU support article](https://www.tensorflow.org/install/gpu#ubuntu_1804_cuda_101), but do jump straight to the "Ubuntu 18.04" section and don't get distracted by the other section that points you to a bunch of rabbit-hole links in the "Software requirements" section. (All of this will probably change by the time this install guide is revisited, but alas.)
+
+If the system gets into a weird state with conflicting library versions, it seems to be safe to do a heavy `sudo apt purge *nvidia* *cuda* *cudnn* && sudo apt autoremove` to eradicate everything and start fresh, so long as you have `nouveau` drivers for backup after the nvidia drivers are wiped and/or are comfortable working from a recovery mode shell and reinstalling things from there.
+
+If you encounter errors during NVIDIA driver installation due to drivers already being in use or nouveau needing to be disabled, simply reboot into a recovery mode shell, enable networking with `sudo service networking start && sudo dhclient && some other stuff` and repeat the installation there.  (Or avoid needing networking in that situation by installing via dpkg).
+
+The `nvidia-smi` tool is your friend to help figure out what's going on, as it shows the current NVIDIA drivers in use, or logs an error if the drivers aren't loaded.
+
+Once everything's set up, running a Tensorflow example should cause a GPU usage spike that should be apparent in the `nvidia-smi` output (e.g. `watch -n 1 nvidia-smi`).  If there's no GPU usage spike but the Tensorflow example finishes anyways, there's a good chance it simply fell back to CPU execution.  Also, if running `tensorboard` doesn't work then you still have work to do.
