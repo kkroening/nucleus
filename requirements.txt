@@ -4,8 +4,10 @@ astroid==2.2.5
 attrs==19.1.0
 backcall==0.1.0
 black==19.3b0
+blessings==1.7
 Click==7.0
 decorator==4.4.0
+gpustat==0.6.0
 ipython==7.5.0
 ipython-genutils==0.2.0
 isort==4.3.20
@@ -14,11 +16,13 @@ lazy-object-proxy==1.4.1
 mccabe==0.6.1
 -e git+git@github.com:kkroening/nucleus.git@c6ebf197924186568c9067a4ca30ceef1f60a3ac#egg=nucleus
 numpy==1.16.4
+nvidia-ml-py3==7.352.0
 pandas==0.24.2
 parso==0.4.0
 pexpect==4.7.0
 pickleshare==0.7.5
 prompt-toolkit==2.0.9
+psutil==5.6.7
 ptyprocess==0.6.0
 pydash==4.7.5
 pyflakes==2.1.1
