@@ -31,6 +31,12 @@ System Preferences => Keyboard => Keyboard => Modifier Keys => set capslock to "
 
 System Preferences => Keyboard => Text => uncheck everything
 
+## Set window management hotkey(s)
+
+System Preferences => Keyboard => Shortcuts => App Shortcuts => `+` button:
+- Menu Title: `Zoom`
+- Keyboard Shortcut: `⌥ ⌘ =`
+
 ## Disable OS X sounds
 
 System Preferences => Sound
