@@ -126,6 +126,7 @@ alias kcgc='kubectl config get-contexts'
 alias kcsns='kubectl config set-context $(kubectl config current-context) --namespace'
 alias kcscc='kubectl config use-context'
 alias kcgcc='kubectl config view --minify -o json | yq ".contexts[0].context" -y'
+alias kctn='kubectl top node'
 alias tf=terraform
 
 export DIRENV_LOG_FORMAT=
