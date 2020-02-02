@@ -383,7 +383,7 @@ sudo update-alternatives --config editor
 
 [pyflakes-vim](https://github.com/kevinw/pyflakes-vim) is officially deprecated, but it's still my favorite vim Python plugin due to its simplicity and speed (as compared to [ALE](https://github.com/dense-analysis/ale) and [Syntastic](https://github.com/vim-syntastic/syntastic) which are horrifyingly slow out of the box, to the point of being completely unusable).
 
-`pyflakes-vim` should work with a standard `apt install vim python-flake8`, so long as Pathogen and pyflakes-vim are present in the appropriate `~/.vim` directories (e.g. by symlinking the corresponding nucleus submodules).
+`pyflakes-vim` should work with a standard `apt install vim python-flake8` (or maybe `python3-pyflakes`), so long as Pathogen and pyflakes-vim are present in the appropriate `~/.vim` directories (e.g. by symlinking the corresponding nucleus submodules).
 
 ## NVIDIA GPU drivers / Tensorflow-GPU
 
@@ -396,3 +396,47 @@ If you encounter errors during NVIDIA driver installation due to drivers already
 The `nvidia-smi` tool is your friend to help figure out what's going on, as it shows the current NVIDIA drivers in use, or logs an error if the drivers aren't loaded.
 
 Once everything's set up, running a Tensorflow example should cause a GPU usage spike that should be apparent in the `nvidia-smi` output (e.g. `watch -n 1 nvidia-smi`).  If there's no GPU usage spike but the Tensorflow example finishes anyways, there's a good chance it simply fell back to CPU execution.  Also, if running `tensorboard` doesn't work then you still have work to do.
+
+## Steam
+
+After installing the NVIDIA drivers as described above, it's also necessary to install some 32-bit dependencies in order for Steam to work:
+
+```bash
+sudo apt install libnvidia-gl-440:i386
+```
+
+Then install Steam "as usual." (My process this time around was to download the official Steam `.deb` file from the Steam website, install it with dpkg, then `sudo apt install steam`, but there might be a less roundabout way)
+
+See also: https://github.com/ValveSoftware/steam-for-linux/issues/5553#issuecomment-402396591
+
+These also seem to be necessary:
+```bash
+sudo apt install \
+  libbz2-1.0:i386 \
+  libgdk-pixbuf2.0-0:i386 \
+  libglib2.0-0:i386 \
+  libgtk2.0-0:i386 \
+  libpulse0:i386 \
+  libva2:i386 \
+  libva-x11-2:i386 \
+  libvdpau1:i386 \
+  libxrandr2:i386 \
+  libxtst6:i386
+```
+
+## Misc
+
+### Limit alt+tab switching to the current workspace only:
+```bash
+gsettings set org.gnome.shell.app-switcher current-workspace-only true
+```
+
+### Enable alt-left + alt-right keys in terminal
+
+Write the following to `~/.inputrc`:
+```
+"\e[1;3D": backward-word ### Alt left
+"\e[1;3C": forward-word ### Alt right
+```
+
+See [stackexchange post 108098](https://unix.stackexchange.com/questions/108098/alt-left-to-skip-words-does-not-work-in-terminal-emulators).
