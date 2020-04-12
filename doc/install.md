@@ -1,4 +1,4 @@
-# OS Customization
+# OS X installation instructions
 
 ## Set hostname:
 
@@ -12,7 +12,7 @@ sudo reboot
 
 ## Auto-hide dock
 
-Right click Dock and choose "Dock preferences", then auto-hide dock
+Right click Dock and choose "Dock preferences", then auto-hide dock.
 
 ## Remove extra dock icons
 
@@ -65,6 +65,10 @@ Click battery indicator in top menu and choose "Show Percentage"
 
 - System Preferences => Displays => Uncheck "Automatically adjust brightness"
 
+## Link home directory in Finder
+
+- Open Finder, navigate to Documents, hit Command + up-arrow twice to navigate to `/Users`, then drag and drop your home directory onto the favorite bar on the left.
+
 ## Disable nonsensical automatic virtual desktop reordering
 
 - System Preferences => Mission Control => Uncheck "Automatically rearrange spaces"
@@ -78,10 +82,6 @@ curl -O 'https://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg'
 open googlechrome.dmg
 ```
 
-- Setup default chrome profile
-  - People => Edit => rename "Person 1" to "Personal"
-- Setup work profile:
-  - People => Add Person, People => Edit => Rename to "Work"
 - Do in all profiles:
   - Sign into chrome
   - Configure sync settings
@@ -131,6 +131,62 @@ git config --global user.name "Karl Kroening"
 git config --global core.excludesfile ~/.global_gitignore
 ```
 
+## Nucleus installation (part 1)
+
+```bash
+git clone https://github.com/kkroening/nucleus.git ~/nucleus
+cd ~/nucleus
+git submodule update --init
+mkdir -p ~/bin ~/.vim ~/.vim/autoload ~/.vim/bundle ~/.vim/ftplugin
+ln -s ~/nucleus/keygen/keygen.py ~/bin/key
+ln -s ~/nucleus/dotfiles/.* ~/
+ln -s ~/nucleus/.vim/autoload/* ~/.vim/autoload/
+ln -s ~/nucleus/.vim/bundle/* ~/.vim/bundle/
+ln -s ~/nucleus/.vim/ftplugin/* ~/.vim/ftplugin/
+```
+
+## Python
+
+```bash
+brew install pyenv
+pyenv install 2.7.14
+pyenv install 3.7.3
+
+pyenv shell 2.7.14
+pip install -U pip
+pip install -U virtualenv
+
+pyenv shell 3.7.3
+pip install -U pip
+pip install -U virtualenv
+
+pyenv global 2.7.14 3.7.3
+```
+
+## Nucleus installation (part 2)
+
+> _Note: This second part of the nucleus installation must be done *after* Python is set up._
+
+```bash
+cd ~/nucleus
+.vc
+.va
+pip install -e .
+```
+
+## Install packages via homebrew
+
+```bash
+brew install coreutils
+brew install vim
+brew install htop
+brew install watch
+brew install ffmpeg --with-sdl2 --with-freetype --with-fontconfig --with-libass
+brew install go
+brew install nvm
+brew install mdcat
+```
+
 ## Add github ssh key
 
 Run the following and then paste into github:
@@ -145,52 +201,6 @@ cat ~/.ssh/id_rsa.pub | pbcopy
 brew install gpg
 gpg --full-generate-key
 ```
-
-## Install coreutils
-
-```bash
-brew install coreutils
-```
-
-Follow instructions for setting PATH and MANPATH.  i.e., add to bash_profile:
-```bash
-PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
-MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-```
-
-## Install nucleus repo
-
-```bash
-git clone https://github.com/kkroening/nucleus.git
-cd nucleus
-git submodule update --init
-mkdir -p ~/bin
-ln -s ~/nucleus/keygen/keygen.py ~/bin/key
-```
-
-Setup symlinks (manually for now).
-
-```bash
-cd ~
-ln -s ~/nucleus/.* .
-rm .vim
-mkdir .vim .vim/bundle .vim/ftplugin
-pushd .vim/bundle
-  ln -s ~/nucleus/.vim/bundle/* .
-popd
-pushd .vim/ftplugin
-  ln -s ~/nucleus/.vim/ftplugin/* .
-popd
-```
-
-## Alternative to nucleus: configure minimal bash_profile
-
-Fix prompt (inspired by GCE) and setup `$PATH`:
-```bash
-PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-PATH=~/bin:${PATH}
-```
-
 
 ## Install packages via homebrew
 
@@ -250,61 +260,6 @@ curl https://sdk.cloud.google.com | bash
 - Refer to https://cloud.google.com/sdk/downloads
 - run `install.sh` to add to bash_profile
 
-## vim
-
-
-FUCKING CANCER:
-```
-sudo /System/Library/Frameworks/Python.framework/Versions/2.7/bin/python -m ensurepip
-sudo /System/Library/Frameworks/Python.framework/Versions/2.7/bin/python -m pip install pyflakes
-```
-There's apparently no way to get vim to work with another python environment, and it gives a worthless erorr message, so the only way to instdall pytholn deps is to fucking use sudo against system python. wtfffvfffgffffdfguysdffssdgfuysufysugdyfasdfgiuadfsgiadfisghadfs;hioadfshoiuadfshio;dfsadfsadsddfAS;;
-
-Probably not needed:
-```
-brew reinstall vim --with-custom-python
-```
-
-`.vimrc`:
-```
-filetype plugin indent on
-set directory^=$HOME/.vim/tmp//
-set et hls sts=4 sw=4 ts=4
-syn on
-
-"
-" Fix shift+arrow key combinations.
-"
-nmap <S-Up>    <Up>
-nmap <S-Down>  <Down>
-nmap <S-Left>  <Left>
-nmap <S-Right> <Right>
-imap <S-Up>    <Up>
-imap <S-Down>  <Down>
-imap <S-Left>  <Left>
-imap <S-Right> <Right>
-vmap <S-Up>    <Up>
-vmap <S-Down>  <Down>
-vmap <S-Left>  <Left>
-vmap <S-Right> <Right>
-
-map <Esc>[A <Up>
-map <Esc>[B <Down>
-map <Esc>[C <Right>
-map <Esc>[D <Left>
-```
-
-`~/.vim/ftplugin/text.vim`:
-```
-setlocal sts=2 sw=2 ts=2
-```
-
-Install pathogen.vim:
-``` bash
-mkdir -p ~/.vim/autoload ~/.vim/bundle && \
-curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
-```
-
 ## Docker
 
 - https://store.docker.com/edititions/community/docker-ce-desktop-mac
@@ -322,6 +277,33 @@ brew cask install minikube
 brew install kubernetes-cli
 ```
 
+# Minimal terminal setup
+
+If nucleus can't be installed for whatever reason, this section has the bare-minimal steps to configure a semi-reasonable terminal environment.
+
+Write minimal `~/.bash_profile`:
+```bash
+PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+PATH=~/bin:${PATH}
+
+if which pyenv > /dev/null; then
+    eval "$(pyenv init -)"
+fi
+
+if [[ "${OSTYPE}" == "darwin"* ]]; then
+    PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
+    MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+fi
+```
+
+Install pathogen.vim:
+``` bash
+mkdir -p ~/.vim/autoload ~/.vim/bundle && \
+curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+```
+
+Write a minimal `~/.vimrc` by stripping down the nucleus `~/.vimrc`.
+
 # Extra
 
 ## f.lux
@@ -337,12 +319,10 @@ curl -Lo - https://download.scdn.co/SpotifyInstaller.zip | bsdtar -x
 open "Install Spotify.app"
 ```
 
-
 ## Karabiner Elements
 
 Karabiner elements for emulating numpad with Blender:
 - https://github.com/tekezo/Karabiner-Elements/issues/127
-
 
 ## yEd
 
@@ -351,15 +331,118 @@ Karabiner elements for emulating numpad with Blender:
   - Check _Edit Label on Create Node_
   - Check _Dynamically Adjust Node Size to Label Size_
 
-
 ## Fix monitor issue:
 
-- Remove /Library/Preferences/com.apple.windowserver.plist
-- Remove Users/karlk/Library/Preferences/com.apple.windowserver.*
-- nvram/pram reset: power off, then hit power then hold command+option+p+r for about 30 seconds; screen should flash twice
+- Remove `/Library/Preferences/com.apple.windowserver.plist`
+- Remove `Users/karlk/Library/Preferences/com.apple.windowserver.*`
+- nvram/pram reset: power off, then hit power then hold Command+Option+P+R for about 30 seconds; screen should flash twice
 - smc reset: power off then cmd+option+shift+power
 - edit: this doesn't actually fix it or even seem to make a difference.
 
 ## Various optional apps:
 
 - `brew install mdcat`
+
+# Ubuntu installation instructions
+
+Follow _some_ of the above instructions (judiciously).
+
+_TODO: pull out common parts of the above and fill in this section.  For now it's just a collection of various notes._
+
+## pyenv
+
+Perform the `apt-get install` commands listed in pyenv's [Common build problems](https://github.com/pyenv/pyenv/wiki/Common-build-problems#prerequisites) article first, then follow the instructions in the [pyenv-installer readme](https://github.com/pyenv/pyenv-installer).  Be sure to make the `~/.bashrc` changes suggested in the `pyenv-installer` output.  Finally, set vim as the default editor using `sudo update-alternatives --config editor`.
+
+At the time of this writing, the entire process looks like this:
+```bash
+sudo apt-get install -y \
+  build-essential \
+  curl \
+  git
+  libbz2-dev \
+  libffi-dev \
+  liblzma-dev \
+  libncurses5-dev \
+  libncursesw5-dev \
+  libreadline-dev \
+  libsqlite3-dev \
+  libssl-dev \
+  llvm \
+  make \
+  python-openssl \
+  tk-dev \
+  wget \
+  xz-utils \
+  zlib1g-dev \
+curl https://pyenv.run | bash
+echo "export PATH=\"${PYENV_ROOT}/bin:\$PATH\""
+echo "eval \"\$(pyenv init -)\""
+echo "eval \"\$(pyenv virtualenv-init -)\""
+sudo update-alternatives --config editor
+```
+
+> _**Note*: Some of the above apt packages may be redundant/unnecessary._
+
+> _**Note**: The `~/.bashrc` changes are already included in nucleus' `.bashrc` file._
+
+## pyflakes-vim
+
+[pyflakes-vim](https://github.com/kevinw/pyflakes-vim) is officially deprecated, but it's still my favorite vim Python plugin due to its simplicity and speed (as compared to [ALE](https://github.com/dense-analysis/ale) and [Syntastic](https://github.com/vim-syntastic/syntastic) which are horrifyingly slow out of the box, to the point of being completely unusable).
+
+`pyflakes-vim` should work with a standard `apt install vim python-flake8` (or maybe `python3-pyflakes`), so long as Pathogen and pyflakes-vim are present in the appropriate `~/.vim` directories (e.g. by symlinking the corresponding nucleus submodules).
+
+## NVIDIA GPU drivers / Tensorflow-GPU
+
+The NVIDIA GPU drivers should be installed as part of the Tensorflow-GPU setup to ensure that all the drivers and various CUDA/cuDNN libraries are compatible.  Currently, the best place to look for instructions is in the [Tensorflow GPU support article](https://www.tensorflow.org/install/gpu#ubuntu_1804_cuda_101), but do jump straight to the "Ubuntu 18.04" section and don't get distracted by the other section that points you to a bunch of rabbit-hole links in the "Software requirements" section. (All of this will probably change by the time this install guide is revisited, but alas.)
+
+If the system gets into a weird state with conflicting library versions, it seems to be safe to do a heavy `sudo apt purge *nvidia* *cuda* *cudnn* && sudo apt autoremove` to eradicate everything and start fresh, so long as you have `nouveau` drivers for backup after the nvidia drivers are wiped and/or are comfortable working from a recovery mode shell and reinstalling things from there.
+
+If you encounter errors during NVIDIA driver installation due to drivers already being in use or nouveau needing to be disabled, simply reboot into a recovery mode shell, enable networking with `sudo service networking start && sudo dhclient && some other stuff` and repeat the installation there.  (Or avoid needing networking in that situation by installing via dpkg).
+
+The `nvidia-smi` tool is your friend to help figure out what's going on, as it shows the current NVIDIA drivers in use, or logs an error if the drivers aren't loaded.
+
+Once everything's set up, running a Tensorflow example should cause a GPU usage spike that should be apparent in the `nvidia-smi` output (e.g. `watch -n 1 nvidia-smi`).  If there's no GPU usage spike but the Tensorflow example finishes anyways, there's a good chance it simply fell back to CPU execution.  Also, if running `tensorboard` doesn't work then you still have work to do.
+
+## Steam
+
+After installing the NVIDIA drivers as described above, it's also necessary to install some 32-bit dependencies in order for Steam to work:
+
+```bash
+sudo apt install libnvidia-gl-440:i386
+```
+
+Then install Steam "as usual." (My process this time around was to download the official Steam `.deb` file from the Steam website, install it with dpkg, then `sudo apt install steam`, but there might be a less roundabout way)
+
+See also: https://github.com/ValveSoftware/steam-for-linux/issues/5553#issuecomment-402396591
+
+These also seem to be necessary:
+```bash
+sudo apt install \
+  libbz2-1.0:i386 \
+  libgdk-pixbuf2.0-0:i386 \
+  libglib2.0-0:i386 \
+  libgtk2.0-0:i386 \
+  libpulse0:i386 \
+  libva2:i386 \
+  libva-x11-2:i386 \
+  libvdpau1:i386 \
+  libxrandr2:i386 \
+  libxtst6:i386
+```
+
+## Misc
+
+### Limit alt+tab switching to the current workspace only:
+```bash
+gsettings set org.gnome.shell.app-switcher current-workspace-only true
+```
+
+### Enable alt-left + alt-right keys in terminal
+
+Write the following to `~/.inputrc`:
+```
+"\e[1;3D": backward-word ### Alt left
+"\e[1;3C": forward-word ### Alt right
+```
+
+See [stackexchange post 108098](https://unix.stackexchange.com/questions/108098/alt-left-to-skip-words-does-not-work-in-terminal-emulators).

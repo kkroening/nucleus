@@ -13,6 +13,7 @@ setup(
         'black',
         'flake8',
         'future',
+        'gpustat',
         'IPython',
         'ipywidgets',
         'jupyterlab',

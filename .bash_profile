@@ -52,8 +52,8 @@ if [ -f '/Users/karlk/google-cloud-sdk/completion.bash.inc' ]; then source '/Use
 #export PATH="${APPENGINE_SDK}:${PATH}"
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
 
 
 ## QT stuff (log during `brew install qt5`):
@@ -146,7 +146,7 @@ export DIRENV_LOG_FORMAT=
 
 alias jsum='kronos get-issue-summary'
 
-source <(kubectl completion bash)
+#source <(kubectl completion bash)
 
 sk="$(readlink -f ~/work/skykit)"
 alias sk='cd ~/work/skykit'

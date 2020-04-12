@@ -24,14 +24,13 @@ autocmd FileType sh setlocal sts=2 sw=2 ts=2 colorcolumn=80
 
 autocmd BufRead,BufNewFile *.docker setlocal filetype=dockerfile
 autocmd BufRead,BufNewFile *.gql setlocal sts=2 sw=2 ts=2
+autocmd BufRead,BufNewFile *.html setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.js setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.json setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.jsx setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.py setlocal colorcolumn=100
 autocmd BufRead,BufNewFile *.sh setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.tf setlocal sts=2 sw=2 ts=2
-autocmd BufRead,BufNewFile *.tf setlocal sts=2 sw=2 ts=2
-autocmd BufRead,BufNewFile *.txt setlocal sts=2 sw=2 ts=2 colorcolumn=120
 autocmd BufRead,BufNewFile *.vue setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.yaml setlocal sts=2 sw=2 ts=2
 
@@ -62,7 +61,8 @@ map ,u :diffup
 
 " disable markdown fucking spellcheck (I know how to spell, you cunt)
 let g:markdown_enable_spell_checking = 0
-let g:ale_set_signs = 0
+
+let g:vue_pre_processors = ['typescript']
+"let g:vue_pre_processors = 'detect_on_enter'
 
 let g:pyflakes_prefer_python_version = 3
-
