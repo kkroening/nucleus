@@ -22,16 +22,18 @@ highlight DiffText ctermfg=black ctermbg=magenta
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o noai nocin nosi inde=
 autocmd FileType sh setlocal sts=2 sw=2 ts=2 colorcolumn=80
 
-autocmd BufRead,BufNewFile *.txt setlocal sts=2 sw=2 ts=2 colorcolumn=120
-autocmd BufRead,BufNewFile *.yaml setlocal sts=2 sw=2 ts=2
-autocmd BufRead,BufNewFile *.py setlocal colorcolumn=100
+autocmd BufRead,BufNewFile *.docker setlocal filetype=dockerfile
+autocmd BufRead,BufNewFile *.gql setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.js setlocal sts=2 sw=2 ts=2
-autocmd BufRead,BufNewFile *.sh setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.json setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.jsx setlocal sts=2 sw=2 ts=2
+autocmd BufRead,BufNewFile *.py setlocal colorcolumn=100
+autocmd BufRead,BufNewFile *.sh setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.tf setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.tf setlocal sts=2 sw=2 ts=2
-autocmd BufRead,BufNewFile *.docker setlocal filetype=dockerfile
+autocmd BufRead,BufNewFile *.txt setlocal sts=2 sw=2 ts=2 colorcolumn=120
+autocmd BufRead,BufNewFile *.vue setlocal sts=2 sw=2 ts=2
+autocmd BufRead,BufNewFile *.yaml setlocal sts=2 sw=2 ts=2
 
 "
 " Fix shift+arrow key combinations.
