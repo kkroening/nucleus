@@ -5,17 +5,18 @@ find . \
         -name .ipynb_checkpoints -o \
         -name .tox -o \
         -name .venv\* -o \
-        -name build -o \
         -name bandit-baseline.json -o \
+        -name build -o \
         -name deploy -o \
         -name node_modules -o \
         -name venv -o \
         -name \*.bundle.js -o \
+        -name \*.html -o \
         -name \*.map -o \
+        -name \*.js -o \
         -name \*.min.js -o \
         -name \*.pyc -o \
         -name \*.pyo -o \
-        -name \*.js -o \
         -name \*.sw\* -o \
         -name \*.vue -o \
         -name \*.sw\* -o \
