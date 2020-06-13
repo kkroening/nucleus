@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+POSITIONAL_ARGS=()
+FIND_ARGS=()
+GREP_ARGS=()
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -i) GREP_ARGS+=$1; shift;;
+        *) POSITIONAL_ARGS+=$1; shift;;
+    esac
+done
+
+if [ ${#POSITIONAL_ARGS} -lt 1 ]; then
+    >&2 echo "Usage: $(basename $0) <pattern> [-i] [\`find\` args...]"
+    exit 1
+fi
+
+GREP_ARGS+="${POSITIONAL_ARGS[0]}"
+FIND_ARGS+="${POSITIONAL_ARGS[@]:1}"
+
+kfjs "${FIND_ARGS}" | xargs -0 grep "${GREP_ARGS}" -B4 -A4 -n --color=always | less -FRX

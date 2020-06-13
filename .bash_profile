@@ -80,50 +80,81 @@ alias kce='kc exec'
 alias kcg='kc get'
 alias kwg='kw get'
 alias kcD='kc delete'
+
 alias kcgcm='kc get configmaps'
 alias kwgcm='kw get configmaps'
 alias kcdcm='kc describe configmap'
 alias kwdcm='kw describe configmap'
+
 alias kcgd='kc get deployments'
 alias kwgd='kw get deployments'
 alias kcdd='kc describe deployment'
 alias kwdd='kw describe deployment'
+
 alias kcgp='kc get pods'
 alias kwgp='kw get pods'
 alias kcdp='kc describe pod'
 alias kwdp='kw describe pod'
 alias kcDp='kc delete pod'
+
 alias kcgi='kc get ingress'
 alias kwgi='kw get ingress'
 alias kcdi='kc describe ingress'
 alias kwdi='kw describe ingress'
 alias kcDi='kc delete ingress'
+
 alias kcgs='kc get services'
 alias kwgs='kw get services'
 alias kcds='kc describe service'
 alias kwds='kw describe service'
+
 alias kcgS='kc get secrets'
 alias kwgS='kw get secrets'
 alias kcdS='kc describe secret'
 alias kwdS='kw describe secret'
+
 alias kcgj='kc get jobs'
 alias kwgj='kw get jobs'
 alias kcdj='kc describe job'
 alias kwdj='kw describe job'
 alias kcDj='kc delete job'
+
 alias kcgcj='kc get cronjobs'
 alias kwgcj='kw get cronjobs'
 alias kcdcj='kc describe cronjob'
 alias kwdcj='kw describe cronjob'
 alias kcDcj='kc delete cronjob'
+
 alias kcge='kc get events'
 alias kwge='kw get events'
 alias kcde='kc describe event'
 alias kwde='kw describe event'
+
 alias kcgn='kc get nodes'
 alias kwgn='kw get nodes'
 alias kcdn='kc describe node'
 alias kwdn='kw describe node'
+
+alias kcgss='kc get statefulset'
+alias kwgss='kw get statefulset'
+alias kcdss='kc describe statefulset'
+alias kwdss='kw describe statefulset'
+
+alias kcgrs='kc get replicaset'
+alias kwgrs='kw get replicaset'
+alias kcdrs='kc describe replicaset'
+alias kwdrs='kw describe replicaset'
+
+alias kcges='kc get elasticsearch'
+alias kwges='kw get elasticsearch'
+alias kcdes='kc describe elasticsearch'
+alias kwdes='kw describe elasticsearch'
+
+alias kcgkb='kc get kibana'
+alias kwgkb='kw get kibana'
+alias kcdkb='kc describe kibana'
+alias kwdkb='kw describe kibana'
+
 alias kcl='kc logs'
 alias kwl='kw logs'
 alias kcd='kc describe'
@@ -143,6 +174,8 @@ export DIRENV_LOG_FORMAT=
 #if which direnv > /dev/null; then
 #    eval $(direnv hook bash)
 #fi
+
+export SNAPBUILD_NO_COMMIT_PROMPT=1
 
 alias jsum='kronos get-issue-summary'
 

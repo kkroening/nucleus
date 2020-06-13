@@ -22,6 +22,7 @@ highlight DiffText ctermfg=black ctermbg=magenta
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o noai nocin nosi inde=
 autocmd FileType sh setlocal sts=2 sw=2 ts=2 colorcolumn=80
 
+autocmd BufRead,BufNewFile *.css setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.docker setlocal filetype=dockerfile
 autocmd BufRead,BufNewFile *.gql setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.html setlocal sts=2 sw=2 ts=2

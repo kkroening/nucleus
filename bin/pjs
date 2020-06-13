@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+#exec prettier --parser babel --single-quote
+exec prettier --parser babel "$@"

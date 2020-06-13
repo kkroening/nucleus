@@ -1,0 +1,27 @@
+{
+  "name": "nucleus",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kkroening/nucleus.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kkroening/nucleus/issues"
+  },
+  "homepage": "https://github.com/kkroening/nucleus#readme",
+  "devDependencies": {
+    "create-react-app": "^3.4.1",
+    "js-beautify": "^1.11.0",
+    "prettier": "^2.0.5"
+  }
+}
