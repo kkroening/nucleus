@@ -82,10 +82,11 @@ curl -O 'https://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg'
 open googlechrome.dmg
 ```
 
-- Do in all profiles:
-  - Sign into chrome
-  - Configure sync settings
-  - Install ublock origin
+Do in all profiles:
+- Sign into gmail account
+- Configure sync settings
+- Install ublock origin
+- Install [Rearrange Tabs](https://chrome.google.com/webstore/detail/rearrange-tabs/ccnnhhnmpoffieppjjkhdakcoejcpbga?hl=en-US) extension
 
 ## iTerm2
 
