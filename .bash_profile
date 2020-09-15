@@ -178,8 +178,12 @@ export DIRENV_LOG_FORMAT=
 export SNAPBUILD_NO_COMMIT_PROMPT=1
 
 alias jsum='kronos get-issue-summary'
+alias jurl='kronos get-issue-url'
 
 #source <(kubectl completion bash)
 
 sk="$(readlink -f ~/work/skykit)"
 alias sk='cd ~/work/skykit'
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+

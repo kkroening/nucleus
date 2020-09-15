@@ -29,7 +29,7 @@ autocmd BufRead,BufNewFile *.html setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.js setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.json setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.jsx setlocal sts=2 sw=2 ts=2
-autocmd BufRead,BufNewFile *.py setlocal colorcolumn=100
+autocmd BufRead,BufNewFile *.py setlocal colorcolumn=89
 autocmd BufRead,BufNewFile *.sh setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.tf setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.vue setlocal sts=2 sw=2 ts=2
@@ -60,7 +60,8 @@ map ,g :diffget
 map ,p :diffput
 map ,u :diffup
 
-" disable markdown fucking spellcheck (I know how to spell, you cunt)
+" Disable markdown plugin insanity that shouldn't even exist:
+let g:markdown_enable_input_abbreviations = 0
 let g:markdown_enable_spell_checking = 0
 
 let g:vue_pre_processors = ['typescript']

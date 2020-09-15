@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ $# -ne 3 ]]; then
+  2>&1 echo "Usage: $(basename $0) <dir> <fileglob> <text>"
+  exit 1
+fi
+
+dir="$1"
+fileglob="$2"
+text="$3"
+
+files="$(find "${dir}" -name "${fileglob}" -exec bash -c ">/dev/null grep \"${text}\" \"{}\" && echo \"{}\"" \;)"
+if [[ -z "${files}" ]]; then
+  2>&1 echo No matches.
+  exit 1
+else
+  vi ${files}
+fi

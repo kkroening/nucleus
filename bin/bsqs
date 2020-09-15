@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+exec black -Sq - -l 10

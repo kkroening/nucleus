@@ -24,6 +24,7 @@ setup(
         'pyyaml',
         'requests',
         'tensorflow',
+        'xlrd',
         'yq',
     ],
     entry_points={
@@ -31,6 +32,7 @@ setup(
             'camel=nucleus.camel:main',
             'snake=nucleus.snake:main',
             'csview=nucleus.csview:main',
+            'xlsx2csv=nucleus.xlsx2csv:main',
         ],
     },
 )
