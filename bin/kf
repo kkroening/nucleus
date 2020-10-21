@@ -12,9 +12,7 @@ find . \
         -name node_modules -o \
         -name venv -o \
         -name \*.bundle.js -o \
-        -name \*.html -o \
         -name \*.map -o \
-        -name \*.js -o \
         -name \*.min.js -o \
         -name \*.pyc -o \
         -name \*.pyo -o \

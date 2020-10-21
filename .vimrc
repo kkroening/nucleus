@@ -29,11 +29,15 @@ autocmd BufRead,BufNewFile *.html setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.js setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.json setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.jsx setlocal sts=2 sw=2 ts=2
+autocmd BufRead,BufNewFile *.ts setlocal sts=2 sw=2 ts=2 filetype=javascript
+autocmd BufRead,BufNewFile *.tsx setlocal sts=2 sw=2 ts=2 filetype=javascript
 autocmd BufRead,BufNewFile *.py setlocal colorcolumn=100
 autocmd BufRead,BufNewFile *.sh setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.tf setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.vue setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.yaml setlocal sts=2 sw=2 ts=2
+
+nmap <F8> :TagbarToggle<CR>
 
 "
 " Fix shift+arrow key combinations.

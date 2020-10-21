@@ -183,3 +183,7 @@ alias jsum='kronos get-issue-summary'
 
 sk="$(readlink -f ~/work/skykit)"
 alias sk='cd ~/work/skykit'
+
+export PATH="$HOME/.cargo/bin:$PATH"
+
+export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/library/

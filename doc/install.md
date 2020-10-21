@@ -179,13 +179,13 @@ pip install -e .
 
 ```bash
 brew install coreutils
-brew install vim
-brew install htop
-brew install watch
 brew install ffmpeg --with-sdl2 --with-freetype --with-fontconfig --with-libass
-brew install go
-brew install nvm
+brew install htop
 brew install mdcat
+brew install nvm
+brew install vim
+brew install watch
+brew install --HEAD universal-ctags/universal-ctags/universal-ctags
 ```
 
 ## Add github ssh key
@@ -202,18 +202,6 @@ cat ~/.ssh/id_rsa.pub | pbcopy
 brew install gpg
 gpg --full-generate-key
 ```
-
-## Install packages via homebrew
-
-- `brew install vim`
-- `brew install htop`
-- `brew install watch`
-- `brew install ffmpeg --with-sdl2 --with-freetype --with-fontconfig --with-libass`
-- `brew install go`
-  - add to .bash_profile:
-    ```
-    (fixme: add goroot to $PATH)
-    ```
 
 ## Python
 
@@ -251,6 +239,13 @@ gpg --full-generate-key
   ```bash
   (unset PIP_REQUIRE_VIRTUALENV; /usr/local/bin/pip3 install pyflakes)
   ```
+
+
+## Rust
+
+```bash
+brew install rustup-init
+```
 
 ## gcloud sdk
 

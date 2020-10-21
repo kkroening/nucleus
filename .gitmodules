@@ -28,3 +28,9 @@
 [submodule ".vim/bundle/vim-es6"]
 	path = .vim/bundle/vim-es6
 	url = https://github.com/isRuslan/vim-es6.git
+[submodule "rust-etags"]
+	path = rust-etags
+	url = git@github.com:nikomatsakis/rust-etags.git
+[submodule ".vim/bundle/tagbar"]
+	path = .vim/bundle/tagbar
+	url = git@github.com:preservim/tagbar.git
