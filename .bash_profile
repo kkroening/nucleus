@@ -178,6 +178,7 @@ export DIRENV_LOG_FORMAT=
 export SNAPBUILD_NO_COMMIT_PROMPT=1
 
 alias jsum='kronos get-issue-summary'
+alias jurl='kronos get-issue-url'
 
 #source <(kubectl completion bash)
 
@@ -187,3 +188,5 @@ alias sk='cd ~/work/skykit'
 export PATH="$HOME/.cargo/bin:$PATH"
 
 export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/library/
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"

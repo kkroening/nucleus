@@ -67,6 +67,7 @@ map ,g :diffget
 map ,p :diffput
 map ,u :diffup
 
+let g:markdown_enable_input_abbreviations = 0
 let g:markdown_enable_spell_checking = 0
 
 let g:vue_pre_processors = ['typescript']

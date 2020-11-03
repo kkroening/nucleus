@@ -4,6 +4,7 @@ find . \
         -name .git -o \
         -name .gopath -o \
         -name .ipynb_checkpoints -o \
+        -name .pytest_cache -o \
         -name .tox -o \
         -name .venv\* -o \
         -name bandit-baseline.json -o \
@@ -12,14 +13,13 @@ find . \
         -name node_modules -o \
         -name venv -o \
         -name \*.bundle.js -o \
+        -name \*.egg-info -o \
         -name \*.map -o \
         -name \*.min.js -o \
         -name \*.pyc -o \
         -name \*.pyo -o \
         -name \*.sw\* -o \
-        -name \*.egg-info -o \
-        -name \*.vue -o \
         -name \*.sw\* -o \
-        -name .pytest_cache -o \
+        -name \*.vue -o \
         -name .lab_cache \
     \) -prune -o -type f -print0
