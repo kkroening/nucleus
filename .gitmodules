@@ -34,3 +34,12 @@
 [submodule ".vim/bundle/tagbar"]
 	path = .vim/bundle/tagbar
 	url = git@github.com:preservim/tagbar.git
+[submodule ".vim/bundle/vim-racer"]
+	path = .vim/bundle/vim-racer
+	url = git@github.com:racer-rust/vim-racer.git
+[submodule ".vim/vim-toml"]
+	path = .vim/vim-toml
+	url = git@github.com:cespare/vim-toml.git
+[submodule ".vim/bundle/vim-toml"]
+	path = .vim/bundle/vim-toml
+	url = git@github.com:cespare/vim-toml.git

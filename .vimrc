@@ -26,14 +26,16 @@ autocmd BufRead,BufNewFile *.css setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.docker setlocal filetype=dockerfile
 autocmd BufRead,BufNewFile *.gql setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.html setlocal sts=2 sw=2 ts=2
-autocmd BufRead,BufNewFile *.js setlocal sts=2 sw=2 ts=2
-autocmd BufRead,BufNewFile *.json setlocal sts=2 sw=2 ts=2
-autocmd BufRead,BufNewFile *.jsx setlocal sts=2 sw=2 ts=2
-autocmd BufRead,BufNewFile *.ts setlocal sts=2 sw=2 ts=2 filetype=javascript
-autocmd BufRead,BufNewFile *.tsx setlocal sts=2 sw=2 ts=2 filetype=javascript
-autocmd BufRead,BufNewFile *.py setlocal colorcolumn=100
+autocmd BufRead,BufNewFile *.js setlocal sts=2 sw=2 ts=2 | nmap ,f mkMml:%!pjs`lzz`k | vmap ,f mkMml:!pjs`lzz`k
+autocmd BufRead,BufNewFile *.json setlocal sts=2 sw=2 ts=2 | nmap ,f mkMml:%!pj`lzz`k | vmap ,f mkMml:!pj`lzz`k
+autocmd BufRead,BufNewFile *.jsx setlocal sts=2 sw=2 ts=2 | nmap ,f mkMml:%!pjs`lzz`k | vmap ,f mkMml:!pjs`lzz`k
+autocmd BufRead,BufNewFile *.py setlocal colorcolumn=100 | nmap ,f mkMml:%!bsq`lzz`k | vmap ,f mkMml:!bsq`lzz`k
+autocmd BufRead,BufNewFile *.rs nmap ,f mkMml:%!prs`lzz`k | vmap ,f mkMml:!prs`lzz`k
 autocmd BufRead,BufNewFile *.sh setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.tf setlocal sts=2 sw=2 ts=2
+autocmd BufRead,BufNewFile *.toml nmap ,f mkMml:%!toml-fmt`lzz`k | vmap ,f mkMml:!toml-fmt`lzz`k
+autocmd BufRead,BufNewFile *.ts setlocal sts=2 sw=2 ts=2 filetype=javascript | nmap ,f mkMml:%!pjs`lzz`k | vmap ,f mkMml:!pjs`lzz`k
+autocmd BufRead,BufNewFile *.tsx setlocal sts=2 sw=2 ts=2 filetype=javascript | nmap ,f mkMml:%!pjs`lzz`k | vmap ,f mkMml:!pjs`lzz`k
 autocmd BufRead,BufNewFile *.vue setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.yaml setlocal sts=2 sw=2 ts=2
 
@@ -60,14 +62,18 @@ map <Esc>[B <Down>
 map <Esc>[C <Right>
 map <Esc>[D <Left>
 
+vmap ,s !sort -f
 map ,g :diffget
 map ,p :diffput
 map ,u :diffup
 
-" disable markdown fucking spellcheck (I know how to spell, you cunt)
 let g:markdown_enable_spell_checking = 0
 
 let g:vue_pre_processors = ['typescript']
 "let g:vue_pre_processors = 'detect_on_enter'
 
 let g:pyflakes_prefer_python_version = 3
+
+" Configure tagbar:
+let g:tagbar_width = 60
+"autocmd VimEnter * nested :call tagbar#autoopen(1)

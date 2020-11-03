@@ -182,6 +182,7 @@ brew install coreutils
 brew install ffmpeg --with-sdl2 --with-freetype --with-fontconfig --with-libass
 brew install htop
 brew install mdcat
+brew install fswatch
 brew install nvm
 brew install vim
 brew install watch
