@@ -58,7 +58,7 @@ nbclient==0.5.1
 nbconvert==6.0.7
 nbformat==5.0.8
 nest-asyncio==1.4.1
-notebook==6.1.4
+notebook==6.1.5
 -e git+git@github.com:kkroening/nucleus.git@ef186334356468cddef6ccada500c600bc1ba792#egg=nucleus
 numpy==1.19.2
 nvidia-ml-py3==7.352.0
