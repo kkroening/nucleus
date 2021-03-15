@@ -170,22 +170,26 @@ pyenv global 2.7.14 3.7.3
 
 ```bash
 cd ~/nucleus
-.vc
-.va
-pip install -e .
+virtualenv venv \
+  && venv/bin/pip install -r requirements.txt
+virtualenv venv2 -p "$(which python2)" \
+  && venv2/bin/pip install -r requirements-py2.txt
 ```
 
 ## Install packages via homebrew
 
 ```bash
-brew install coreutils
+brew install \
+  ctags \
+  direnv \
+  coreutils \
+  htop \
+  mdcat \
+  fswatch \
+  nvm \
+  vim \
+  watch
 brew install ffmpeg --with-sdl2 --with-freetype --with-fontconfig --with-libass
-brew install htop
-brew install mdcat
-brew install fswatch
-brew install nvm
-brew install vim
-brew install watch
 brew install --HEAD universal-ctags/universal-ctags/universal-ctags
 ```
 
@@ -206,7 +210,7 @@ gpg --full-generate-key
 
 ## Python
 
-- `brew install pyenv direnv`
+- `brew install pyenv`
   - add to .bash_profile:
     ```bash
     eval "$(pyenv init -)"
