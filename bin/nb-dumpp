@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#
+# nb-dumpp: Same as nb-dump, but prettier.
+
+exec nb-dump | black -Sq - | ccat
