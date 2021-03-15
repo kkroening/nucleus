@@ -13,11 +13,6 @@ nucleus::_setup_aliases() {
   alias pbp='pbpaste'
 
   alias tf=terraform
-
-  sk="$(readlink -f ~/work/skykit)"
-  alias sk='cd ~/work/skykit'
-
-  alias ops-serving='~/work/skykit/ops/venv/bin/skykit-ops serving'
 }
 
 nucleus::_setup_gcloud() {
@@ -146,7 +141,7 @@ nucleus::_setup_kubectl() {
 }
 
 nucleus::_setup_misc() {
-  export SNAPBUILD_NO_COMMIT_PROMPT=1
+  true
 }
 
 nucleus::_setup_nucleus() {
@@ -255,6 +250,14 @@ nucleus::_main() {
     "${func}"
     unset -f "${func}"
   done
+
+  if [[ -d ~/.bash_profile.d ]]; then
+    #for file in (shopt -s nullglob && echo ~/.bash_profile.d/*.sh); do
+    FILES="$(shopt -s nullglob && echo ~/.bash_profile.d/*.sh)"
+    for file in ${FILES}; do
+      . "${file}"
+    done
+  fi
 
   unset -f nucleus::_main
 }
