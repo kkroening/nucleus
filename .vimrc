@@ -22,22 +22,23 @@ highlight DiffText ctermfg=black ctermbg=magenta
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o noai nocin nosi inde=
 autocmd FileType sh setlocal sts=2 sw=2 ts=2 colorcolumn=80
 
-autocmd BufRead,BufNewFile *.css setlocal sts=2 sw=2 ts=2
+autocmd BufRead,BufNewFile *.css setlocal sts=2 sw=2 ts=2 | nmap ,f mkMml:%!pcss`lzz`k | vmap ,f mkMml:!pjs`lzz`k
 autocmd BufRead,BufNewFile *.docker setlocal filetype=dockerfile
 autocmd BufRead,BufNewFile *.gql setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.html setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.js setlocal sts=2 sw=2 ts=2 | nmap ,f mkMml:%!pjs`lzz`k | vmap ,f mkMml:!pjs`lzz`k
 autocmd BufRead,BufNewFile *.json setlocal sts=2 sw=2 ts=2 | nmap ,f mkMml:%!pj`lzz`k | vmap ,f mkMml:!pj`lzz`k
 autocmd BufRead,BufNewFile *.jsx setlocal sts=2 sw=2 ts=2 | nmap ,f mkMml:%!pjs`lzz`k | vmap ,f mkMml:!pjs`lzz`k
-autocmd BufRead,BufNewFile *.py setlocal colorcolumn=100 | nmap ,f mkMml:%!bsq`lzz`k | vmap ,f mkMml:!bsq`lzz`k
+autocmd BufRead,BufNewFile *.py setlocal colorcolumn=100 | nmap ,f mkMml:%!bsq`lzz`k | vmap ,f mkMml:!bsq`lzz`k | nmap ,i mkMml1GV}OA!sort -f`lzz`k
 autocmd BufRead,BufNewFile *.rs nmap ,f mkMml:%!prs`lzz`k | vmap ,f mkMml:!prs`lzz`k
 autocmd BufRead,BufNewFile *.sh setlocal sts=2 sw=2 ts=2
-autocmd BufRead,BufNewFile *.tf setlocal sts=2 sw=2 ts=2
+autocmd BufRead,BufNewFile *.tf setlocal sts=2 sw=2 ts=2 | nmap ,f mkMml:%!terraform fmt -`lzz`k | vmap ,f mkMml:!pjs`lzz`k
 autocmd BufRead,BufNewFile *.toml nmap ,f mkMml:%!toml-fmt`lzz`k | vmap ,f mkMml:!toml-fmt`lzz`k
 autocmd BufRead,BufNewFile *.ts setlocal sts=2 sw=2 ts=2 filetype=javascript | nmap ,f mkMml:%!pjs`lzz`k | vmap ,f mkMml:!pjs`lzz`k
 autocmd BufRead,BufNewFile *.tsx setlocal sts=2 sw=2 ts=2 filetype=javascript | nmap ,f mkMml:%!pjs`lzz`k | vmap ,f mkMml:!pjs`lzz`k
 autocmd BufRead,BufNewFile *.vue setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.yaml setlocal sts=2 sw=2 ts=2
+autocmd BufRead,BufNewFile *pylintrc setlocal filetype=toml
 
 nmap <F8> :TagbarToggle<CR>
 
