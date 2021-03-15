@@ -136,14 +136,25 @@ git config --global core.excludesfile ~/.global_gitignore
 
 ```bash
 git clone https://github.com/kkroening/nucleus.git ~/nucleus
+
 cd ~/nucleus
 git submodule update --init
-mkdir -p ~/bin ~/.vim ~/.vim/autoload ~/.vim/bundle ~/.vim/ftplugin
-ln -s ~/nucleus/keygen/keygen.py ~/bin/key
-ln -s ~/nucleus/dotfiles/.* ~/
+
+mkdir -p \
+  ~/.bash_profile.d \
+  ~/.vim/autoload \
+  ~/.vim/bundle \
+  ~/.vim/ftplugin \
+  ~/bin
+
+ln -s ~/nucleus/.bashrc ~/.bashrc
+ln -s ~/nucleus/.bash_profile ~/.bash_profile
+ln -s ~/nucleus/.bash_profile.d/* ~/.bash_profile.d/
+ln -s ~/nucleus/.global_gitignore ~/.global_gitignore
 ln -s ~/nucleus/.vim/autoload/* ~/.vim/autoload/
 ln -s ~/nucleus/.vim/bundle/* ~/.vim/bundle/
 ln -s ~/nucleus/.vim/ftplugin/* ~/.vim/ftplugin/
+ln -s ~/nucleus/keygen/keygen.py ~/bin/key
 ```
 
 ## Python
