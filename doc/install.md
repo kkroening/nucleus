@@ -154,6 +154,7 @@ ln -s ~/nucleus/.global_gitignore ~/.global_gitignore
 ln -s ~/nucleus/.vim/autoload/* ~/.vim/autoload/
 ln -s ~/nucleus/.vim/bundle/* ~/.vim/bundle/
 ln -s ~/nucleus/.vim/ftplugin/* ~/.vim/ftplugin/
+ln -s ~/nucleus/.vimrc ~/.vimrc
 ln -s ~/nucleus/keygen/keygen.py ~/bin/key
 ```
 
