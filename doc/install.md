@@ -37,6 +37,8 @@ System Preferences => Keyboard => Shortcuts => App Shortcuts => `+` button:
 - Menu Title: `Zoom`
 - Keyboard Shortcut: `⌥ ⌘ =`
 
+System Preferences => Keyboard => Shortcuts => Accessibility => unselect all.
+
 ## Disable OS X sounds
 
 System Preferences => Sound
