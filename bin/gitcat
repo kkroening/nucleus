@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+_gitcat() {
+  if (( $# < 1 )); then
+    echo "Usage: $(basename $0) [git-ref/branch/sha] <filename>" >&2
+    echo "" >&2
+    echo "Notes:" >&2
+    echo '- If no [git-ref/branch/sha] is specified, the default is `HEAD`.' >&2
+    echo '- The filename is relative to the current directory.' >&2
+    exit 1
+  fi
+
+  if (( $# > 1 )); then
+    ref="$1"
+    shift
+  else
+    ref="HEAD"
+  fi
+  filename="$1"
+
+  git show "${ref}":./"${filename}"
+}
+
+_gitcat "$@"

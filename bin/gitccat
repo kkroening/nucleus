@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+gitcat "$@" | ccat --color=always
