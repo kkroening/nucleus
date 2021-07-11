@@ -11,7 +11,6 @@ nucleus::_setup_aliases() {
   alias less='less -FRX'
   alias ..='cd ..'
 
-  alias gits='git status'
   alias pbc='pbcopy'
   alias pbp='pbpaste'
 
