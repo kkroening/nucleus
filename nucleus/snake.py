@@ -4,4 +4,6 @@ import sys
 
 
 def main():
-    print(pydash.snake_case(sys.stdin.read()))
+    lines = sys.stdin.read().split('\n')
+    lines = [pydash.snake_case(x) for x in lines]
+    print('\n'.join(lines))
