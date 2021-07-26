@@ -90,37 +90,6 @@ Do in all profiles:
 - Install ublock origin
 - Install [Rearrange Tabs](https://chrome.google.com/webstore/detail/rearrange-tabs/ccnnhhnmpoffieppjjkhdakcoejcpbga?hl=en-US) extension
 
-## iTerm2
-
-```bash
-curl -o - https://iterm2.com/downloads/stable/iTerm2-3_2_6.zip | bsdtar -x
-open .
-```
-
-Then drag and drop to Applications.
-
-Run iterm and configure:
-- iTerm => Preferences => Profiles
-  - General => reuse previous session's current directory
-  - General => Characters considered part of word for selection => `/-+\~_.@`
-  - Colors => Color Presets => Light Background
-    - Change color for yellow to something more visible.
-  - Text => Font => font size 16
-  - Terminal => check "Silence bell"
-  - Session => "Prompt before closing if there are jobs running besides..."
-  - Keys:
-    - Set Left ⎇  Key: Esc+
-    - Add ⎇ +← mapping: Send Escape Sequence: b
-    - Add ⎇ +→ mapping: Send Escape Sequence: f
-    - (Note that the alt symbol is reversed in this doc for some reason; fixme)
-  - Other actions => Set as default
-
-## Slack
-
-```bash
-curl -o slack.dmg https://slack.com/ssb/download-osx
-```
-
 ## Homebrew
 
 [https://brew.sh](https://brew.sh)
@@ -159,6 +128,28 @@ ln -s ~/nucleus/.vim/ftplugin/* ~/.vim/ftplugin/
 ln -s ~/nucleus/.vimrc ~/.vimrc
 ln -s ~/nucleus/keygen/keygen.py ~/bin/key
 ```
+
+## iTerm2
+
+```bash
+brew install iTerm2
+```
+
+Run iterm and configure:
+- iTerm => Preferences => Profiles
+  - General => reuse previous session's current directory
+  - General => Characters considered part of word for selection => `/-+\~_.@`
+  - Colors => Color Presets => Light Background
+    - Change color for yellow to something more visible.
+  - Text => Font => font size 16
+  - Terminal => check "Silence bell"
+  - Session => "Prompt before closing if there are jobs running besides..."
+  - Keys:
+    - Set Left ⎇  Key: Esc+
+    - Add ⎇ +← mapping: Send Escape Sequence: b
+    - Add ⎇ +→ mapping: Send Escape Sequence: f
+    - (Note that the alt symbol is reversed in this doc for some reason; fixme)
+  - Other actions => Set as default
 
 ## Python
 
@@ -259,7 +250,6 @@ gpg --full-generate-key
   (unset PIP_REQUIRE_VIRTUALENV; /usr/local/bin/pip3 install pyflakes)
   ```
 
-
 ## Rust
 
 ```bash
@@ -274,6 +264,12 @@ curl https://sdk.cloud.google.com | bash
 ```
 - Refer to https://cloud.google.com/sdk/downloads
 - run `install.sh` to add to bash_profile
+
+## Slack
+
+```bash
+curl -o slack.dmg https://slack.com/ssb/download-osx
+```
 
 ## Docker
 
