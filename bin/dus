@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if (( $# > 0 )); then
+  pattern="$1"; shift
+else
+  pattern="*"
+fi
+
+exec du -sBm ${pattern} "$@"
