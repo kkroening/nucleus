@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+_check_usage() {
+  if (( $# < 1 )); then
+    echo "$(basename $0): Scrub outputs from a Jupyter Notebook (\*.ipynb) file." 2>&1
+    echo "" 2>&1
+		echo "Usage: $(basename $0) <ipynb filename>" 2>&1
+    exit 1
+  fi
+}
+
+_determine_backup_file() {
+  local -r notebook_file="$1"
+  local backup_file
+  backup_file="${notebook_file}.bak"
+  count=1
+  while [[ -e "${backup_file}" ]]; do
+    ((count=count+1))
+    backup_file="${notebook_file}.bak${count}"
+  done
+  echo "${backup_file}"
+}
+
+_main() {
+  _check_usage "$@"
+  notebook_file="$1"
+  backup_file="$(_determine_backup_file "${notebook_file}")"
+
+  cp "${notebook_file}" "${backup_file}"
+  exec cat "${backup_file}" \
+    | jq -r 'del(.cells[].outputs)' --indent 1 \
+    > "${notebook_file}"
+}
+
+_main "$@"
