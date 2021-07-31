@@ -18,6 +18,7 @@ nucleus::_setup_git_aliases() {
   alias gitrb='git rebase'
   alias gitro='git remote'
   alias gits='git status'
+  alias gitsm='git submodule'
   alias gitt='git tag'
 }
 
