@@ -29,7 +29,7 @@ _main() {
 
   cp "${notebook_file}" "${backup_file}"
   exec cat "${backup_file}" \
-    | jq -r 'del(.cells[].outputs)' --indent 1 \
+    | jq -r 'del(.cells[].outputs) | del(.cells[].id)' --indent 1 \
     > "${notebook_file}"
 }
 
