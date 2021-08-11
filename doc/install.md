@@ -106,6 +106,8 @@ git config --global core.excludesfile ~/.global_gitignore
 ## Nucleus installation (part 1)
 
 ```bash
+brew install coreutils
+
 git clone https://github.com/kkroening/nucleus.git ~/nucleus
 
 cd ~/nucleus
@@ -187,7 +189,6 @@ virtualenv venv2 -p "$(which python2)" \
 brew install \
   ctags \
   direnv \
-  coreutils \
   htop \
   mdcat \
   fswatch \
