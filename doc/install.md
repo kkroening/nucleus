@@ -171,6 +171,22 @@ pip install -U virtualenv
 pyenv global 2.7.14 3.7.3
 ```
 
+**pyenv-virtualenv (TBD)**:
+
+If you see the following error, `pyenv-virtualenv` may need to be installed:
+```
+pyenv: no such command `virtualenv-init'
+```
+
+In this case, install `pyenv-virtualenv`:
+```bash
+brew install pyenv-virtualenv
+```
+
+_Source_: [pyenv: no such command `virtualenv' (Stack Overflow)](https://stackoverflow.com/a/67676109).
+
+> _**Note**_: It's not clear why this pyenv plugin is even needed, so this sub-section may be unnecessary.
+
 ## Nucleus installation (part 2)
 
 > _**Note**_: This second part of the nucleus installation must be done *after* Python is set up.
