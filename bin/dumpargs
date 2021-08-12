@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+dumpargs() {
+  echo "$# args." >&2
+  while (( $# > 0 )); do
+    echo "$1"
+    shift
+  done
+}
+
+exec dumpargs "$@"
