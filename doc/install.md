@@ -106,6 +106,8 @@ git config --global core.excludesfile ~/.global_gitignore
 ## Nucleus installation (part 1)
 
 ```bash
+brew install coreutils
+
 git clone https://github.com/kkroening/nucleus.git ~/nucleus
 
 cd ~/nucleus
@@ -169,9 +171,25 @@ pip install -U virtualenv
 pyenv global 2.7.14 3.7.3
 ```
 
+**pyenv-virtualenv (TBD)**:
+
+If you see the following error, `pyenv-virtualenv` may need to be installed:
+```
+pyenv: no such command `virtualenv-init'
+```
+
+In this case, install `pyenv-virtualenv`:
+```bash
+brew install pyenv-virtualenv
+```
+
+_Source_: [pyenv: no such command `virtualenv' (Stack Overflow)](https://stackoverflow.com/a/67676109).
+
+> _**Note**_: It's not clear why this pyenv plugin is even needed, so this sub-section may be unnecessary.
+
 ## Nucleus installation (part 2)
 
-> _Note: This second part of the nucleus installation must be done *after* Python is set up._
+> _**Note**_: This second part of the nucleus installation must be done *after* Python is set up.
 
 ```bash
 cd ~/nucleus
@@ -183,18 +201,31 @@ virtualenv venv2 -p "$(which python2)" \
 
 ## Install packages via homebrew
 
+> _**Note**_: The `brew install` items in this section are optional, so season the commands to taste.
+
+> _**Note**_: Some particularly tricky package installations are shown separately (e.g. `ffmpeg`).
+
+**Assorted packages (optional):**
+
 ```bash
 brew install \
   ctags \
   direnv \
-  coreutils \
   htop \
   mdcat \
   fswatch \
   nvm \
   vim \
   watch
+```
+
+**ffmpeg (optional):**
+```bash
 brew install ffmpeg --with-sdl2 --with-freetype --with-fontconfig --with-libass
+```
+
+**universal-ctags (optional):**
+```bash
 brew install --HEAD universal-ctags/universal-ctags/universal-ctags
 ```
 
@@ -392,9 +423,9 @@ echo "eval \"\$(pyenv virtualenv-init -)\""
 sudo update-alternatives --config editor
 ```
 
-> _**Note*: Some of the above apt packages may be redundant/unnecessary._
+> _**Note**_: Some of the above apt packages may be redundant/unnecessary.
 
-> _**Note**: The `~/.bashrc` changes are already included in nucleus' `.bashrc` file._
+> _**Note**_: The `~/.bashrc` changes are already included in nucleus' `.bashrc` file.
 
 ## pyflakes-vim
 
