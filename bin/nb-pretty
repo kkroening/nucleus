@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+exec nb-cat "$@" | sed 's/^%cache //' | black -Sq -
