@@ -14,6 +14,7 @@ nucleus::_setup_aliases() {
   alias va='. venv/bin/activate'
   alias vc='virtualenv venv'
   alias vd='deactivate'
+  alias cccat='ccat --color=always'
 }
 
 nucleus::_setup_aliases
