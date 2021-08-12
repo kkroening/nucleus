@@ -1,21 +1,28 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-POSITIONAL_ARGS=()
-FIND_ARGS=()
-GREP_ARGS=()
-while [[ $# -gt 0 ]]; do
-    case $1 in
-        -i) GREP_ARGS+=$1; shift;;
-        *) POSITIONAL_ARGS+=$1; shift;;
-    esac
-done
+positional_args=()
+find_args=()
+grep_args=()
 
-if [ ${#POSITIONAL_ARGS} -lt 1 ]; then
-    >&2 echo "Usage: $(basename $0) <pattern> [-i] [\`find\` args...]"
-    exit 1
-fi
+_parse_args() {
+  while (( $# > 0 )); do
+      case $1 in
+          -i) grep_args+=$1; shift;;
+          *) positional_args+=$1; shift;;
+      esac
+  done
 
-GREP_ARGS+="${POSITIONAL_ARGS[0]}"
-FIND_ARGS+="${POSITIONAL_ARGS[@]:1}"
+  if (( ${#positional_args} < 1 )); then
+      >&2 echo "Usage: $(basename "$0") <pattern> [-i] [\`find\` args...]"
+      exit 1
+  fi
 
-kf "${FIND_ARGS}" | xargs -0 grep "${GREP_ARGS}" -B4 -A4 -n --color=always | less -FRX
+  grep_args+="${positional_args[0]}"
+  find_args+="${positional_args[@]:1}"
+}
+
+_parse_args "$@"
+kf "${find_args}" \
+  | xargs -0 grep "${grep_args}" -B4 -A4 -n --color=always \
+  | less -FRX
