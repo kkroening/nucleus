@@ -1,6 +1,8 @@
 # OS X installation instructions
 
-## Set hostname:
+## System settings
+
+### Set hostname:
 
 Run the following in a terminal:
 ```bash
@@ -10,70 +12,85 @@ dscacheutil -flushcache
 sudo reboot
 ```
 
-## Auto-hide dock
+### Auto-hide dock
 
 Right click Dock and choose "Dock preferences", then auto-hide dock.
 
-## Remove extra dock icons
+### Remove extra dock icons
 
 Drag and drop each unnecessary icon on the dock to the trash.
 
-## Make TouchBar buttons behave like a reasonable keyboard
+### Show battery percentage
 
-Keyboard => Touch Bar Shows => Expanded Control Strip
-Keyboard => Customize Control Strip => drag `Screen Lock` in place of Siri icon
+Click battery indicator in top menu and choose "Show Percentage"
 
-## Disable capslock
+### Link home directory in Finder
 
-System Preferences => Keyboard => Keyboard => Modifier Keys => set capslock to "No action"
+Open Finder, navigate to Documents, hit Command + up-arrow twice to navigate to `/Users`, then drag and drop your home directory onto the favorite bar on the left.
 
-## Disable all keyboard autocorrect nonsense
+## System Preferences
 
-System Preferences => Keyboard => Text => uncheck everything
+### Make TouchBar buttons behave like a reasonable keyboard
 
-## Set window management hotkey(s)
+System Preferences => Keyboard
+- Touch Bar Shows => Expanded Control Strip
+- Customize Control Strip => drag `Screen Lock` in place of Siri icon
 
-System Preferences => Keyboard => Shortcuts => App Shortcuts => `+` button:
-- Menu Title: `Zoom`
-- Keyboard Shortcut: `⌥ ⌘ =`
+### Disable capslock
 
-System Preferences => Keyboard => Shortcuts => Accessibility => unselect all.
+System Preferences => Keyboard
+- Modifier Keys => set capslock to "No action"
 
-## Disable OS X sounds
+### Disable all keyboard autocorrect nonsense
+
+System Preferences => Keyboard
+- Text => uncheck everything
+
+### Set window management hotkey(s)
+
+System Preferences => Keyboard
+- Shortcuts => App Shortcuts => `+` button:
+  - Menu Title: `Zoom`
+  - Keyboard Shortcut: `⌥ ⌘ =`
+- Accessibility => unselect all.
+
+### Disable OS X sounds
 
 System Preferences => Sound
 - uncheck "Play user interface sound effects"
 - set alert volume to 0
 
-## Enable bluetooth icon in menu bar
+### Enable bluetooth icon in menu bar
 
-- System Preferences => Bluetooth => Show Bluetooth in menu bar
+System Preferences => Bluetooth
+- Show Bluetooth in menu bar
 
-## Show battery percentage
+### Require password on screen lock
 
-Click battery indicator in top menu and choose "Show Percentage"
+System Preferences => Security & Privacy
+- General => Require password immediately
 
-## Require password on screen lock
+### Enable firewall
 
-- System Preferences => Security & Privacy => General => Require password immediately
+System Preferences => Security & Privacy
+- Turn On Firewall
+- Firewall Options => Uncheck "Automatically allow ..." checkboxes
+- Firewall Options => Check "Enable stealth mode"
 
-## Enable firewall
+### Disable automatic screen brightness
 
-- System Preferences => Security & Privacy => Turn On Firewall
-- System Preferences => Security & Privacy => Firewall Options => Uncheck "Automatically allow ..." checkboxes
-- System Preferences => Security & Privacy => Firewall Options => Check "Enable stealth mode"
+System Preferences => Displays
+- Uncheck "Automatically adjust brightness"
 
-## Disable automatic screen brightness
+### Disable nonsensical automatic virtual desktop reordering
 
-- System Preferences => Displays => Uncheck "Automatically adjust brightness"
+System Preferences => Mission Control
+- Uncheck "Automatically rearrange spaces"
 
-## Link home directory in Finder
+### Disable "fast user switching" menu
 
-- Open Finder, navigate to Documents, hit Command + up-arrow twice to navigate to `/Users`, then drag and drop your home directory onto the favorite bar on the left.
-
-## Disable nonsensical automatic virtual desktop reordering
-
-- System Preferences => Mission Control => Uncheck "Automatically rearrange spaces"
+System Preferences => Users & Groups
+- Login Options => Uncheck "Show fast user switching menu"
 
 # Application installation/setup
 
