@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+eval gcloud beta emulators datastore "$@"
