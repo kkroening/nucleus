@@ -155,20 +155,24 @@ brew install iTerm2
 ```
 
 Run iterm and configure:
+- iTerm -> Preferences => Appearance
+  - Theme => "Light (High Contrast)"
 - iTerm => Preferences => Profiles
-  - General => reuse previous session's current directory
-  - General => Characters considered part of word for selection => `/-+\~_.@`
+  - General => Reuse previous session's current directory
+  - General => Characters considered part of word for selection => `/-+\~_.@`  (FIXME: no logner present?)
+  - General -> Title: "Job+Args"
   - Colors => Color Presets => Light Background
     - Change color for yellow to something more visible.
-  - Text => Font => font size 16
-  - Terminal => check "Silence bell"
+  - Text => Font => Font Size: 16
+  - Window => Settings For New Windows => Style: "Full Screen"
+  - Terminal => Check "Silence bell"
   - Session => "Prompt before closing if there are jobs running besides..."
   - Keys:
     - Set Left ⎇  Key: Esc+
     - Add ⎇ +← mapping: Send Escape Sequence: b
     - Add ⎇ +→ mapping: Send Escape Sequence: f
     - (Note that the alt symbol is reversed in this doc for some reason; fixme)
-  - Other actions => Set as default
+  - Other actions => Set as Default
 
 ## Python
 
