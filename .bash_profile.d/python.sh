@@ -18,6 +18,7 @@ nucleus::_setup_python() {
 
   export PIPENV_VENV_IN_PROJECT=true
   export PIP_REQUIRE_VIRTUALENV=true
+  # export PYTHONBREAKPOINT=IPython.terminal.debugger.set_trace
   export PYTHONDONTWRITEBYTECODE=true
 }
 

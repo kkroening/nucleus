@@ -12,6 +12,7 @@ nucleus::_setup_git_aliases() {
   alias gitdom='git diff origin/master'
   alias gitf='git fetch'
   alias gitl='git log'
+  alias gitlom='git log origin/master'
   alias gitm='git merge'
   alias gitmb='git merge-base'
   alias gitmbom='git merge-base origin/master'
