@@ -127,6 +127,14 @@ git config --global user.name "Karl Kroening"
 git config --global core.excludesfile ~/.global_gitignore
 ```
 
+## Add github ssh key
+
+Run the following and then paste into github:
+```bash
+ssh-keygen
+cat ~/.ssh/id_rsa.pub | pbcopy
+```
+
 ## Nucleus installation (part 1)
 
 ```bash
@@ -255,14 +263,6 @@ brew install ffmpeg --with-sdl2 --with-freetype --with-fontconfig --with-libass
 **universal-ctags (optional):**
 ```bash
 brew install --HEAD universal-ctags/universal-ctags/universal-ctags
-```
-
-## Add github ssh key
-
-Run the following and then paste into github:
-```bash
-ssh-keygen
-cat ~/.ssh/id_rsa.pub | pbcopy
 ```
 
 ## Setup gpg key
