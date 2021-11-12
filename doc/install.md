@@ -118,6 +118,14 @@ Do in all profiles:
 
 [https://brew.sh](https://brew.sh)
 
+## Setup bash
+
+```bash
+brew install bash
+echo "$(which bash)" | sudo tee -a /etc/shells
+chsh -s "$(which bash)"
+```
+
 ## Git
 
 ```bash
@@ -127,7 +135,7 @@ git config --global user.name "Karl Kroening"
 git config --global core.excludesfile ~/.global_gitignore
 ```
 
-## Add github ssh key
+## Add GitHub SSH key
 
 Run the following and then paste into github:
 ```bash
@@ -136,6 +144,8 @@ cat ~/.ssh/id_rsa.pub | pbcopy
 ```
 
 ## Nucleus installation (part 1)
+
+> _**Note**_: This section depends on the previous sections, including setup of homebrew, git, GitHub, bash, coreutils, etc.
 
 ```bash
 brew install coreutils
