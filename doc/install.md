@@ -187,7 +187,7 @@ Run iterm and configure:
   - General => Characters considered part of word for selection => `/-+\~_.@`  (FIXME: no logner present?)
   - General -> Title: "Job+Args"
   - Colors => Color Presets => Light Background
-    - Change color for yellow to something more visible.
+    - Change yellow colors to pink to be more visible: `#c700b0` for normal and `#fe67f3` for bright.
   - Text => Font => Font Size: 16
   - Window => Settings For New Windows => Style: "Full Screen"
   - Terminal => Check "Silence bell"
