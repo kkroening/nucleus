@@ -2,6 +2,10 @@
 
 ## System settings
 
+### Sign into Apple Store
+
+_(Optional):_ Install application updates.
+
 ### Set hostname:
 
 Run the following in a terminal:
@@ -19,10 +23,6 @@ Right click Dock and choose "Dock preferences", then auto-hide dock.
 ### Remove extra dock icons
 
 Drag and drop each unnecessary icon on the dock to the trash.
-
-### Show battery percentage
-
-Click battery indicator in top menu and choose "Show Percentage"
 
 ### Link home directory in Finder
 
@@ -49,26 +49,32 @@ System Preferences => Keyboard
 ### Set window management hotkey(s)
 
 System Preferences => Keyboard
-- Shortcuts => App Shortcuts => `+` button:
+- _(Optional):_ Shortcuts => App Shortcuts => `+` button:
   - Menu Title: `Zoom`
   - Keyboard Shortcut: `⌥ ⌘ =`
-- Accessibility => unselect all.
+- Shortcuts => Accessibility => unselect all.
 
 ### Disable OS X sounds
 
 System Preferences => Sound
-- uncheck "Play user interface sound effects"
-- set alert volume to 0
+- Uncheck "Play sound on startup"
+- Uncheck "Play user interface sound effects"
+- Set alert volume to 0
+- "Show Sound in menu bar" => "always"
 
 ### Enable bluetooth icon in menu bar
 
 System Preferences => Bluetooth
 - Show Bluetooth in menu bar
 
-### Require password on screen lock
+### Enable FileVault disk encryption
+
+System Preferences => Security & Privacy => FileVault
+
+### Screen lock settings
 
 System Preferences => Security & Privacy
-- General => Require password immediately
+- General => "Require password 15 minutes after sleep or screen saver begins"
 
 ### Enable firewall
 
@@ -76,10 +82,11 @@ System Preferences => Security & Privacy
 - Turn On Firewall
 - Firewall Options => Uncheck "Automatically allow ..." checkboxes
 - Firewall Options => Check "Enable stealth mode"
+- _(TBD):_ Drop "Control Center" firewall allowance rule
 
 ### Disable automatic screen brightness
 
-System Preferences => Displays
+System Preferences => Displays => Display Settings
 - Uncheck "Automatically adjust brightness"
 
 ### Disable nonsensical automatic virtual desktop reordering
