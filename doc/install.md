@@ -191,6 +191,7 @@ Run iterm and configure:
   - Text => Font => Font Size: 16
   - Window => Settings For New Windows => Style: "Full Screen"
   - Terminal => Check "Silence bell"
+  - Terminal => Mousing Reporting => Enable "Report mouse wheel events" and disable "Report mouse clicks & drags"
   - Terminal => Scrollback lines => 30,000
   - Session => "Prompt before closing if there are jobs running besides..."
   - Keys:
