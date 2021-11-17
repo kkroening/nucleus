@@ -338,7 +338,7 @@ curl https://sdk.cloud.google.com | bash
 ## Slack
 
 ```bash
-curl -o slack.dmg https://slack.com/ssb/download-osx
+brew install slack
 ```
 
 ## Docker
