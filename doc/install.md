@@ -108,6 +108,8 @@ curl -O 'https://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg'
 open googlechrome.dmg
 ```
 
+- Set as default browser (`chrome://settings/defaultBrowser`) -> "Make default".
+
 Do in all profiles:
 - Sign into gmail account
 - Configure sync settings
