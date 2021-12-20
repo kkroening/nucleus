@@ -9,6 +9,11 @@ set number
 set bs=2
 set colorcolumn=100
 
+set mouse=a
+map <ScrollWheelDown> j
+map <ScrollWheelUp> k
+set scrolloff=5
+
 highlight LineNr ctermfg=grey ctermbg=lightgrey
 highlight Italic ctermbg=lightgrey
 highlight BoldItalic ctermbg=lightgrey

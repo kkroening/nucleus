@@ -108,6 +108,8 @@ curl -O 'https://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg'
 open googlechrome.dmg
 ```
 
+- Set as default browser (`chrome://settings/defaultBrowser`) -> "Make default".
+
 Do in all profiles:
 - Sign into gmail account
 - Configure sync settings
@@ -187,10 +189,12 @@ Run iterm and configure:
   - General => Characters considered part of word for selection => `/-+\~_.@`  (FIXME: no logner present?)
   - General -> Title: "Job+Args"
   - Colors => Color Presets => Light Background
-    - Change color for yellow to something more visible.
+    - Change yellow colors to brown/peach to be more visible: `#c78d00` for normal and `#fec467` for bright.
   - Text => Font => Font Size: 16
   - Window => Settings For New Windows => Style: "Full Screen"
   - Terminal => Check "Silence bell"
+  - Terminal => Mousing Reporting => Enable "Report mouse wheel events" and disable "Report mouse clicks & drags"
+  - Terminal => Scrollback lines => 30,000
   - Session => "Prompt before closing if there are jobs running besides..."
   - Keys:
     - Set Left ⎇  Key: Esc+
@@ -337,7 +341,7 @@ curl https://sdk.cloud.google.com | bash
 ## Slack
 
 ```bash
-curl -o slack.dmg https://slack.com/ssb/download-osx
+brew install slack
 ```
 
 ## Docker
