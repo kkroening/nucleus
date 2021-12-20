@@ -1,5 +1,7 @@
 # OS X installation instructions
 
+> _**Note**_: Most of the sections in this setup guide are optional, and can be applied on an à la carte basis, depending on personal requirements/preferences.
+
 ## System settings
 
 ### Sign into Apple Store
@@ -120,61 +122,6 @@ Do in all profiles:
 
 [https://brew.sh](https://brew.sh)
 
-## Setup bash
-
-```bash
-brew install bash
-echo "$(which bash)" | sudo tee -a /etc/shells
-chsh -s "$(which bash)"
-```
-
-## Git
-
-```bash
-brew install git
-git config --global user.email "karlk@kralnet.us"
-git config --global user.name "Karl Kroening"
-git config --global core.excludesfile ~/.global_gitignore
-```
-
-## Add GitHub SSH key
-
-Run the following and then paste into github:
-```bash
-ssh-keygen
-cat ~/.ssh/id_rsa.pub | pbcopy
-```
-
-## Nucleus installation (part 1)
-
-> _**Note**_: This section depends on the previous sections, including setup of homebrew, git, GitHub, bash, coreutils, etc.
-
-```bash
-brew install coreutils
-
-git clone https://github.com/kkroening/nucleus.git ~/nucleus
-
-cd ~/nucleus
-git submodule update --init
-
-mkdir -p \
-  ~/.bash_profile.d \
-  ~/.vim/autoload \
-  ~/.vim/bundle \
-  ~/.vim/ftplugin \
-  ~/bin
-
-ln -s ~/nucleus/.bashrc ~/.bashrc
-ln -s ~/nucleus/.bash_profile ~/.bash_profile
-ln -s ~/nucleus/.bash_profile.d/* ~/.bash_profile.d/
-ln -s ~/nucleus/.global_gitignore ~/.global_gitignore
-ln -s ~/nucleus/.vim/autoload/* ~/.vim/autoload/
-ln -s ~/nucleus/.vim/bundle/* ~/.vim/bundle/
-ln -s ~/nucleus/.vim/ftplugin/* ~/.vim/ftplugin/
-ln -s ~/nucleus/.vimrc ~/.vimrc
-ln -s ~/nucleus/keygen/keygen.py ~/bin/key
-```
-
 ## iTerm2
 
 ```bash
@@ -203,53 +150,97 @@ Run iterm and configure:
     - (Note that the alt symbol is reversed in this doc for some reason; fixme)
   - Other actions => Set as Default
 
+## Setup bash
+
+```bash
+brew install bash
+echo "$(which bash)" | sudo tee -a /etc/shells
+chsh -s "$(which bash)"
+```
+
+## Git
+
+```bash
+brew install git
+git config --global user.email "***@***"  # (email redacted)
+git config --global user.name "Karl Kroening"
+git config --global core.excludesfile ~/.global_gitignore
+```
+
+## Add GitHub SSH key
+
+Run the following and then paste into github:
+```bash
+ssh-keygen
+cat ~/.ssh/id_rsa.pub | pbcopy
+```
+
 ## Python
 
 ```bash
 brew install pyenv
-pyenv install 2.7.14
-pyenv install 3.7.3
-
-pyenv shell 2.7.14
-pip install -U pip
-pip install -U virtualenv
-
-pyenv shell 3.7.3
-pip install -U pip
-pip install -U virtualenv
-
-pyenv global 2.7.14 3.7.3
 ```
 
-**pyenv-virtualenv (TBD)**:
+Restart your terminal/shell and then run `which python`.  If it doesn't say `/Users/<user>/.pyenv/shims/python`, then pyenv is not configured properly.  Refer to the [official pyenv documentation](https://github.com/pyenv/pyenv) for more info.
 
-If you see the following error, `pyenv-virtualenv` may need to be installed:
-```
-pyenv: no such command `virtualenv-init'
-```
-
-In this case, install `pyenv-virtualenv`:
 ```bash
-brew install pyenv-virtualenv
+unset PIP_REQUIRE_VIRTUALENV 2>/dev/null
+pyenv install 3.9.6
+pyenv shell 3.9.6
+pip install -U pip
+pip install -U virtualenv
+pip install -U readline
+pyenv global 3.9.6
 ```
 
-_Source_: [pyenv: no such command `virtualenv' (Stack Overflow)](https://stackoverflow.com/a/67676109).
+## Nucleus installation - shell customization, Vim configuration, etc.
 
-> _**Note**_: It's not clear why this pyenv plugin is even needed, so this sub-section may be unnecessary.
+> _**Note**_: This section depends on the previous sections, including setup of Homebrew, git, GitHub, bash, coreutils, Python, etc.
 
-## Nucleus installation (part 2)
+[Nucleus](https://github.com/kkroening/nucleus) includes shell setup/customization, Vim configuration, etc.
 
-> _**Note**_: This second part of the nucleus installation must be done *after* Python is set up.
+```bash
+brew install coreutils
+
+git clone https://github.com/kkroening/nucleus.git ~/nucleus
+
+cd ~/nucleus
+git submodule update --init
+
+mkdir -p \
+  ~/.bash_profile.d \
+  ~/.vim/autoload \
+  ~/.vim/bundle \
+  ~/.vim/ftplugin \
+  ~/bin
+
+ln -s ~/nucleus/.bashrc ~/.bashrc
+ln -s ~/nucleus/.bash_profile ~/.bash_profile
+ln -s ~/nucleus/.bash_profile.d/* ~/.bash_profile.d/
+ln -s ~/nucleus/.global_gitignore ~/.global_gitignore
+ln -s ~/nucleus/.vim/autoload/* ~/.vim/autoload/
+ln -s ~/nucleus/.vim/bundle/* ~/.vim/bundle/
+ln -s ~/nucleus/.vim/ftplugin/* ~/.vim/ftplugin/
+ln -s ~/nucleus/.vimrc ~/.vimrc
+ln -s ~/nucleus/keygen/keygen.py ~/bin/key
+```
+
+Restart the terminal, and then set up a virtual environment for Nucleus:
 
 ```bash
 cd ~/nucleus
 virtualenv venv \
   && venv/bin/pip install -r requirements.txt
-virtualenv venv2 -p "$(which python2)" \
-  && venv2/bin/pip install -r requirements-py2.txt
 ```
 
-## Install packages via homebrew
+### Vim Python syntax
+
+Install pyflakes for Homebrew's version of Vim:
+```bash
+(unset PIP_REQUIRE_VIRTUALENV; /usr/local/bin/pip3 install pyflakes)
+```
+
+## Install packages via Homebrew
 
 > _**Note**_: The `brew install` items in this section are optional, so season the commands to taste.
 
@@ -269,59 +260,12 @@ brew install \
   watch
 ```
 
-**ffmpeg (optional):**
-```bash
-brew install ffmpeg --with-sdl2 --with-freetype --with-fontconfig --with-libass
-```
-
-**universal-ctags (optional):**
-```bash
-brew install --HEAD universal-ctags/universal-ctags/universal-ctags
-```
-
 ## Setup gpg key
 
 ```bash
 brew install gpg
 gpg --full-generate-key
 ```
-
-## Python
-
-- `brew install pyenv`
-  - add to .bash_profile:
-    ```bash
-    eval "$(pyenv init -)"
-    ```
-
-- install python versions:
-  ```bash
-  pyenv install 2.7.14
-  pyenv install 3.7.3
-  ```
-
-- Install latest virtualenv + pip in each pyenv:
-  ```bash
-  pyenv shell 2.7.14
-  pip install -U pip
-  pip install -U virtualenv
-  pip install -U readline
-
-  pyenv shell 3.7.3
-  pip install -U pip
-  pip install -U virtualenv
-  pip install -U readline
-  ```
-
-- Set global default Python interpreters:
-  ```bash
-  pyenv global 3.7.3 2.7.14
-  ```
-
-- Install pyflakes for homebrew vim:
-  ```bash
-  (unset PIP_REQUIRE_VIRTUALENV; /usr/local/bin/pip3 install pyflakes)
-  ```
 
 ## Rust
 
@@ -431,7 +375,7 @@ Karabiner elements for emulating numpad with Blender:
 
 Follow _some_ of the above instructions (judiciously).
 
-_TODO: pull out common parts of the above and fill in this section.  For now it's just a collection of various notes._
+> _**Todo**_: Pull out common parts of the above and fill in this section.  For now it's just a collection of various notes.
 
 ## pyenv
 
