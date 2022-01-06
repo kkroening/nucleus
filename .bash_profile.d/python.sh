@@ -13,7 +13,7 @@ nucleus::_setup_python() {
   if which pyenv > /dev/null; then
     eval "$(pyenv init --path)"
     eval "$(pyenv init -)"
-    export CLOUDSDK_PYTHON="$(pyenv shell 2.7.14 && pyenv which python)"
+    export CLOUDSDK_PYTHON="$(pyenv shell 2.7.18 && pyenv which python)"
   fi
 
   export PIPENV_VENV_IN_PROJECT=true
