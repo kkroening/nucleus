@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-exec black -Sq -
+exec black -Sq - "$@"

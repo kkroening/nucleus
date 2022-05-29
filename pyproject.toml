@@ -1,0 +1,14 @@
+[tool.black]
+include = '^/(skykit|stubs|tests)/.*\.pyi?$'
+skip-string-normalization = true
+target_version = ['py39']
+
+[tool.isort]
+ensure_newline_before_comments = true
+force_grid_wrap = 0
+force_single_line = true
+include_trailing_comma = true
+line_length = 88
+multi_line_output = 3
+no_sections = true
+use_parentheses = true

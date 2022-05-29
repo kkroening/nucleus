@@ -4,6 +4,9 @@ find . \
         -name .git -o \
         -name .gopath -o \
         -name .ipynb_checkpoints -o \
+        -name .lab_cache -o \
+        -name .mypy_cache -o \
+        -name .nox -o \
         -name .pytest_cache -o \
         -name .tox -o \
         -name .venv\* -o \
@@ -12,6 +15,7 @@ find . \
         -name deploy -o \
         -name node_modules -o \
         -name venv -o \
+        -name \*.bak -o \
         -name \*.bundle.js -o \
         -name \*.egg-info -o \
         -name \*.map -o \
@@ -20,6 +24,5 @@ find . \
         -name \*.pyo -o \
         -name \*.sw\* -o \
         -name \*.sw\* -o \
-        -name \*.vue -o \
-        -name .lab_cache \
+        -name \*.vue \
     \) -prune -o -type f -print0
