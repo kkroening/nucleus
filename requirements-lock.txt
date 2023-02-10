@@ -23,7 +23,7 @@ future==0.18.2
 gpustat==0.6.0
 idna==3.3
 ipykernel==6.5.0
-ipython==7.29.0
+ipython==8.10.0
 ipython-genutils==0.2.0
 ipywidgets==7.6.5
 isort==5.10.1
