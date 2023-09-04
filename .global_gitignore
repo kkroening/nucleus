@@ -1,8 +1,9 @@
+*.egg-info
 *.pyc
 *.swp
-.venv*
-*.egg-info
-venv*
-.pytest_cache
-.ipynb_checkpoints
 .DS_Store
+.ipynb_checkpoints
+.pytest_cache
+.venv*
+venv*
+__stuff/

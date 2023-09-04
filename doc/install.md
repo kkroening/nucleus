@@ -48,6 +48,11 @@ System Preferences => Keyboard
 System Preferences => Keyboard
 - Text => uncheck everything
 
+### Add keyboard shortcuts
+
+System Preferences => Keyboard => Text
+- Add `:>>:` -> `»`
+
 ### Set window management hotkey(s)
 
 System Preferences => Keyboard
@@ -254,10 +259,11 @@ Install pyflakes for Homebrew's version of Vim:
 brew install \
   ctags \
   direnv \
+  fswatch \
   htop \
   mdcat \
-  fswatch \
   nvm \
+  pre-commit \
   vim \
   watch
 ```
