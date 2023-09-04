@@ -14,9 +14,11 @@ nucleus::_setup_gcloud() {
   if [[ -f "${GCLOUD_ROOT}/path.bash.inc" ]]; then
     source "${GCLOUD_ROOT}/path.bash.inc"
   fi
-  if [[ -f "${GCLOUD_ROOT}/completion.bash.inc" ]]; then
-    source "${GCLOUD_ROOT}/completion.bash.inc"
-  fi
+
+  # # Note: gcloud auto-completion is quite annoying - especially for gsutil.
+  # if [[ -f "${GCLOUD_ROOT}/completion.bash.inc" ]]; then
+  #   source "${GCLOUD_ROOT}/completion.bash.inc"
+  # fi
 }
 
 nucleus::_setup_gcloud
