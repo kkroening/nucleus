@@ -13,9 +13,13 @@ nucleus::_setup_homebrew() {
 nucleus::_setup_gnu_coreutils() {
   unset -f nucleus::_setup_gnu_coreutils
 
-  # Use gnu coreutils.
-  PATH="${HOMEBREW_PREFIX}/opt/coreutils/libexec/gnubin:$PATH"
-  MANPATH="${HOMEBREW_PREFIX}/opt/coreutils/libexec/gnuman:$MANPATH"
+  # Use GNU binaries instead of stock OS X variants:
+  if [[ -n "${HOMEBREW_PREFIX:-}" ]]; then
+    PATH="${HOMEBREW_PREFIX}/opt/coreutils/libexec/gnubin:$PATH"
+    PATH="${HOMEBREW_PREFIX}/opt/gnu-sed/libexec/gnubin:$PATH"
+    MANPATH="${HOMEBREW_PREFIX}/opt/coreutils/libexec/gnuman:$MANPATH"
+    MANPATH="${HOMEBREW_PREFIX}/opt/gnu-sed/libexec/gnuman:$MANPATH"
+  fi
 
   # # TBD:
   # PATH="${HOMEBREW_PREFIX}/opt/gnu-tar/libexec/gnubin:$PATH"

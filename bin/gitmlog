@@ -1,28 +1,111 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
 
-if [ $# -lt 2 ]; then
-    BRANCH1=$(git rev-parse --abbrev-ref HEAD)
-    if [ $# -lt 1 ]; then
-        BRANCH2=origin/${BRANCH1}
-    else
-        BRANCH2=$1; shift
-    fi
-else
-    BRANCH1=$1; shift
-    BRANCH2=$1; shift
-fi
 
-MB=$(git merge-base "${BRANCH1}" "${BRANCH2}")
+_show_usage() {
+  cat >&2 <<EOF
 
-run() {
-    echo "Merge base: ${MB}"
-    echo
-    echo "==== ${BRANCH1} commits: ============================================================"
-    git --no-pager log ${MB}..${BRANCH1} --graph --decorate --color=always "$@"
-    echo
-    echo
-    echo "==== ${BRANCH2} commits: ============================================================"
-    git --no-pager log ${MB}..${BRANCH2} --graph --decorate --color=always "$@"
+Usage:
+    gitmlog
+      [remote-branch]
+      [local-branch]
+      [options...]
+      [-- [git-log args...]]
+
+
+Arguments:
+  [remote-branch]
+      A branch/tag/ref/sha to compare against.  If unspecified, it defaults to
+      the currently checked out branch name, but prepended with \`origin/\`;
+      for example, if \`feature1\` branch is currently checked out,
+      [remote-branch] will default to \`origin/feature1\`.  The branch actually
+      doesn't necessarily have to be remote, in spite of the name, which is
+      merely a hint as to the typical use case for the script - comparing a
+      local vs remote branch.
+  [local-branch]
+      A branch/tag/ref/sha to compare against.  If unspecified, it defaults to
+      the currently checked out branch name.
+
+Options:
+  -m
+      Shorthand for setting [remote-branch] to \`master\`.  It's commonly
+      useful to combine this with \`-o\` so that [remote-branch] becomes
+      \`origin/master\`.
+  -o
+      Shorthand for prefixing [remote-branch] with \`origin/\`.  If
+      [remote-branch] is unspecified, this argument is ignored.
+  -n
+      Shorthand for passing \`--name-status\` to \`git log\`.
+  -- [git-log args...]
+      Pass the remaining arguments to \`git log\` verbatim.
+  -h, --help
+      Show help/usage.
+EOF
 }
-run "$@" | less -FRX
+
+_show_help() {
+  echo "scripts/release: Perform release process." >&2
+  _show_usage
+  cat >&2 <<EOF
+
+This script performs the release process by updating CHANGELOG.md, committing,
+tagging, and pushing based on the specified version identifier.
+
+If no version identifier is specified, the version is computed automatically
+by determining the current version (according to \`git describe ...\`) and then
+the minor version number is increased (e.g. \`1.2.3\` -> \`1.3.0\`), so long as
+the current version is a valid semantic version identifier.
+
+The script refuses to do anything if not on master, if the local workarea is
+dirty, or if the changelog is missing, unless overridden using the appropriate
+arguments (e.g. -B).
+EOF
+}
+
+_parse_args() {
+  # TODO: implement.
+  # while (( "$#" )); do
+  #   case "$1" in
+  #     -h|--help)
+  #       _show_help
+  #       exit 1
+  #       ;;
+  #     *)
+  #       base::log_error "Unrecognized argument: $1"
+  #       _show_usage
+  #       exit 1
+  #       ;;
+  #   esac
+  # done
+
+  if (( $# < 2 )); then
+    branch1="$(git rev-parse --abbrev-ref HEAD)"
+    if (( $# < 1 )); then
+      branch2="origin/${branch1}"
+    else
+      branch2="$1"; shift
+    fi
+  else
+    branch1="$1"; shift
+    branch2="$1"; shift
+  fi
+}
+
+_log() {
+  git --no-pager log --graph --decorate --color=always "$@"
+}
+
+_main() {
+  _parse_args "$@"
+  merge_base="$(git merge-base "${branch1}" "${branch2}")"
+  echo "Merge base: ${merge_base}"
+  echo
+  echo "==== ${branch1} commits: ============================================================"
+  _log "${merge_base}..${branch1}" "$@"
+  echo
+  echo
+  echo "==== ${branch2} commits: ============================================================"
+  _log "${merge_base}..${branch2}" "$@"
+}
+
+_main "$@" | less -FRX

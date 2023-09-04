@@ -8,12 +8,14 @@ find . \
         -name .mypy_cache -o \
         -name .nox -o \
         -name .pytest_cache -o \
+        -name .terraform -o \
         -name .tox -o \
         -name .venv\* -o \
         -name bandit-baseline.json -o \
         -name build -o \
         -name deploy -o \
         -name node_modules -o \
+        -name sdk -o \
         -name venv -o \
         -name \*.bak -o \
         -name \*.bundle.js -o \

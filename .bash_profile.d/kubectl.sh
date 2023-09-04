@@ -110,6 +110,11 @@ nucleus::_setup_kubectl() {
   alias kcdn='kc describe node'
   alias kwdn='kw describe node'
 
+  alias kcgN='kc get namespaces'
+  alias kwgN='kw get namespaces'
+  alias kcdN='kc describe namespaces'
+  alias kwdN='kw describe namespaces'
+
   alias kcgss='kc get statefulset'
   alias kwgss='kw get statefulset'
   alias kcdss='kc describe statefulset'

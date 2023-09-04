@@ -66,6 +66,7 @@ System Preferences => Keyboard
   - Menu Title: `Zoom`
   - Keyboard Shortcut: `⌥ ⌘ =`
 - Shortcuts => Accessibility => unselect all.
+- Dictation => Shortcut => Off (or "Press 🎙" if the _Off_ option is missing)
 
 ### Disable OS X sounds
 
