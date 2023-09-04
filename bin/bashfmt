@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+exec shfmt \
+  --binary-next-line \
+  --case-indent \
+  --indent 2 \
+  --space-redirects \
+  "$@"

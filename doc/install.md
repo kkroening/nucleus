@@ -271,6 +271,7 @@ brew install \
   mdcat \
   nvm \
   pre-commit \
+  shfmt \
   vim \
   watch
 ```
@@ -302,6 +303,8 @@ curl https://sdk.cloud.google.com | bash
 ```bash
 brew install slack
 ```
+
+> **TODO**: Explain Slack settings - e.g. sort conversations/channels alphabetically.
 
 ## Docker
 
