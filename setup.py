@@ -12,7 +12,8 @@ setup(
     install_requires=[
         #'matplotlib',
         #'tensorflow',
-        'black<=21.9b0',  # Upgrading past this breaks py2 formatting.
+        # 'black<=21.9b0',  # Upgrading past this breaks py2 formatting.
+        'black',
         'flake8',
         'future',
         'gpustat',

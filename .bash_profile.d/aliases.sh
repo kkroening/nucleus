@@ -10,6 +10,7 @@ nucleus::_setup_aliases() {
   alias pbc='pbcopy'
   alias pbp='pbpaste'
   alias tf=terraform
+  alias .va='. .venv/bin/activate'
   alias va3='. venv3/bin/activate'
   alias va='. venv/bin/activate'
   alias vc='virtualenv venv'
