@@ -53,6 +53,12 @@ System Preferences => Keyboard
 System Preferences => Keyboard => Text
 - Add `:>>:` -> `»`
 
+### Setup trackpad gestures
+
+System Preferences => Trackpad => More Gestures
+- Uncheck "Swipe between pages"
+- Uncheck "App Exposé"
+
 ### Set window management hotkey(s)
 
 System Preferences => Keyboard
