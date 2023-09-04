@@ -108,4 +108,18 @@ _main() {
   _log "${merge_base}..${branch2}" "$@"
 }
 
-_main "$@" | less -FRX
+_newmain() {
+  #
+  # Possibly a more standard implementation of the previous, but doesn't quite
+  # work correctly.
+  #
+  _parse_args "$@"
+  git log \
+    "${branch1}^...${branch2}^" \
+    --graph \
+    --decorate \
+    --left-right \
+    "$@"
+}
+
+_main "$@"

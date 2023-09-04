@@ -287,7 +287,10 @@ gpg --full-generate-key
 
 ```bash
 brew install rustup-init
+rustup-init
 ```
+
+> **Note**: Customize the `rustup-init` installation to not modify the PATH since nucleus already does it in `~/.bash_profile.d/rust`.
 
 ## gcloud sdk
 

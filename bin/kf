@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+set -euo pipefail
+
 find . \
     \( \
         -name .git -o \
@@ -12,8 +14,6 @@ find . \
         -name .tox -o \
         -name .venv\* -o \
         -name bandit-baseline.json -o \
-        -name build -o \
-        -name deploy -o \
         -name node_modules -o \
         -name sdk -o \
         -name venv -o \
