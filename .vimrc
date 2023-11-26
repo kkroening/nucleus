@@ -41,8 +41,8 @@ autocmd BufRead,BufNewFile *.rs nmap ,f mkMml:%!prs`lzz`k | vmap ,f mkMml:!prs
 autocmd BufRead,BufNewFile *.sh setlocal sts=2 sw=2 ts=2 colorcolumn=81 | nmap ,f mkMml:%!bashfmt`lzz`k | vmap ,f mkMml:!bashfmt`lzz`k
 autocmd BufRead,BufNewFile *.tf setlocal sts=2 sw=2 ts=2 | nmap ,f mkMml:%!terraform fmt -`lzz`k | vmap ,f mkMml:!pjs`lzz`k
 autocmd BufRead,BufNewFile *.toml nmap ,f mkMml:%!toml-fmt`lzz`k | vmap ,f mkMml:!toml-fmt`lzz`k
-autocmd BufRead,BufNewFile *.ts setlocal sts=2 sw=2 ts=2 filetype=javascript | nmap ,f mkMml:%!pjs`lzz`k | vmap ,f mkMml:!pjs`lzz`k
-autocmd BufRead,BufNewFile *.tsx setlocal sts=2 sw=2 ts=2 filetype=javascript | nmap ,f mkMml:%!pjs`lzz`k | vmap ,f mkMml:!pjs`lzz`k
+autocmd BufRead,BufNewFile *.ts setlocal sts=2 sw=2 ts=2 filetype=typescript | nmap ,f mkMml:%!prettier --parser=typescript`lzz`k | vmap ,f mkMml:!prettier --parser=typescript`lzz`k
+autocmd BufRead,BufNewFile *.tsx setlocal sts=2 sw=2 ts=2 filetype=typescript | nmap ,f mkMml:%!prettier --parser=typescript`lzz`k | vmap ,f mkMml:!prettier --parser=typescript`lzz`k
 autocmd BufRead,BufNewFile *.vue setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.yaml setlocal sts=2 sw=2 ts=2 | nmap ,f mkMml:%!goyq -P e . -`lzz`k | vmap ,f mkMml:!goyq -P e . -`lzz`k | nmap ,i mkMml1GV}OA!sort -f`lzz`k
 autocmd BufRead,BufNewFile *.yml setlocal sts=2 sw=2 ts=2  | nmap ,f mkMml:%!goyq -P e . -`lzz`k | vmap ,f mkMml:!goyq -P e . -`lzz`k | nmap ,i mkMml1GV}OA!sort -f`lzz`k

@@ -271,8 +271,10 @@ brew install \
   mdcat \
   nvm \
   pre-commit \
+  prettier \
   shfmt \
   vim \
+  wasm-tools \
   watch
 ```
 
@@ -286,7 +288,7 @@ gpg --full-generate-key
 ## Rust
 
 ```bash
-brew install rustup-init
+brew install rustup-init wasm-pack
 rustup-init
 ```
 
@@ -300,6 +302,12 @@ curl https://sdk.cloud.google.com | bash
 ```
 - Refer to https://cloud.google.com/sdk/downloads
 - run `install.sh` to add to bash_profile
+
+## Visual Studio Code
+
+Extensions:
+
+* rust-analyzer
 
 ## Slack
 

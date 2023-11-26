@@ -25,6 +25,7 @@ nucleus::_setup_python() {
   export GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1
 
   alias por='poetry run'
+  alias mytest='mypy && pytest'
 }
 
 nucleus::_setup_python
