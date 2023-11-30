@@ -248,8 +248,9 @@ virtualenv venv \
 ### Vim Python syntax
 
 Install pyflakes for Homebrew's version of Vim:
+
 ```bash
-(unset PIP_REQUIRE_VIRTUALENV; $(brew --prefix python@3.10)/bin/pip3 install pyflakes)
+(unset PIP_REQUIRE_VIRTUALENV; $(brew --prefix python@3.12)/bin/pip3.12 install pyflakes --break-system-packages)
 ```
 
 > _**Note**_: Homebrew's version of vim periodically changes to depend on different versions of Python, so the above command may need to be adjusted in the future.  Refer to the output of `brew info vim`.
