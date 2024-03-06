@@ -295,6 +295,26 @@ rustup-init
 
 > **Note**: Customize the `rustup-init` installation to not modify the PATH since nucleus already does it in `~/.bash_profile.d/rust`.
 
+## Nix
+
+[Install Nix](https://nixos.org/download#download-nix):
+
+```bash
+sh <(curl -L https://nixos.org/nix/install)
+```
+
+> **Note**: The above method of installation skips most of the prompts besides for running `sudo`.  If you prefer an interactive installation with more explanation and confirmation along the way, `curl` the install script to a file, set it as executable with `chmod +x install` and then run it directly as (`./install`).
+
+> **Note**: If you see a mysterious "Oh no, something went wrong error", GNU coreutils may need to be disabled.  See [nix #7181](https://github.com/NixOS/nix/issues/7181).
+
+### Install Nix-based tools
+
+```bash
+nix-env -iA \
+  nixpkgs.nixfmt \
+  nixpkgs.ripgrep
+```
+
 ## gcloud sdk
 
 ```bash
