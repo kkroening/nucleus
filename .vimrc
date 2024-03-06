@@ -35,8 +35,8 @@ autocmd BufRead,BufNewFile *.html setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.js setlocal sts=2 sw=2 ts=2   | nmap ,f mkMml:%!pjs`lzz`k | vmap ,f mkMml:!pjs`lzz`k
 autocmd BufRead,BufNewFile *.json setlocal sts=2 sw=2 ts=2 | nmap ,f mkMml:%!pj`lzz`k  | vmap ,f mkMml:!pj`lzz`k
 autocmd BufRead,BufNewFile *.jsx setlocal sts=2 sw=2 ts=2  | nmap ,f mkMml:%!pjs`lzz`k | vmap ,f mkMml:!pjs`lzz`k
-autocmd BufRead,BufNewFile *.py  setlocal colorcolumn=89   | nmap ,f mkMml:%!bsq`lzz`k | vmap ,f mkMml:!bsq`lzz`k | nmap ,i mkMml:%!isrt -`lzz`k
-autocmd BufRead,BufNewFile *.pyi setlocal colorcolumn=89   | nmap ,f mkMml:%!bsq --pyi`lzz`k | vmap ,f mkMml:!bsq --pyi`lzz`k | nmap ,i mkMml:%!isrt -`lzz`k
+autocmd BufRead,BufNewFile *.py  setlocal colorcolumn=89   | nmap ,f :Black | vmap ,f :Black | nmap ,i mkMml:%!isrt -`lzz`k
+autocmd BufRead,BufNewFile *.pyi setlocal colorcolumn=89   | nmap ,f :Black | vmap ,f :Black | nmap ,i mkMml:%!isrt -`lzz`k
 autocmd BufRead,BufNewFile *.rs nmap ,f mkMml:%!prs`lzz`k | vmap ,f mkMml:!prs`lzz`k
 autocmd BufRead,BufNewFile *.sh setlocal sts=2 sw=2 ts=2 colorcolumn=81 | nmap ,f mkMml:%!bashfmt`lzz`k | vmap ,f mkMml:!bashfmt`lzz`k
 autocmd BufRead,BufNewFile *.tf setlocal sts=2 sw=2 ts=2 | nmap ,f mkMml:%!terraform fmt -`lzz`k | vmap ,f mkMml:!pjs`lzz`k
