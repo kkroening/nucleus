@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-exec rustfmt
+exec rustfmt --edition=2021

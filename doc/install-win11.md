@@ -29,10 +29,10 @@
 
 See [Windows 11 Setup Without Internet](https://www.minitool.com/news/windows-11-setup-without-internet.html) guide.
 
-**Method 1** - `OOBE\\BYPASSNRO``:
+**Method 1** - `OOBE\BYPASSNRO`:
 
 -   Press Shift + F10 when prompted for internet/login
--   Run `OOBE\\BYPASSNRO`
+-   Run `OOBE\BYPASSNRO`
 
 **Method 2** - Task Manager:
 
@@ -82,19 +82,19 @@ Install standard performance monitoring tools as soon as possible in order to ke
 
 > **Tip**: After installing each app, to prevent being prompted for administrator permission every time, right click each desktop icon and select properties.  Then in the shortcut => advanced settings, enable _Run as administrator_.
 
-### Drivers
+## Drivers
 
-#### ASRock Z790 Nova
+### ASRock Z790 Nova
 
 -   [Downloads page](https://pg.asrock.com/mb/Intel/Z790%20Nova%20WiFi/index.asp#Download)
     -   Update BIOS first, and then use ASRock auto-installer if possible.
 
-#### NVIDIA
+### NVIDIA
 
 -   [NVIDIA Driver Downloads](https://www.nvidia.com/download/index.aspx)
 -   _Optional_: [GeForce Experience](https://www.nvidia.com/en-us/geforce/drivers/) (automatic driver installer, etc.)
 
-### De-bloating
+## De-bloating
 
 -   Disable OneDrive nagging: Ctrl+Shift+Esc => Startup apps => Disable `OneDrive.exe`
 -   Disable Edge:
@@ -105,3 +105,112 @@ Install standard performance monitoring tools as soon as possible in order to ke
     -   ```
         reg add "HKCU\Software\Policies\Microsoft\Windows\Explorer" /v DisableSearchBoxSuggestions /t REG_DWORD /d 1 /f
         ```
+
+## WSL2
+
+### Install WSL2
+
+```powershell
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+wsl --set-default-version 2
+```
+
+### Debian
+
+#### Install Debian:
+
+```powershell
+wsl --install -d Debian
+```
+
+#### Update packages:
+
+```powershell
+wsl
+```
+
+```bash
+sudo apt update
+sudo apt upgrade
+```
+
+### Enable SSH server
+
+#### Install `openssh-server`:
+
+In a WSL shell, install `openssh-server`:
+
+```bash
+sudo apt install jq openssh-server
+sudo service ssh start
+```
+
+#### _Optional_: Disable MOTD banner:
+
+Disable the hideous "ABSOLUTELY NO WARRANTY" message banner:
+
+```bash
+sudo rm /etc/motd
+```
+
+#### Configure firewall:
+
+-   Open Windows Firewall and click on "Advanced settings".
+-   Inbound Rules > New Rule.
+-   Select Port, click Next, and specify the SSH port (default is 22).
+-   Allow the connection, and make sure it applies to Domain, Private, and Public.
+-   Name the rule (e.g., "WSL2 SSH").
+
+#### Configure netsh portproxy:
+
+Determine the WSL VM's internal IP address by running `ip addr | grep inet 172` in WSL - e.g. `172.28.43.167`.
+
+Then outside of WSL, configure a netsh portproxy:
+
+```bash
+netsh interface portproxy add v4tov4 ssh 172.28.43.167 ssh
+```
+
+> **Note**: The portproxy setting survives reboots, but WSL IP addresses change frequently, so you'll need to reconfigure the portproxy by using `netsh interface portproxy delete v4tov4 ssh` and then repeating the aforementioned steps.
+
+#### Configure `~/.ssh/authorized_keys`:
+
+Enabling password-based login can help with bootstrapping the authorized keys:
+
+```bash
+sudo vi /etc/ssh/ssd_config
+# (Enable `PasswordAuthentication`)
+sudo service ssh restart
+```
+
+Determine the main Windows (not WSL) IP address by running `ipconfig` - e.g. `192.168.1.214`.
+
+Connect via ssh using a password to populate the `~/.ssh/authorized_keys` file with your public key - e.g. `~/.ssh/id_rsa.pub`:
+
+```bash
+cat ~/.ssh/id_rsa.pub | pbcopy
+ssh 192.168.1.214
+umask 077
+mkdir -p ~/.ssh
+vi ~/.ssh/authorized_keys
+# (paste public key)
+```
+
+_Optional_: Disable password-based login by disabling `PasswordAuthentication` as described above.
+
+#### Confirm SSH setup:
+
+Confirm that you can connect using passwordless login:
+
+```bash
+ssh 192.168.1.214
+```
+
+#### _Optional_: Configure DHCP and DNS:
+
+Consider enabling DHCP in your router settings so that Windows gets a predictable IP address.  Then also configure DNS either in your router settings, or by writing an entry in `/etc/hosts`.
+
+### Perform standard Nucleus setup for Debian
+
+Refer to [install-debian.md](./install-debian.md).
