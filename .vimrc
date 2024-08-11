@@ -27,10 +27,17 @@ highlight DiffText ctermfg=black ctermbg=magenta
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o noai nocin nosi inde=
 autocmd FileType sh setlocal sts=2 sw=2 ts=2 colorcolumn=81 | nmap ,f mkMml:%!bashfmt`lzz`k | vmap ,f mkMml:!bashfmt`lzz`k
 
+" function! PreserveViewAndCursor(func)  " TBD
+"     let l:winview = winsaveview()
+"     call execute(a:func)
+"     call winrestview(l:winview)
+" endfunction
+
 " TODO: de-duplicate these nasty definitions:
 autocmd BufRead,BufNewFile *.css setlocal sts=2 sw=2 ts=2 | nmap ,f mkMml:%!pcss`lzz`k | vmap ,f mkMml:!pjs`lzz`k
 autocmd BufRead,BufNewFile Dockerfile setlocal sts=2 sw=2 ts=2 filetype=dockerfile
 autocmd BufRead,BufNewFile *.docker setlocal sts=2 sw=2 ts=2 filetype=dockerfile
+autocmd BufRead,BufNewFile *.glsl setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.gql setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.html setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.js setlocal sts=2 sw=2 ts=2   | nmap ,f mkMml:%!pjs`lzz`k | vmap ,f mkMml:!pjs`lzz`k
@@ -96,3 +103,5 @@ let g:tagbar_width = 60
 
 " Set `:C` command to clear search. https://stackoverflow.com/a/18003136
 :command C let @/=""
+
+command! -range=% Pbc silent <line1>,<line2>w !pbc

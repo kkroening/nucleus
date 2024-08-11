@@ -1,2 +1,37 @@
 #!/usr/bin/env bash
-exec pbcopy "$@"
+set -euo pipefail
+
+_copy_to_clipboard_via_iterm() {
+  input=$(cat)
+  printf "\e]52;c;$(printf "%s" "$input" | base64 | tr -d '\n')\a"
+}
+
+_copy_to_clipboard_via_pbcopy() {
+  pbcopy
+}
+
+_copy_to_clipboard_via_xclip() {
+  xclip -selection clipboard
+}
+
+_copy_to_clipboard_via_xsel() {
+  xsel --clipboard --input
+}
+
+_main() {
+  if [[ -n "${SSH_CONNECTION-}" || -n "${SSH_CLIENT-}" || -n "${SSH_TTY-}" ]]; then
+    # Assume running via iTerm if running over SSH
+    _copy_to_clipboard_via_iterm
+  elif command -v pbcopy &> /dev/null; then
+    _copy_to_clipboard_via_pbcopy
+  elif command -v xclip &> /dev/null; then
+    _copy_to_clipboard_via_xclip
+  elif command -v xsel &> /dev/null; then
+    _copy_to_clipboard_via_xsel
+  else
+    echo "No suitable clipboard utility found" >&2
+    exit 1
+  fi
+}
+
+_main

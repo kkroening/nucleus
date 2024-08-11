@@ -3,11 +3,12 @@
 nucleus::_setup_aliases() {
   unset -f nucleus::_setup_aliases
 
+  # alias pbc='pbcopy'  # TBD: replaced by script
+
   alias ..='cd ..'
   alias less='less -FRX'
   alias lla='ls -la'
   alias ls='ls --color=auto'
-  alias pbc='pbcopy'
   alias pbp='pbpaste'
   alias tf=terraform
   alias .va='. .venv/bin/activate'
