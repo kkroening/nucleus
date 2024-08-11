@@ -1,3 +1,16 @@
+# Installation notes - Debian
+
+This guide applies to multiple Debian variants, including (but not limited to) Raspberry Pi OS.
+
+## Raspberry Pi disk image
+
+_(Skip this section for non- Raspberry Pi)_
+
+For Raspberry Pi setup, use [Raspberry Pi Imager](https://www.raspberrypi.com/software/) on a host system (e.g. `brew install raspberry-pi-imager` on OS X) to create the base image, and customize as desired.
+
+Notes:
+*   Enable ssh server, and optionally pre-register public key
+
 ## Install Debian packages
 
 ```bash
@@ -7,6 +20,7 @@ sudo apt install \
   curl \
   dnsutils \
   git \
+  htop \
   jq \
   man \
   vim \
@@ -28,8 +42,8 @@ git config --global core.excludesfile ~/.global_gitignore
 Run the following and then paste into github:
 
 ```bash
-ssh-keygen
-cat ~/.ssh/id_rsa.pub | pbcopy
+ssh-keygen -t ed25519
+cat ~/.ssh/id_ed25519.pub | pbcopy
 ```
 
 ## Nucleus installation - shell customization, Vim configuration, etc.
@@ -104,6 +118,16 @@ ln -s ~/nucleus/keygen/keygen.py ~/bin/key
 )
 ```
 
+## SSH server
+
+#### Disable MOTD banner:
+
+Disable the hideous "ABSOLUTELY NO WARRANTY" message banner:
+
+```bash
+sudo rm /etc/motd
+```
+
 ## Rust
 
 ### Install rustup
@@ -119,3 +143,28 @@ rustup component add rust-src
 sudo apt install \
   yt-dlp
 ```
+
+## Raspberry Pi specific steps
+
+### Fix locale (if necessary)
+
+```bash
+sudo raspi-config
+# change locale settings to ensure `en_US`, etc.
+```
+
+> **TODO**: Figure out why this happens (sometimes?) with Raspberry Pi Imager, and ideally prevent it upfront.
+
+### Terminal
+
+#### Configure keyboard shortcuts
+
+*   _Edit_ => _Preferences_ => _Shortcuts_
+    *   _Previous Tab_: Ctrl+Left
+    *   _Next Tab_: Ctrl+Right
+    *   _Move Tab Left_: Ctrl+Down
+    *   _Move Tab Right_: Ctrl+Up
+
+### Chromium
+
+Log into any desired accounts, add GitHub public key, etc.

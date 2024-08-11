@@ -390,6 +390,15 @@ Write a minimal `~/.vimrc` by stripping down the nucleus `~/.vimrc`.
 
 Set bedtime color to 2700K.
 
+## JupyterLab
+
+Avoid globally installing JupyterLab, but do link user-settings:
+
+```bash
+mkdir -p ~/.jupyter/lab
+ln -s ~/nucleus/.jupyter/lab/user-settings ~/.jupyter/lab/
+```
+
 ## Spotify
 
 ```bash

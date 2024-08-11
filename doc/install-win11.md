@@ -214,3 +214,25 @@ Consider enabling DHCP in your router settings so that Windows gets a predictabl
 ### Perform standard Nucleus setup for Debian
 
 Refer to [install-debian.md](./install-debian.md).
+
+## Docker
+
+Install [Docker Desktop on Windows](https://docs.docker.com/desktop/install/windows-install/) and follow all the prompts, selecting WSL2 as the backend.
+
+Once Docker Desktop is running, in the settings => Resources => WSL Integration, check "Enable integration with additional distros."
+
+### Configure symlink(s)
+
+You might encounter errors like this when running `docker build ...` when connecting to WSL2 over ssh:
+
+```
+error getting credentials - err: exec: "docker-credential-desktop.exe": executable file not found in $PATH
+```
+
+Apparently WSL2 sets additional environment variables when running a shell locally, as compared to connecting via ssh, and part of the shell setup includes adjusting `$PATH` to point to additional Docker binaries.  One in particular is the `docker-credential-desktop.exe`.  It's not clear when/where/why/how this `$PATH` setup happens, but a targeted workaround is to symlink the file into `~/bin`:
+
+```bash
+ln -s /mnt/c/Program\ Files/Docker/Docker/resources/bin/docker-credential-desktop.exe ~/bin/
+```
+
+> **Note**: The entire directory could be added to the path, but it's probably better to be a bit more targeted here with the least amount of additional system customization.
