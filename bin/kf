@@ -17,14 +17,18 @@ find . \
         -name node_modules -o \
         -name sdk -o \
         -name venv -o \
+        -name \*.auto.tfvars.json -o \
         -name \*.bak -o \
         -name \*.bundle.js -o \
         -name \*.egg-info -o \
+        -name \*.log -o \
         -name \*.map -o \
         -name \*.min.js -o \
         -name \*.pyc -o \
         -name \*.pyo -o \
         -name \*.sw\* -o \
         -name \*.sw\* -o \
-        -name \*.vue \
+        -name \*.tfstate -o \
+        -name \*.vue -o \
+        -name __stuff \
     \) -prune -o -type f -print0
