@@ -25,7 +25,8 @@
 
 ### Alternative OOBE bypass methods
 
-> **Note**: It's likely that the bypass method will break in the future, so some alternatives are below.
+> [!NOTE]
+> It's likely that the bypass method will break in the future, so some alternatives are below.
 
 See [Windows 11 Setup Without Internet](https://www.minitool.com/news/windows-11-setup-without-internet.html) guide.
 
@@ -181,7 +182,8 @@ Then outside of WSL, configure a netsh portproxy:
 netsh interface portproxy add v4tov4 ssh 172.28.43.167 ssh
 ```
 
-> **Note**: The portproxy setting survives reboots, but WSL IP addresses change frequently, so you'll need to reconfigure the portproxy by using `netsh interface portproxy delete v4tov4 ssh` and then repeating the aforementioned steps.
+> [!NOTE]
+> The portproxy setting survives reboots, but WSL IP addresses change frequently, so you'll need to reconfigure the portproxy by using `netsh interface portproxy delete v4tov4 ssh` and then repeating the aforementioned steps.
 
 #### Configure `~/.ssh/authorized_keys`:
 
@@ -224,6 +226,20 @@ Consider enabling DHCP in your router settings so that Windows gets a predictabl
 
 Refer to [install-debian.md](./install-debian.md).
 
+### Additional WSL-specific Debian setup:
+
+#### _Nvidia-only_: Link `nvidia-smi`:
+
+```bash
+ln -s /usr/lib/wsl/lib/nvidia-smi ~/bin/
+```
+
+> [!WARNING]
+> As mentioned in the [CUDA on WSL User Guide](https://docs.nvidia.com/cuda/wsl-user-guide/index.html#cuda-support-for-wsl-2):
+>
+> > users must not install any NVIDIA GPU Linux driver within WSL 2. One has to be very careful here as the default CUDA Toolkit comes packaged with a driver, and it is easy to overwrite the WSL 2 NVIDIA driver with the default installation.
+>
+
 ## Docker
 
 Install [Docker Desktop on Windows](https://docs.docker.com/desktop/install/windows-install/) and follow all the prompts, selecting WSL2 as the backend.
@@ -244,4 +260,5 @@ Apparently WSL2 sets additional environment variables when running a shell local
 ln -s /mnt/c/Program\ Files/Docker/Docker/resources/bin/docker-credential-desktop.exe ~/bin/
 ```
 
-> **Note**: The entire directory could be added to the path, but it's probably better to be a bit more targeted here with the least amount of additional system customization.
+> [!NOTE]
+> The entire directory could be added to the path, but it's probably better to be a bit more targeted here with the least amount of additional system customization.
