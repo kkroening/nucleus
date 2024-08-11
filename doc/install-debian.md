@@ -23,8 +23,12 @@ sudo apt install \
   htop \
   jq \
   man \
-  vim \
+  pyflakes3 \
+  vim-nox \
+  shfmt \
   wget
+
+sudo update-alternatives --set editor /usr/bin/vim.nox
 ```
 
 ## Git

@@ -146,6 +146,15 @@ sudo apt install jq openssh-server
 sudo service ssh start
 ```
 
+#### _Optional_: Automatically start ssh on WSL startup:
+
+Add the following in `/etc/wsl.conf`:
+
+```bash
+[boot]
+command="service ssh start"
+```
+
 #### _Optional_: Disable MOTD banner:
 
 Disable the hideous "ABSOLUTELY NO WARRANTY" message banner:
@@ -164,7 +173,7 @@ sudo rm /etc/motd
 
 #### Configure netsh portproxy:
 
-Determine the WSL VM's internal IP address by running `ip addr | grep inet 172` in WSL - e.g. `172.28.43.167`.
+Determine the WSL VM's internal IP address by running `ip addr | grep 'inet 172'` in WSL - e.g. `172.28.43.167`.
 
 Then outside of WSL, configure a netsh portproxy:
 
