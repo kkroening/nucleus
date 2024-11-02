@@ -11,6 +11,8 @@ nucleus::_setup_gcloud() {
     GCLOUD_ROOT="${GCLOUD_ROOT2}"
   fi
 
+  export CLOUDSDK_PYTHON=python3.11  # google-cloud-sdk breaks with 3.12+
+
   if [[ -f "${GCLOUD_ROOT}/path.bash.inc" ]]; then
     source "${GCLOUD_ROOT}/path.bash.inc"
   fi

@@ -35,7 +35,6 @@ autocmd FileType sh setlocal sts=2 sw=2 ts=2 colorcolumn=81 | nmap ,f mkMml:%!ba
 
 " TODO: de-duplicate these nasty definitions:
 autocmd BufRead,BufNewFile *.css setlocal sts=2 sw=2 ts=2 | nmap ,f mkMml:%!pcss`lzz`k | vmap ,f mkMml:!pjs`lzz`k
-autocmd BufRead,BufNewFile Dockerfile setlocal sts=2 sw=2 ts=2 filetype=dockerfile
 autocmd BufRead,BufNewFile *.docker setlocal sts=2 sw=2 ts=2 filetype=dockerfile
 autocmd BufRead,BufNewFile *.glsl setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.gql setlocal sts=2 sw=2 ts=2
@@ -58,6 +57,8 @@ autocmd BufRead,BufNewFile *.vue setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.yaml setlocal sts=2 sw=2 ts=2 | nmap ,f mkMml:%!goyq -P e . -`lzz`k | vmap ,f mkMml:!goyq -P e . -`lzz`k | nmap ,i mkMml1GV}OA!sort -f`lzz`k
 autocmd BufRead,BufNewFile *.yml setlocal sts=2 sw=2 ts=2  | nmap ,f mkMml:%!goyq -P e . -`lzz`k | vmap ,f mkMml:!goyq -P e . -`lzz`k | nmap ,i mkMml1GV}OA!sort -f`lzz`k
 autocmd BufRead,BufNewFile *pylintrc setlocal filetype=toml
+autocmd BufRead,BufNewFile Dockerfile setlocal sts=2 sw=2 ts=2 filetype=dockerfile
+autocmd BufRead,BufNewFile requirements*.txt setlocal sts=2 sw=2 ts=2 filetype=requirements
 
 nmap <F8> :TagbarToggle<CR>
 

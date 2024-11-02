@@ -148,6 +148,39 @@ sudo apt install \
   yt-dlp
 ```
 
+## DNS
+
+> [!NOTE]
+> This section hasn't been fully written yet - mostly TBD.
+
+Ensure IP forwarding is enabled:
+
+```bash
+sudo vi /etc/sysctl.conf
+```
+
+```
+net.ipv4.ip_forward=1
+```
+
+```bash
+sudo sysctl -p
+```
+
+## WireGuard
+
+_(WIP)_
+
+Follow the WireGuard [Quick Start](https://www.wireguard.com/quickstart/) instructions.
+
+Gateway:
+
+```bash
+sudo apt install wireguard
+ip link add dev wg0 type wireguard
+ip address add dev wg0 10.0.0.1/24
+```
+
 ## Raspberry Pi specific steps
 
 ### Fix locale (if necessary)

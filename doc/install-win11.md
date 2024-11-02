@@ -136,6 +136,15 @@ sudo apt update
 sudo apt upgrade
 ```
 
+### Enable systemd
+
+Add the following in `/etc/wsl.conf`:
+
+```init
+[boot]
+systemd=true
+```
+
 ### Enable SSH server
 
 #### Install `openssh-server`:
@@ -145,15 +154,6 @@ In a WSL shell, install `openssh-server`:
 ```bash
 sudo apt install jq openssh-server
 sudo service ssh start
-```
-
-#### _Optional_: Automatically start ssh on WSL startup:
-
-Add the following in `/etc/wsl.conf`:
-
-```bash
-[boot]
-command="service ssh start"
 ```
 
 #### _Optional_: Disable MOTD banner:

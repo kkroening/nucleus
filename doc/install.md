@@ -137,7 +137,7 @@ Do in all profiles:
 ## iTerm2
 
 ```bash
-brew install iTerm2
+brew install iterm2
 ```
 
 Run iterm and configure:
@@ -265,13 +265,9 @@ Install pyflakes for Homebrew's version of Vim:
 
 ```bash
 brew install \
-  ctags \
-  direnv \
-  fswatch \
   htop \
   mdcat \
   nvm \
-  pre-commit \
   prettier \
   shfmt \
   vim \
@@ -322,7 +318,7 @@ cd ~
 curl https://sdk.cloud.google.com | bash
 ```
 - Refer to https://cloud.google.com/sdk/downloads
-- run `install.sh` to add to bash_profile
+- run `install.sh` to add to `bash_profile`
 
 ## Visual Studio Code
 
