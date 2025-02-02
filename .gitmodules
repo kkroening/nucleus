@@ -40,3 +40,6 @@
 [submodule ".vim/bundle/vim-go"]
 	path = .vim/bundle/vim-go
 	url = git@github.com:fatih/vim-go.git
+[submodule ".vim/bundle/black"]
+	path = .vim/bundle/black
+	url = git@github.com:psf/black.git

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#
+# `clrsc`: Clears the screen by wiping iTerm's scrollback buffer.
+#
+set -euo pipefail
+echo -e '\033]50;ClearScrollback\a'

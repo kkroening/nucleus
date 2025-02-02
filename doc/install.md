@@ -137,7 +137,7 @@ Do in all profiles:
 ## iTerm2
 
 ```bash
-brew install iTerm2
+brew install iterm2
 ```
 
 Run iterm and configure:
@@ -248,8 +248,9 @@ virtualenv venv \
 ### Vim Python syntax
 
 Install pyflakes for Homebrew's version of Vim:
+
 ```bash
-(unset PIP_REQUIRE_VIRTUALENV; $(brew --prefix python@3.10)/bin/pip3 install pyflakes)
+(unset PIP_REQUIRE_VIRTUALENV; $(brew --prefix python@3.12)/bin/pip3.12 install pyflakes --break-system-packages)
 ```
 
 > _**Note**_: Homebrew's version of vim periodically changes to depend on different versions of Python, so the above command may need to be adjusted in the future.  Refer to the output of `brew info vim`.
@@ -264,13 +265,9 @@ Install pyflakes for Homebrew's version of Vim:
 
 ```bash
 brew install \
-  ctags \
-  direnv \
-  fswatch \
   htop \
   mdcat \
   nvm \
-  pre-commit \
   prettier \
   shfmt \
   vim \
@@ -294,6 +291,26 @@ rustup-init
 
 > **Note**: Customize the `rustup-init` installation to not modify the PATH since nucleus already does it in `~/.bash_profile.d/rust`.
 
+## Nix
+
+[Install Nix](https://nixos.org/download#download-nix):
+
+```bash
+sh <(curl -L https://nixos.org/nix/install)
+```
+
+> **Note**: The above method of installation skips most of the prompts besides for running `sudo`.  If you prefer an interactive installation with more explanation and confirmation along the way, `curl` the install script to a file, set it as executable with `chmod +x install` and then run it directly as (`./install`).
+
+> **Note**: If you see a mysterious "Oh no, something went wrong error", GNU coreutils may need to be disabled.  See [nix #7181](https://github.com/NixOS/nix/issues/7181).
+
+### Install Nix-based tools
+
+```bash
+nix-env -iA \
+  nixpkgs.nixfmt \
+  nixpkgs.ripgrep
+```
+
 ## gcloud sdk
 
 ```bash
@@ -301,7 +318,7 @@ cd ~
 curl https://sdk.cloud.google.com | bash
 ```
 - Refer to https://cloud.google.com/sdk/downloads
-- run `install.sh` to add to bash_profile
+- run `install.sh` to add to `bash_profile`
 
 ## Visual Studio Code
 
@@ -368,6 +385,15 @@ Write a minimal `~/.vimrc` by stripping down the nucleus `~/.vimrc`.
 [f.lux download](https://justgetflux.com)
 
 Set bedtime color to 2700K.
+
+## JupyterLab
+
+Avoid globally installing JupyterLab, but do link user-settings:
+
+```bash
+mkdir -p ~/.jupyter/lab
+ln -s ~/nucleus/.jupyter/lab/user-settings ~/.jupyter/lab/
+```
 
 ## Spotify
 
