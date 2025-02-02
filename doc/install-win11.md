@@ -61,13 +61,11 @@ See [Windows 11 Setup Without Internet](https://www.minitool.com/news/windows-11
     -   _(TODO)_
 -   Night light
 
-### Chrome
+### Disable Capslock Permanently
 
--   Use Edge to install Chrome, and don't be swayed by the pleas to stick with Edge
--   Set as default browser: Win + I => Default apps => Google Chrome => Set default
--   Launch Chrome
--   Chrome settings - `about:settings`
-    -    Hamburger menu => Downloads => Ask where to save each file before downloading
+-   Install [PowerToys](https://learn.microsoft.com/en-us/windows/powertoys/install).
+-   Open **Keyboard Manager**.
+-   Click **Remap a key** and map **Caps Lock** to **Disable (Unassigned)**.
 
 ### Performance monitoring
 
@@ -94,6 +92,10 @@ Install standard performance monitoring tools as soon as possible in order to ke
 -   [NVIDIA Driver Downloads](https://www.nvidia.com/download/index.aspx)
 -   _Optional_: [GeForce Experience](https://www.nvidia.com/en-us/geforce/drivers/) (automatic driver installer, etc.)
 
+#### Logitech Keyboard + Mouse
+
+-   [Logitech G HUB](https://download01.logi.com/web/ftp/pub/techsupport/gaming/lghub_installer.exeq)
+
 ### De-bloating
 
 -   Disable OneDrive nagging: Ctrl+Shift+Esc => Startup apps => Disable `OneDrive.exe`
@@ -105,3 +107,19 @@ Install standard performance monitoring tools as soon as possible in order to ke
     -   ```
         reg add "HKCU\Software\Policies\Microsoft\Windows\Explorer" /v DisableSearchBoxSuggestions /t REG_DWORD /d 1 /f
         ```
+
+## Additional Software
+
+### Chrome
+
+-   Use Edge to install Chrome, and don't be swayed by the pleas to stick with Edge
+-   Set as default browser: Win + I => Default apps => Google Chrome => Set default
+-   Launch Chrome
+-   Chrome settings - `about:settings`
+    -    Hamburger menu => Downloads => Ask where to save each file before downloading
+
+### Steam
+
+-   Install [Steam](https://store.steampowered.com/about/)
+-   In **Steam** -> **Settings** -> **Interface**, uncheck _"Notify me about additions or changes to my games, new releases, and upcoming releases**"_.
+
