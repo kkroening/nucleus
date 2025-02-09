@@ -124,6 +124,15 @@ Install standard performance monitoring tools as soon as possible in order to ke
 -   Install [Steam](https://store.steampowered.com/about/)
 -   In **Steam** -> **Settings** -> **Interface**, uncheck _"Notify me about additions or changes to my games, new releases, and upcoming releases**"_.
 
+### OpenJDK
+
+[Install OpenJDK](https://learn.microsoft.com/en-us/java/openjdk/install)
+
+```bash
+winget search Microsoft.OpenJDK
+winget install Microsoft.OpenJDK.21  # adjust as needed
+```
+
 ## WSL2
 
 ### Install WSL2
