@@ -137,11 +137,18 @@ winget install Microsoft.OpenJDK.21  # adjust as needed
 
 ### Install WSL2
 
+#### Enable Windows features for WSL
+
+In an admin terminal (Windows key + X => "Terminal (Admin)"):
+
 ```powershell
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 wsl --set-default-version 2
 ```
+
+> [!NOTE]
+> These steps can also be done via the "Turn Windows features on or off" dialog in the Control Panel, but for convenience these can simply be pasted into the terminal to achieve the same result.
 
 ### Debian
 
