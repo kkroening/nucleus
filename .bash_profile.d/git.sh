@@ -23,6 +23,7 @@ nucleus::_setup_git_aliases() {
   alias gitmbom='git merge-base origin/master'
   alias gitmlogom='gitmlog origin/master'
   alias gitmom='git merge origin/master'
+  alias gitP='git pull'
   alias gitp='git push'
   alias gitpo='git push origin'
   alias gitpoh='git push origin HEAD'

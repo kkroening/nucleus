@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-find . \
+find -s . \
     \( \
         -name .git -o \
         -name .gopath -o \
@@ -14,7 +14,9 @@ find . \
         -name .tox -o \
         -name .venv\* -o \
         -name bandit-baseline.json -o \
+        -name dist -o \
         -name node_modules -o \
+        -name notmine -o \
         -name sdk -o \
         -name venv -o \
         -name \*.auto.tfvars.json -o \
@@ -24,8 +26,10 @@ find . \
         -name \*.log -o \
         -name \*.map -o \
         -name \*.min.js -o \
+        -name \*.order -o \
         -name \*.pyc -o \
         -name \*.pyo -o \
+        -name \*.spec.js -o \
         -name \*.sw\* -o \
         -name \*.sw\* -o \
         -name \*.tfstate -o \

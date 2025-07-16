@@ -58,6 +58,13 @@ System Preferences => Keyboard => Text
 System Preferences => Trackpad => More Gestures
 - Uncheck "Swipe between pages"
 - Uncheck "App Exposé"
+- Uncheck "Force Click and haptic feedback"
+    - (This disables the excruciatingly annoying Dictionary app from popping up when
+      double-clicking to select text, and accidentally pressing slightly too hard to
+      activate the Dictionary's _popup from hell_ functionality)
+- Uncheck "Look up \& data detectors"
+    - (This is also necessary for disabling the atrocious dictionary popup. Good
+      riddance!)
 
 ### Set window management hotkey(s)
 
@@ -197,12 +204,12 @@ Restart your terminal/shell and then run `which python`.  If it doesn't say `/Us
 
 ```bash
 unset PIP_REQUIRE_VIRTUALENV 2>/dev/null
-pyenv install 3.9.6
-pyenv shell 3.9.6
+pyenv install 3.12.2
+pyenv shell 3.12.2
 pip install -U pip
 pip install -U virtualenv
 pip install -U readline
-pyenv global 3.9.6
+pyenv global 3.12.2
 ```
 
 ## Nucleus installation - shell customization, Vim configuration, etc.
@@ -250,7 +257,7 @@ virtualenv venv \
 Install pyflakes for Homebrew's version of Vim:
 
 ```bash
-(unset PIP_REQUIRE_VIRTUALENV; $(brew --prefix python@3.12)/bin/pip3.12 install pyflakes --break-system-packages)
+(unset PIP_REQUIRE_VIRTUALENV; $(brew --prefix python@3.13)/bin/pip3.13 install pyflakes --break-system-packages)
 ```
 
 > _**Note**_: Homebrew's version of vim periodically changes to depend on different versions of Python, so the above command may need to be adjusted in the future.  Refer to the output of `brew info vim`.

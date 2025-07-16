@@ -34,6 +34,10 @@ autocmd FileType sh setlocal sts=2 sw=2 ts=2 colorcolumn=81 | nmap ,f mkMml:%!ba
 " endfunction
 
 " TODO: de-duplicate these nasty definitions:
+autocmd BufRead,BufNewFile *.c setlocal colorcolumn=89   | nmap ,f mkMml:%!clang-format`lzz`k | vmap ,f mkMml:!clang-format`lzz`k
+autocmd BufRead,BufNewFile *.cpp setlocal colorcolumn=89   | nmap ,f mkMml:%!clang-format`lzz`k | vmap ,f mkMml:!clang-format`lzz`k
+autocmd BufRead,BufNewFile *.h setlocal colorcolumn=89   | nmap ,f mkMml:%!clang-format`lzz`k | vmap ,f mkMml:!clang-format`lzz`k
+autocmd BufRead,BufNewFile *.glsl setlocal sts=2 sw=2 ts=2 colorcolumn=89   | nmap ,f mkMml:%!clang-format`lzz`k | vmap ,f mkMml:!clang-format`lzz`k
 autocmd BufRead,BufNewFile *.css setlocal sts=2 sw=2 ts=2 | nmap ,f mkMml:%!pcss`lzz`k | vmap ,f mkMml:!pjs`lzz`k
 autocmd BufRead,BufNewFile *.docker setlocal sts=2 sw=2 ts=2 filetype=dockerfile
 autocmd BufRead,BufNewFile *.glsl setlocal sts=2 sw=2 ts=2
@@ -44,11 +48,12 @@ autocmd BufRead,BufNewFile *.json setlocal sts=2 sw=2 ts=2 | nmap ,f mkMml:%!pj
 autocmd BufRead,BufNewFile *.jsx setlocal sts=2 sw=2 ts=2  | nmap ,f mkMml:%!pjs`lzz`k | vmap ,f mkMml:!pjs`lzz`k
 " autocmd BufRead,BufNewFile *.py  setlocal colorcolumn=89   | nmap ,f :Black | vmap ,f :Black | nmap ,i mkMml:%!isrt -`lzz`k
 " autocmd BufRead,BufNewFile *.pyi setlocal colorcolumn=89   | nmap ,f :Black | vmap ,f :Black | nmap ,i mkMml:%!isrt -`lzz`k
-autocmd BufRead,BufNewFile *.py  setlocal colorcolumn=89   | nmap ,f mkMml:%!bsq`lzz`k | vmap ,f mkMml:!bsq`lzz`k | nmap ,i mkMml:%!isrt -`lzz`k
-autocmd BufRead,BufNewFile *.pyi setlocal colorcolumn=89   | nmap ,f mkMml:%!bsq --pyi`lzz`k | vmap ,f mkMml:!bsq --pyi`lzz`k | nmap ,i mkMml:%!isrt -`lzz`k
+autocmd BufRead,BufNewFile *.py  setlocal colorcolumn=89   | nmap ,F mkMml:%!bsq`lzz`k | vmap ,f mkMml:!bsq`lzz`k | nmap ,i mkMml:%!isrt -`lzz`k | nmap ,f ,F,i
+autocmd BufRead,BufNewFile *.pyi setlocal colorcolumn=89   | nmap ,F mkMml:%!bsq --pyi`lzz`k | vmap ,f mkMml:!bsq --pyi`lzz`k | nmap ,i mkMml:%!isrt -`lzz`k | nmap ,f ,F,i
 autocmd BufRead,BufNewFile *.nix setlocal sts=2 sw=2 ts=2 colorcolumn=81 | nmap ,f mkMml:%!nixfmt`lzz`k | vmap ,f mkMml:%!nixfmt`lzz`k
 autocmd BufRead,BufNewFile *.rs nmap ,f mkMml:%!prs`lzz`k | vmap ,f mkMml:!prs`lzz`k
 autocmd BufRead,BufNewFile *.sh setlocal sts=2 sw=2 ts=2 colorcolumn=81 | nmap ,f mkMml:%!bashfmt`lzz`k | vmap ,f mkMml:!bashfmt`lzz`k
+autocmd BufRead,BufNewFile *.sql setlocal sts=2 sw=2 ts=2
 autocmd BufRead,BufNewFile *.tf setlocal sts=2 sw=2 ts=2 | nmap ,f mkMml:%!terraform fmt -`lzz`k | vmap ,f mkMml:!pjs`lzz`k
 autocmd BufRead,BufNewFile *.toml nmap ,f mkMml:%!toml-fmt`lzz`k | vmap ,f mkMml:!toml-fmt`lzz`k
 autocmd BufRead,BufNewFile *.ts setlocal sts=2 sw=2 ts=2 filetype=typescript | nmap ,f mkMml:%!prettier --parser=typescript`lzz`k | vmap ,f mkMml:!prettier --parser=typescript`lzz`k
