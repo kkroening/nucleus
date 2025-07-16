@@ -62,13 +62,11 @@ See [Windows 11 Setup Without Internet](https://www.minitool.com/news/windows-11
     -   _(TODO)_
 -   Night light
 
-### Chrome
+### Disable Capslock Permanently
 
--   Use Edge to install Chrome, and don't be swayed by the pleas to stick with Edge
--   Set as default browser: Win + I => Default apps => Google Chrome => Set default
--   Launch Chrome
--   Chrome settings - `about:settings`
-    -    Hamburger menu => Downloads => Ask where to save each file before downloading
+-   Install [PowerToys](https://learn.microsoft.com/en-us/windows/powertoys/install).
+-   Open **Keyboard Manager**.
+-   Click **Remap a key** and map **Caps Lock** to **Disable (Unassigned)**.
 
 ### Performance monitoring
 
@@ -95,6 +93,10 @@ Install standard performance monitoring tools as soon as possible in order to ke
 -   [NVIDIA Driver Downloads](https://www.nvidia.com/download/index.aspx)
 -   _Optional_: [GeForce Experience](https://www.nvidia.com/en-us/geforce/drivers/) (automatic driver installer, etc.)
 
+#### Logitech Keyboard + Mouse
+
+-   [Logitech G HUB](https://download01.logi.com/web/ftp/pub/techsupport/gaming/lghub_installer.exeq)
+
 ## De-bloating
 
 -   Disable OneDrive nagging: Ctrl+Shift+Esc => Startup apps => Disable `OneDrive.exe`
@@ -107,15 +109,46 @@ Install standard performance monitoring tools as soon as possible in order to ke
         reg add "HKCU\Software\Policies\Microsoft\Windows\Explorer" /v DisableSearchBoxSuggestions /t REG_DWORD /d 1 /f
         ```
 
+## Additional Software
+
+### Chrome
+
+-   Use Edge to install Chrome, and don't be swayed by the pleas to stick with Edge
+-   Set as default browser: Win + I => Default apps => Google Chrome => Set default
+-   Launch Chrome
+-   Chrome settings - `about:settings`
+    -    Hamburger menu => Downloads => Ask where to save each file before downloading
+
+### Steam
+
+-   Install [Steam](https://store.steampowered.com/about/)
+-   In **Steam** -> **Settings** -> **Interface**, uncheck _"Notify me about additions or changes to my games, new releases, and upcoming releases**"_.
+
+### OpenJDK
+
+[Install OpenJDK](https://learn.microsoft.com/en-us/java/openjdk/install)
+
+```bash
+winget search Microsoft.OpenJDK
+winget install Microsoft.OpenJDK.21  # adjust as needed
+```
+
 ## WSL2
 
 ### Install WSL2
+
+#### Enable Windows features for WSL
+
+In an admin terminal (Windows key + X => "Terminal (Admin)"):
 
 ```powershell
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 wsl --set-default-version 2
 ```
+
+> [!NOTE]
+> These steps can also be done via the "Turn Windows features on or off" dialog in the Control Panel, but for convenience these can simply be pasted into the terminal to achieve the same result.
 
 ### Debian
 

@@ -23,9 +23,12 @@ highlight DiffDelete ctermfg=black ctermbg=red
 highlight DiffChange ctermfg=black ctermbg=lightmagenta
 highlight DiffText ctermfg=black ctermbg=magenta
 
-" disable auto-commenting.
+" disable auto-commenting:
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o noai nocin nosi inde=
 autocmd FileType sh setlocal sts=2 sw=2 ts=2 colorcolumn=81 | nmap ,f mkMml:%!bashfmt`lzz`k | vmap ,f mkMml:!bashfmt`lzz`k
+
+" disable smart(-ass) mouse event handling:
+set mouse -=a
 
 " function! PreserveViewAndCursor(func)  " TBD
 "     let l:winview = winsaveview()
