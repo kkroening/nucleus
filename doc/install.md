@@ -228,6 +228,7 @@ git submodule update --init
 
 mkdir -p \
   ~/.bash_profile.d \
+  ~/.jupyter/lab \
   ~/.vim/autoload \
   ~/.vim/bundle \
   ~/.vim/ftplugin \
@@ -242,6 +243,7 @@ ln -s ~/nucleus/.vim/bundle/* ~/.vim/bundle/
 ln -s ~/nucleus/.vim/ftplugin/* ~/.vim/ftplugin/
 ln -s ~/nucleus/.vimrc ~/.vimrc
 ln -s ~/nucleus/keygen/keygen.py ~/bin/key
+ln -s ~/nucleus/.jupyter/lab/user-settings ~/.jupyter/lab/
 ```
 
 Restart the terminal, and then set up a virtual environment for Nucleus:
