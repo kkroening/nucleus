@@ -1,0 +1,73 @@
+#!/bin/bash
+
+set -euo pipefail
+
+_infer_syntax() {
+  local filename="${1}"
+  local ext="${filename##*.}"
+  case "${ext}" in
+    ts|tsx) echo "typescript" ;;
+    js|jsx) echo "javascript" ;;
+    py) echo "python" ;;
+    java) echo "java" ;;
+    c) echo "c" ;;
+    cpp) echo "cpp" ;;
+    sh|bash) echo "bash" ;;
+    md|markdown) echo "markdown" ;;
+    html|htm) echo "html" ;;
+    css) echo "css" ;;
+    json) echo "json" ;;
+    yaml|yml) echo "yaml" ;;
+    *) echo "" ;;
+  esac
+}
+
+_show_help() {
+  cat <<EOF >&2
+Usage: ${0##*/} [file1] [file2] ...
+
+Produces a markdown-formatted output of the contents of the specified files,
+suitable for copying into AI prompts. Each file's content is wrapped in a code block
+with inferred syntax highlighting based on the file extension.
+
+Examples:
+  ${0##*/} file1.ts file2.py
+  ${0##*/} *.ts
+
+If no files are provided or --help is specified, this message is displayed.
+EOF
+  exit 0
+}
+
+_process_file() {
+  local file="${1}"
+  echo "\`${file}\`:"
+  echo
+  local lang
+  lang="$(_infer_syntax "${file}")"
+  if [[ -n "${lang}" ]]; then
+    echo "\`\`\`${lang}"
+  else
+    echo "\`\`\`"
+  fi
+  cat "${file}"
+  echo "\`\`\`"
+  echo
+}
+
+
+_main() {
+    if [[ $# -eq 0 ]] || [[ "${1:-}" == "--help" ]]; then
+      _show_help
+    fi
+
+    for file in "${@}"; do
+      if [[ ! -f "${file}" ]]; then
+        echo "Error: File '${file}' does not exist or is not a regular file." >&2
+        exit 1
+      fi
+      _process_file "${file}"
+    done
+}
+
+_main "$@"
