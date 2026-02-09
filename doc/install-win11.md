@@ -203,7 +203,8 @@ Determine the WSL VM's internal IP address by running `ip addr | grep 'inet 172'
 Then outside of WSL, configure a netsh portproxy:
 
 ```bash
-netsh interface portproxy add v4tov4 ssh 172.28.43.167 ssh
+netsh interface portproxy add v4tov4 ssh 172.21.229.68 ssh
+
 ```
 
 > [!NOTE]
