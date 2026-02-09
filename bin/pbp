@@ -1,2 +1,68 @@
 #!/usr/bin/env bash
-exec pbpaste "$@"
+set -euo pipefail
+
+_paste_from_iterm() {
+  # iTerm2 inline paste (OSC 52 query)
+  # Note: Not all terminals/shells support querying the clipboard reliably.
+  # This is the closest portable-ish method when inside iTerm2 + ssh.
+  printf "\e]52;c;?\a"
+
+  # Most modern iTerm2 + tmux/zsh/bash combinations will respond by printing
+  # the base64 content immediately followed by a bell. We read until bell.
+  # This is fragile — real usage usually needs timeout + read -d $'\a'
+  read -r -d $'\a' response < /dev/tty
+
+  # Remove OSC52 prefix if present
+  response="${response##*;}"
+
+  # Decode base64 and output
+  printf "%s" "$response" | base64 -d 2> /dev/null || true
+}
+
+_paste_from_pbpaste() {
+  pbpaste
+}
+
+_paste_from_powershell_clip() {
+  # Windows (WSL) – powershell.exe Get-Clipboard is usually most reliable
+  powershell.exe -NoProfile -Command "Get-Clipboard -Raw"
+}
+
+_paste_from_xclip() {
+  xclip -selection clipboard -out
+}
+
+_paste_from_xsel() {
+  xsel --clipboard --output
+}
+
+_main() {
+  if [[ 
+    -n "${SSH_CONNECTION-}" ||
+    -n "${SSH_CLIENT-}" ||
+    -n "${SSH_TTY-}" ]]; then
+    # Assume we're running over SSH → most likely iTerm2
+    _paste_from_iterm
+
+  elif command -v pbpaste &> /dev/null; then
+    # macOS
+    _paste_from_pbpaste
+
+  elif command -v powershell.exe &> /dev/null; then
+    # WSL / Windows host
+    _paste_from_powershell_clip
+
+  elif command -v xclip &> /dev/null; then
+    _paste_from_xclip
+
+  elif command -v xsel &> /dev/null; then
+    _paste_from_xsel
+
+  else
+    echo "No suitable clipboard paste utility found." >&2
+    exit 1
+
+  fi
+}
+
+_main
