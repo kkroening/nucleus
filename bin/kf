@@ -29,6 +29,7 @@ find -s . \
         -name \*.order -o \
         -name \*.pyc -o \
         -name \*.pyo -o \
+        -name \*.repo -o \
         -name \*.spec.js -o \
         -name \*.sw\* -o \
         -name \*.sw\* -o \
