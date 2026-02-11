@@ -5,11 +5,19 @@
 unset vi vimdiff
 NUCLEUS__VI="$(which vi)"
 NUCLEUS__VIMDIFF="$(which vimdiff)"
+
 vi() {
-  (deactivate 2>/dev/null; ${NUCLEUS__VI} "$@")
+  (
+    deactivate 2> /dev/null
+    ${NUCLEUS__VI} "$@"
+  )
 }
+
 vimdiff() {
-  (deactivate 2>/dev/null; ${NUCLEUS__VIMDIFF} "$@")
+  (
+    deactivate 2> /dev/null
+    ${NUCLEUS__VIMDIFF} "$@"
+  )
 }
 
 vir() {
