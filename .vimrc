@@ -1,6 +1,10 @@
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
 
+set title
+set titleold=
+set titlestring=%t
+
 filetype plugin indent on
 "set directory^=$HOME/.vim/tmp//
 set et hls sts=4 sw=4 ts=4

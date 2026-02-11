@@ -1,39 +1,40 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-find -s . \
-    \( \
-        -name .git -o \
-        -name .gopath -o \
-        -name .ipynb_checkpoints -o \
-        -name .lab_cache -o \
-        -name .mypy_cache -o \
-        -name .nox -o \
-        -name .pytest_cache -o \
-        -name .terraform -o \
-        -name .tox -o \
-        -name .venv\* -o \
-        -name bandit-baseline.json -o \
-        -name dist -o \
-        -name node_modules -o \
-        -name notmine -o \
-        -name sdk -o \
-        -name venv -o \
-        -name \*.auto.tfvars.json -o \
-        -name \*.bak -o \
-        -name \*.bundle.js -o \
-        -name \*.egg-info -o \
-        -name \*.log -o \
-        -name \*.map -o \
-        -name \*.min.js -o \
-        -name \*.order -o \
-        -name \*.pyc -o \
-        -name \*.pyo -o \
-        -name \*.repo -o \
-        -name \*.spec.js -o \
-        -name \*.sw\* -o \
-        -name \*.sw\* -o \
-        -name \*.tfstate -o \
-        -name \*.vue -o \
-        -name __stuff \
-    \) -prune -o -type f -print0
+find . \
+  \( \
+  -name .git -o \
+  -name .gopath -o \
+  -name .ipynb_checkpoints -o \
+  -name .lab_cache -o \
+  -name .mypy_cache -o \
+  -name .nox -o \
+  -name .pytest_cache -o \
+  -name .terraform -o \
+  -name .tox -o \
+  -name .venv\* -o \
+  -name bandit-baseline.json -o \
+  -name dist -o \
+  -name node_modules -o \
+  -name notmine -o \
+  -name sdk -o \
+  -name venv -o \
+  -name \*.auto.tfvars.json -o \
+  -name \*.bak -o \
+  -name \*.bundle.js -o \
+  -name \*.egg-info -o \
+  -name \*.log -o \
+  -name \*.map -o \
+  -name \*.min.js -o \
+  -name \*.order -o \
+  -name \*.pyc -o \
+  -name \*.pyo -o \
+  -name \*.repo -o \
+  -name \*.spec.js -o \
+  -name \*.sw\* -o \
+  -name \*.sw\* -o \
+  -name \*.tfstate -o \
+  -name \*.vue -o \
+  -name __stuff \
+  \) -prune -o -type f -print0 \
+  | sort -z
