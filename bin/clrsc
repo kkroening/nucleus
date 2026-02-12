@@ -1,6 +1,21 @@
 #!/usr/bin/env bash
 #
-# `clrsc`: Clears the screen by wiping iTerm's scrollback buffer.
+# clrsc: Clears the screen and scrollback buffer in a terminal-aware manner.
 #
+# -   Uses iTerm2 proprietary sequence when running in iTerm2
+# -   Uses standard xterm/DEC sequence (clear scrollback + screen) otherwise
+# -   Works cleanly in Windows Terminal + WSL, most Linux terminals, etc.
+#
+
 set -euo pipefail
-echo -e '\033]50;ClearScrollback\a'
+
+if [[ -n "${ITERM_SESSION_ID:-}" ]]; then
+  # We're inside iTerm2 - use proprietary clear-scrollback sequence
+  printf '\033]50;ClearScrollback\a'
+
+else
+  # Standard behavior: clear visible screen + scrollback
+  # Order: home → erase scrollback → erase screen → home
+  printf '\033[H\033[3J\033[2J\033[H'
+
+fi

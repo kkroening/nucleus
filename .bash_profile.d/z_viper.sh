@@ -6,6 +6,8 @@ nucleus::_setup_viper() {
   if [[ "${HOSTNAME}" == "viper" ]]; then
     alias cdc='cd ~/c-home'
     alias cdd='cd ~/d-home'
+
+    # export QT_SCALE_FACTOR="1.5"
   fi
 }
 

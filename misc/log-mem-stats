@@ -1,0 +1,120 @@
+#!/usr/bin/env bash
+
+# Script: log_memory_stats.sh
+# Purpose: Log memory statistics to CSV every ~10 ms
+
+set -euo pipefail
+
+# Configuration
+readonly OUTPUT_FILE="memory_stats.csv"
+readonly INTERVAL_MS=10
+readonly INTERVAL_SEC="$(bc <<< "scale=3; ${INTERVAL_MS} / 1000")"
+
+# -----------------------------------------------------------------------------
+# Helper Functions
+# -----------------------------------------------------------------------------
+
+print_header() {
+  printf "timestamp_ms,total_kb,used_kb,free_kb,available_kb,swap_total_kb,swap_used_kb\n" > "${OUTPUT_FILE}"
+}
+
+initialize_output_file() {
+  if [[ ! -f "${OUTPUT_FILE}" ]]; then
+    print_header
+  fi
+}
+
+get_timestamp_ms() {
+  date +%s%3N
+}
+
+read_meminfo() {
+  local -a lines
+  mapfile -t lines < /proc/meminfo
+  printf '%s\n' "${lines[@]}"
+}
+
+parse_meminfo_line() {
+  local line="${1}"
+  local key value
+
+  # Extract key and value (MemTotal: 16384256 kB → key=MemTotal value=16384256)
+  key="${line%%:*}"
+  value="${line#*:}"
+  value="${value//[[:space:]]/}"
+  value="${value%kB}"
+
+  printf '%s %s' "${key}" "${value}"
+}
+
+extract_memory_values() {
+  local -A mem=()
+  local line key value
+  local meminfo="$(read_meminfo)"
+
+  while IFS= read -r line; do
+    read -r key value <<< "$(parse_meminfo_line "${line}")"
+
+    case "${key}" in
+      MemTotal) mem[total]="${value}" ;;
+      MemFree) mem[free]="${value}" ;;
+      MemAvailable) mem[available]="${value}" ;;
+      SwapTotal) mem[swap_total]="${value}" ;;
+      SwapFree) mem[swap_free]="${value}" ;;
+    esac
+  done <<< "${meminfo}"
+
+  # Calculate derived values
+  mem[used]=$((${mem[total]:-0} - ${mem[free]:-0}))
+
+  if ((${mem[swap_total]:-0} > 0)); then
+    mem[swap_used]=$((${mem[swap_total]} - ${mem[swap_free]:-0}))
+  else
+    mem[swap_used]=0
+  fi
+
+  # Ensure available has a fallback
+  mem[available]="${mem[available]:-0}"
+
+  printf '%s,%s,%s,%s,%s,%s\n' \
+    "${mem[total]:-0}" \
+    "${mem[used]}" \
+    "${mem[free]:-0}" \
+    "${mem[available]}" \
+    "${mem[swap_total]:-0}" \
+    "${mem[swap_used]}"
+}
+
+log_memory_snapshot() {
+  local timestamp_ms used_line
+
+  timestamp_ms="$(get_timestamp_ms)"
+  used_line="$(extract_memory_values)"
+
+  printf "%s,%s\n" "${timestamp_ms}" "${used_line}" >> "${OUTPUT_FILE}"
+  sync
+}
+
+print_startup_message() {
+  printf "Logging memory statistics to %s every ~%d ms\n" "${OUTPUT_FILE}" "${INTERVAL_MS}"
+  printf "Press Ctrl+C to stop\n"
+}
+
+main_loop() {
+  while true; do
+    log_memory_snapshot
+    sleep "${INTERVAL_SEC}"
+  done
+}
+
+# -----------------------------------------------------------------------------
+# Entry Point
+# -----------------------------------------------------------------------------
+
+_main() {
+  initialize_output_file
+  print_startup_message
+  main_loop
+}
+
+_main "$@"
