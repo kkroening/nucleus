@@ -3,7 +3,7 @@
     {
       "command": "jupyterlab_code_formatter:format",
       "keys": [
-        "Cmd Shift F"
+        "Accel Shift F"
       ],
       "selector": ".jp-Notebook.jp-mod-editMode"
     }

@@ -122,6 +122,20 @@ ln -s ~/nucleus/keygen/keygen.py ~/bin/key
 )
 ```
 
+## Node.js
+
+Install nvm:
+
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+```
+
+Restart your shell, and then install Node.js LTS:
+
+```bash
+nvm install --lts
+```
+
 ## SSH server
 
 #### Disable MOTD banner:

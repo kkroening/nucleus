@@ -16,7 +16,6 @@ nucleus::_setup_aliases() {
   alias va='. venv/bin/activate'
   alias .vc='python -m venv .venv'
   alias vc='python -m venv venv'
-  alias .vc='virtualenv .venv'
   alias vd='deactivate'
 }
 

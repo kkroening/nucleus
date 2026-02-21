@@ -68,6 +68,12 @@ See [Windows 11 Setup Without Internet](https://www.minitool.com/news/windows-11
 -   Open **Keyboard Manager**.
 -   Click **Remap a key** and map **Caps Lock** to **Disable (Unassigned)**.
 
+### Windhawk
+
+-   Install [Windhawk](https://windhawk.net/)
+-   Add _Taskbar keyboard-only auto-hide_ mod to prevent mouse cursor from accidentally un-hiding
+    the taskbar - i.e. require pressing Windows key to un-hide taskbar.
+
 ### Performance monitoring
 
 Install standard performance monitoring tools as soon as possible in order to keep an eye on important metrics such as temperature readings (especially for new machine build):
