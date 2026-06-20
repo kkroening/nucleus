@@ -21,6 +21,8 @@ nucleus::_setup_gcloud() {
   # if [[ -f "${GCLOUD_ROOT}/completion.bash.inc" ]]; then
   #   source "${GCLOUD_ROOT}/completion.bash.inc"
   # fi
+
+  alias gcs='gcloud storage'
 }
 
 nucleus::_setup_gcloud

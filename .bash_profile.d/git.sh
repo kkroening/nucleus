@@ -15,8 +15,8 @@ nucleus::_setup_git_aliases() {
   alias gitdom='git diff origin/master'
   alias gitdt='git describe --tags'
   alias gitf='git fetch origin'
-  alias gitl1h='git log --oneline --color=always | head'
   alias gitl='git log'
+  alias gitl1h='git log --oneline --color=always | head'
   alias gitlom='git log origin/master'
   alias gitm='git merge'
   alias gitmb='git merge-base'
@@ -35,6 +35,11 @@ nucleus::_setup_git_aliases() {
   alias gits='git status'
   alias gitsm='git submodule'
   alias gitt='git tag'
+  alias gw='git worktree'
+  alias gwl='git worktree list'
+  alias gwR='git worktree remove'
+
+  alias gh-kral='GH_CONFIG_DIR=~/.config/gh-kral gh'
 }
 
 nucleus::_setup_git_aliases
