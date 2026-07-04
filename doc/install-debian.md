@@ -160,7 +160,7 @@ With pyenv now installed, use pyenv to install/configure Python itself:
   pyenv global 3.14.6
 
   cd ~/nucleus
-  python -m .venv .venv
+  python -m venv .venv
   .venv/bin/pip install -r requirements.txt
 )
 ```

@@ -1,1 +1,1 @@
-../node_modules/.bin/js-beautify
+../.venv/bin/js-beautify
