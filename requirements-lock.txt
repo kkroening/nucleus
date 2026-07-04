@@ -116,7 +116,7 @@ nbstripout==0.9.1
 nest-asyncio2==1.7.2
 networkx==3.6.1
 notebook_shim==0.2.4
--e git+ssh://git@github.com/kkroening/nucleus.git@158f43f62bf51101ddbfa1ec22267de52bf3f441#egg=nucleus
+-e git+ssh://kkroening.github.com/kkroening/nucleus.git@5902a56fdeb785309f7b421042768af77b58219c#egg=nucleus
 numpy==2.5.1
 nvidia-ml-py==13.610.43
 omegaconf==2.3.1
