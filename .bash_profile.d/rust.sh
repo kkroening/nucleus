@@ -2,6 +2,9 @@
 
 nucleus::_setup_rust() {
   unset -f nucleus::_setup_rust
+
+  PATH="/opt/homebrew/opt/rustup/bin:$PATH"
+
   if [[ -r ~/.cargo/env ]]; then
     source ~/.cargo/env
   fi
