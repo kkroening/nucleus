@@ -212,7 +212,7 @@ git config --global core.excludesfile ~/.global_gitignore
 ## Add GitHub SSH key
 
 Run the following and then paste into github:
-_rsa
+
 ```bash
 ssh-keygen
 cat ~/.ssh/id_ed25519.pub | pbcopy
@@ -244,7 +244,7 @@ pyenv global 3.14.6
 ```bash
 brew install coreutils
 
-git clone https://github.com/kkroening/nucleus.git ~/nucleus
+git clone git@github.com:kkroening/nucleus.git ~/nucleus
 
 cd ~/nucleus
 git submodule update --init
