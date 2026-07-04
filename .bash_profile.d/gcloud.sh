@@ -22,6 +22,7 @@ nucleus::_setup_gcloud() {
   #   source "${GCLOUD_ROOT}/completion.bash.inc"
   # fi
 
+  alias gccu='gcloud components update'
   alias gcs='gcloud storage'
 }
 

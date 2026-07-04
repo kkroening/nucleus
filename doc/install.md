@@ -2,6 +2,7 @@
 
 > _**Note**_: Most of the sections in this setup guide are optional, and can be applied on an à la carte basis, depending on personal requirements/preferences.
 
+
 ## System settings
 
 ### Sign into Apple Store
@@ -30,13 +31,8 @@ Drag and drop each unnecessary icon on the dock to the trash.
 
 Open Finder, navigate to Documents, hit Command + up-arrow twice to navigate to `/Users`, then drag and drop your home directory onto the favorite bar on the left.
 
+
 ## System Preferences
-
-### Make TouchBar buttons behave like a reasonable keyboard
-
-System Preferences => Keyboard
-- Touch Bar Shows => Expanded Control Strip
-- Customize Control Strip => drag `Screen Lock` in place of Siri icon
 
 ### Disable capslock
 
@@ -55,9 +51,7 @@ System Preferences => Keyboard => Text
 
 ### Setup trackpad gestures
 
-System Preferences => Trackpad => More Gestures
-- Uncheck "Swipe between pages"
-- Uncheck "App Exposé"
+System Preferences => Trackpad => Point & Click
 - Uncheck "Force Click and haptic feedback"
     - (This disables the excruciatingly annoying Dictionary app from popping up when
       double-clicking to select text, and accidentally pressing slightly too hard to
@@ -66,14 +60,19 @@ System Preferences => Trackpad => More Gestures
     - (This is also necessary for disabling the atrocious dictionary popup. Good
       riddance!)
 
+System Preferences => Trackpad => More Gestures
+- "Swipe between pages" => "Off"
+- Uncheck "App Exposé"
+
 ### Set window management hotkey(s)
 
 System Preferences => Keyboard
 - _(Optional):_ Shortcuts => App Shortcuts => `+` button:
   - Menu Title: `Zoom`
   - Keyboard Shortcut: `⌥ ⌘ =`
-- Shortcuts => Accessibility => unselect all.
-- Dictation => Shortcut => Off (or "Press 🎙" if the _Off_ option is missing)
+- _(Probably defunct)_:
+  - Shortcuts => Accessibility => unselect all.
+  - Dictation => Shortcut => Off (or "Press 🎙" if the _Off_ option is missing)
 
 ### Disable OS X sounds
 
@@ -81,12 +80,13 @@ System Preferences => Sound
 - Uncheck "Play sound on startup"
 - Uncheck "Play user interface sound effects"
 - Set alert volume to 0
-- "Show Sound in menu bar" => "always"
 
-### Enable bluetooth icon in menu bar
+### Menu bar
 
-System Preferences => Bluetooth
-- Show Bluetooth in menu bar
+System Preferences => Menu Bar
+- Uncheck "Spotlight"
+- "Sound" => "Always Show"
+- TBD: "Automatically hide and show the menu bar" => "Always"
 
 ### Enable FileVault disk encryption
 
@@ -94,25 +94,29 @@ System Preferences => Security & Privacy => FileVault
 
 ### Screen lock settings
 
+System Preferences => Lock Screen
+- "Turn display off on battery when inactive" => 5 minutes
+- "Turn display off on power adapter when inactive" => (TBD)
+
 System Preferences => Security & Privacy
 - General => "Require password 15 minutes after sleep or screen saver begins"
 
 ### Enable firewall
 
-System Preferences => Security & Privacy
-- Turn On Firewall
-- Firewall Options => Uncheck "Automatically allow ..." checkboxes
-- Firewall Options => Check "Enable stealth mode"
-- _(TBD):_ Drop "Control Center" firewall allowance rule
+System Preferences => Network => Firewall => Turn on "Firewall"
+System Preferences => Network => Firewall => Options
+- Uncheck "Automatically allow built-in software to receive incoming connections"
+- Uncheck "Automatically allow downloaded signed software to receive incoming connections"
+- Check "Enable stealth mode"
 
 ### Disable automatic screen brightness
 
-System Preferences => Displays => Display Settings
+System Preferences => Displays
 - Uncheck "Automatically adjust brightness"
 
 ### Disable nonsensical automatic virtual desktop reordering
 
-System Preferences => Mission Control
+System Preferences => Desktop & Dock => Mission Control
 - Uncheck "Automatically rearrange spaces"
 
 ### Disable "fast user switching" menu
@@ -121,6 +125,7 @@ System Preferences => Users & Groups
 - Login Options => Uncheck "Show fast user switching menu"
 
 # Application installation/setup
+
 
 ## Chrome
 
@@ -136,10 +141,13 @@ Do in all profiles:
 - Configure sync settings
 - Install ublock origin
 - Install [Rearrange Tabs](https://chrome.google.com/webstore/detail/rearrange-tabs/ccnnhhnmpoffieppjjkhdakcoejcpbga?hl=en-US) extension
+- Add to OS X dock
+
 
 ## Homebrew
 
 [https://brew.sh](https://brew.sh)
+
 
 ## iTerm2
 
@@ -148,34 +156,48 @@ brew install iterm2
 ```
 
 Run iterm and configure:
-- iTerm -> Preferences => Appearance
-  - Theme => "Light (High Contrast)"
-- iTerm => Preferences => Profiles
-  - General => Reuse previous session's current directory
+- iTerm2 => Settings => Appearance
+  - _(Optional)_: Theme => "Light (High Contrast)"
+- iTerm2 => Settings => Profiles
+  - General => Reuse previous session's directory
   - General => Characters considered part of word for selection => `/-+\~_.@`  (FIXME: no logner present?)
-  - General -> Title: "Job+Args"
-  - Colors => Color Presets => Light Background
+  - General -> Title: "Job Name with Arguments" / "Job+Args"
+  - _(Optional)_: Colors => Color Presets => Light Background
     - Change yellow colors to brown/peach to be more visible: `#c78d00` for normal and `#fec467` for bright.
   - Text => Font => Font Size: 16
-  - Window => Settings For New Windows => Style: "Full Screen"
+  - Window => New windows: 100 columns by 40 rows
+  - Window => New windows => Style: "Full Screen"
   - Terminal => Check "Silence bell"
   - Terminal => Mousing Reporting => Enable "Report mouse wheel events" and disable "Report mouse clicks & drags"
   - Terminal => Scrollback lines => 30,000
   - Session => "Prompt before closing if there are jobs running besides..."
-  - Keys:
+  - Session => Timestamps => Check "Enabled"
+  - Session => Timestamps => "Over contents when mouse hovers over scrollbar"
+  - Keys => General
     - Set Left ⎇  Key: Esc+
+  - Keys => Key Bindings
     - Add ⎇ +← mapping: Send Escape Sequence: b
+      - "Apply to all sessions"
     - Add ⎇ +→ mapping: Send Escape Sequence: f
+      - "Apply to all sessions"
     - (Note that the alt symbol is reversed in this doc for some reason; fixme)
   - Other actions => Set as Default
+- Add to OS X dock
+
 
 ## Setup bash
 
 ```bash
 brew install bash
+```
+
+Open new terminal session, and then:
+
+```bash
 echo "$(which bash)" | sudo tee -a /etc/shells
 chsh -s "$(which bash)"
 ```
+
 
 ## Git
 
@@ -186,31 +208,32 @@ git config --global user.name "Karl Kroening"
 git config --global core.excludesfile ~/.global_gitignore
 ```
 
+
 ## Add GitHub SSH key
 
 Run the following and then paste into github:
+_rsa
 ```bash
 ssh-keygen
-cat ~/.ssh/id_rsa.pub | pbcopy
+cat ~/.ssh/id_ed25519.pub | pbcopy
 ```
+
 
 ## Python
 
 ```bash
 brew install pyenv
-```
 
-Restart your terminal/shell and then run `which python`.  If it doesn't say `/Users/<user>/.pyenv/shims/python`, then pyenv is not configured properly.  Refer to the [official pyenv documentation](https://github.com/pyenv/pyenv) for more info.
+eval "$(pyenv init - bash)"  # temporary - will be persisted in Nucleus setup below
 
-```bash
 unset PIP_REQUIRE_VIRTUALENV 2>/dev/null
-pyenv install 3.12.2
-pyenv shell 3.12.2
+pyenv install 3.14.6
+pyenv shell 3.14.6
 pip install -U pip
 pip install -U virtualenv
-pip install -U readline
-pyenv global 3.12.2
+pyenv global 3.14.6
 ```
+
 
 ## Nucleus installation - shell customization, Vim configuration, etc.
 
@@ -250,19 +273,43 @@ Restart the terminal, and then set up a virtual environment for Nucleus:
 
 ```bash
 cd ~/nucleus
-virtualenv venv \
-  && venv/bin/pip install -r requirements.txt
+virtualenv .venv \
+  && .venv/bin/pip install -r requirements.txt
 ```
 
+
+## Vim
+
+Install Vim through Homebrew:
+
+```bash
+brew install vim
+```
+
+Vim's configuration is mostly handled above already, via the nucleus setup instructions, which
+configures `~/.vimrc`, `~/.vim`, etc.  The Python syntax highlighting is tricky though, because
+pyflakes is *still* the best Vim Python plugin, but must be installed in the system-level Python
+installation that Homebrew's Vim depends on.
+
 ### Vim Python syntax
+
+Confirm which version of Python Homebrew's version of Vim depends on:
+
+```bash
+brew info vim
+```
+
+>   [!NOTE]
+>   Homebrew's version of vim periodically changes to depend on different versions of Python, so
+>   the command below may need to be adjusted in the future.  Refer to the output of
+>   `brew info vim`, by noting the `python@3.xx` in the _Caveats_ section.
 
 Install pyflakes for Homebrew's version of Vim:
 
 ```bash
-(unset PIP_REQUIRE_VIRTUALENV; $(brew --prefix python@3.13)/bin/pip3.13 install pyflakes --break-system-packages)
+(unset PIP_REQUIRE_VIRTUALENV; $(brew --prefix python@3.14)/bin/pip3.14 install pyflakes --break-system-packages)
 ```
 
-> _**Note**_: Homebrew's version of vim periodically changes to depend on different versions of Python, so the above command may need to be adjusted in the future.  Refer to the output of `brew info vim`.
 
 ## Install packages via Homebrew
 
@@ -279,10 +326,10 @@ brew install \
   nvm \
   prettier \
   shfmt \
-  vim \
   wasm-tools \
   watch
 ```
+
 
 ## Setup gpg key
 
@@ -291,6 +338,18 @@ brew install gpg
 gpg --full-generate-key
 ```
 
+Press enter three times to accept default choices, followed by `y` (yes). For example:
+-   `(9) ECC (sign and encrypt) *default*`
+-   `(1) Curve 25519 *default*`
+-   `0 = key does not expire`
+-   `Is this correct? (y/N) y`
+
+Provide _Real name_ and _Email address_. _Comment_ may be blank (or whatever you want).
+Press `o` for okay.
+
+Choose a password (and write it down somewhere) and complete the process.
+
+
 ## Rust
 
 ```bash
@@ -298,42 +357,24 @@ brew install rustup-init wasm-pack
 rustup-init
 ```
 
-> **Note**: Customize the `rustup-init` installation to not modify the PATH since nucleus already does it in `~/.bash_profile.d/rust`.
+>   [!NOTE]
+>   Customize the `rustup-init` installation to not modify the PATH since nucleus already does it
+>   in `~/.bash_profile.d/rust.sh`.
 
-## Nix
-
-[Install Nix](https://nixos.org/download#download-nix):
-
-```bash
-sh <(curl -L https://nixos.org/nix/install)
-```
-
-> **Note**: The above method of installation skips most of the prompts besides for running `sudo`.  If you prefer an interactive installation with more explanation and confirmation along the way, `curl` the install script to a file, set it as executable with `chmod +x install` and then run it directly as (`./install`).
-
-> **Note**: If you see a mysterious "Oh no, something went wrong error", GNU coreutils may need to be disabled.  See [nix #7181](https://github.com/NixOS/nix/issues/7181).
-
-### Install Nix-based tools
-
-```bash
-nix-env -iA \
-  nixpkgs.nixfmt \
-  nixpkgs.ripgrep
-```
 
 ## gcloud sdk
 
 ```bash
-cd ~
-curl https://sdk.cloud.google.com | bash
+brew install gcloud-cli
 ```
-- Refer to https://cloud.google.com/sdk/downloads
-- run `install.sh` to add to `bash_profile`
+
 
 ## Visual Studio Code
 
 Extensions:
 
 * rust-analyzer
+
 
 ## Slack
 
@@ -343,22 +384,17 @@ brew install slack
 
 > **TODO**: Explain Slack settings - e.g. sort conversations/channels alphabetically.
 
+
 ## Docker
 
-- https://store.docker.com/edititions/community/docker-ce-desktop-mac
-
 ```bash
-curl -O https://download.docker.com/mac/stable/Docker.dmg
+brew install --cask docker
 ```
 
-TODO: see if there's a way to download/install without logging into docker store
+>   [!NOTE]
+>   There's a non-cask version of Docker available, but the cask version is recommended because it
+>   includes more complete capability out of the box, including Docker Desktop.
 
-## Minikube
-
-```bash
-brew cask install minikube
-brew install kubernetes-cli
-```
 
 # Minimal terminal setup
 
@@ -389,11 +425,13 @@ Write a minimal `~/.vimrc` by stripping down the nucleus `~/.vimrc`.
 
 # Extra
 
+
 ## f.lux
 
 [f.lux download](https://justgetflux.com)
 
 Set bedtime color to 2700K.
+
 
 ## JupyterLab
 
@@ -404,6 +442,7 @@ mkdir -p ~/.jupyter/lab
 ln -s ~/nucleus/.jupyter/lab/user-settings ~/.jupyter/lab/
 ```
 
+
 ## Spotify
 
 ```bash
@@ -411,10 +450,6 @@ curl -Lo - https://download.scdn.co/SpotifyInstaller.zip | bsdtar -x
 open "Install Spotify.app"
 ```
 
-## Karabiner Elements
-
-Karabiner elements for emulating numpad with Blender:
-- https://github.com/tekezo/Karabiner-Elements/issues/127
 
 ## yEd
 
@@ -422,6 +457,7 @@ Karabiner elements for emulating numpad with Blender:
 - File => Preferences => Editor:
   - Check _Edit Label on Create Node_
   - Check _Dynamically Adjust Node Size to Label Size_
+
 
 ## Fix monitor issue:
 
@@ -431,15 +467,13 @@ Karabiner elements for emulating numpad with Blender:
 - smc reset: power off then cmd+option+shift+power
 - edit: this doesn't actually fix it or even seem to make a difference.
 
-## Various optional apps:
-
-- `brew install mdcat`
 
 # Ubuntu installation instructions
 
 Follow _some_ of the above instructions (judiciously).
 
 > _**Todo**_: Pull out common parts of the above and fill in this section.  For now it's just a collection of various notes.
+
 
 ## pyenv
 
@@ -477,11 +511,13 @@ sudo update-alternatives --config editor
 
 > _**Note**_: The `~/.bashrc` changes are already included in nucleus' `.bashrc` file.
 
+
 ## pyflakes-vim
 
 [pyflakes-vim](https://github.com/kevinw/pyflakes-vim) is officially deprecated, but it's still my favorite vim Python plugin due to its simplicity and speed (as compared to [ALE](https://github.com/dense-analysis/ale) and [Syntastic](https://github.com/vim-syntastic/syntastic) which are horrifyingly slow out of the box, to the point of being completely unusable).
 
 `pyflakes-vim` should work with a standard `apt install vim python-flake8` (or maybe `python3-pyflakes`), so long as Pathogen and pyflakes-vim are present in the appropriate `~/.vim` directories (e.g. by symlinking the corresponding nucleus submodules).
+
 
 ## NVIDIA GPU drivers / Tensorflow-GPU
 
@@ -494,6 +530,7 @@ If you encounter errors during NVIDIA driver installation due to drivers already
 The `nvidia-smi` tool is your friend to help figure out what's going on, as it shows the current NVIDIA drivers in use, or logs an error if the drivers aren't loaded.
 
 Once everything's set up, running a Tensorflow example should cause a GPU usage spike that should be apparent in the `nvidia-smi` output (e.g. `watch -n 1 nvidia-smi`).  If there's no GPU usage spike but the Tensorflow example finishes anyways, there's a good chance it simply fell back to CPU execution.  Also, if running `tensorboard` doesn't work then you still have work to do.
+
 
 ## Steam
 
@@ -521,6 +558,7 @@ sudo apt install \
   libxrandr2:i386 \
   libxtst6:i386
 ```
+
 
 ## Misc
 
