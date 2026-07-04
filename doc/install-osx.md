@@ -9,7 +9,7 @@
 
 _(Optional):_ Install application updates.
 
-### Set hostname:
+### Set hostname
 
 Run the following in a terminal:
 ```bash
@@ -18,6 +18,32 @@ sudo scutil --set LocalHostName "newname"
 dscacheutil -flushcache
 sudo reboot
 ```
+
+### Enable SSH server
+
+```bash
+sudo systemsetup -setremotelogin on
+```
+
+### Configure `/etc/hosts`
+
+Use a common, shared hosts file with definitions to apply for the main LAN.
+
+```bash
+sudo vi /etc/hosts
+```
+
+Recommended: add an entry/entries for this new host, and roll out the host file changes to the
+other devices in the network.
+
+>   [!NOTE]
+>   You might want to circle back around to this *later* in the setup process, after completing
+>   other sections of the install guide.
+
+>   [!NOTE]
+>   The `/etc/hosts` file content is _not_ committed in this repo, since it's entirely machine-
+>   and network-specific.  Ideally this would be handled by a proper DNS level solution, since
+>   `/etc/hosts` can be a bit of a crutch, but this works sufficiently well in practice.
 
 ### Auto-hide dock
 
