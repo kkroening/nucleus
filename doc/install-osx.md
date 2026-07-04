@@ -19,32 +19,6 @@ dscacheutil -flushcache
 sudo reboot
 ```
 
-### Enable SSH server
-
-```bash
-sudo systemsetup -setremotelogin on
-```
-
-### Configure `/etc/hosts`
-
-Use a common, shared hosts file with definitions to apply for the main LAN.
-
-```bash
-sudo vi /etc/hosts
-```
-
-Recommended: add an entry/entries for this new host, and roll out the host file changes to the
-other devices in the network.
-
->   [!NOTE]
->   You might want to circle back around to this *later* in the setup process, after completing
->   other sections of the install guide.
-
->   [!NOTE]
->   The `/etc/hosts` file content is _not_ committed in this repo, since it's entirely machine-
->   and network-specific.  Ideally this would be handled by a proper DNS level solution, since
->   `/etc/hosts` can be a bit of a crutch, but this works sufficiently well in practice.
-
 ### Auto-hide dock
 
 Right click Dock and choose "Dock preferences", then auto-hide dock.
@@ -209,6 +183,7 @@ Run iterm and configure:
     - (Note that the alt symbol is reversed in this doc for some reason; fixme)
   - Other actions => Set as Default
 - Add to OS X dock
+- System Preferences => Privacy & Security => Full Disk Access => Add _iTerm_
 
 
 ## Setup bash
@@ -374,6 +349,44 @@ Provide _Real name_ and _Email address_. _Comment_ may be blank (or whatever you
 Press `o` for okay.
 
 Choose a password (and write it down somewhere) and complete the process.
+
+
+## Networking
+
+### Enable SSH server
+
+```bash
+sudo systemsetup -setremotelogin on
+```
+
+### Configure `/etc/hosts`
+
+Use a common, shared hosts file with definitions to apply for the main LAN.
+
+```bash
+sudo vi /etc/hosts
+```
+
+Recommended: add an entry/entries for this new host, and roll out the host file changes to the
+other devices in the network.
+
+>   [!NOTE]
+>   The `/etc/hosts` file content is _not_ committed in this repo, since it's entirely machine-
+>   and network-specific.  Ideally this would be handled by a proper DNS level solution, since
+>   `/etc/hosts` can be a bit of a crutch, but this works sufficiently well in practice.
+
+### Add SSH authorized keys
+
+Add your SSH public key(s) to your other machines - e.g. via `ssh-copy-id`:
+
+```bash
+ssh-copy-id user@remote_host
+```
+
+(Optionally use `-i` to specify a different identity / public key file)
+
+Repeat for each combination of source/destination SSH pairs (e.g. this machine to another, the
+other machine to this one, etc.).
 
 
 ## Rust
