@@ -210,13 +210,20 @@ git config --global core.excludesfile ~/.global_gitignore
 ```
 
 
-## Add GitHub SSH key
+### Add GitHub SSH key
 
 Run the following and then paste into github:
 
 ```bash
 ssh-keygen
 cat ~/.ssh/id_ed25519.pub | pbcopy
+```
+
+### Configure git LFS
+
+```bash
+brew install git-lfs
+git lfs install
 ```
 
 
