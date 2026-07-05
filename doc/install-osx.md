@@ -497,6 +497,35 @@ open "Install Spotify.app"
   - Check _Edit Label on Create Node_
   - Check _Dynamically Adjust Node Size to Label Size_
 
+## Claude
+
+Install Claude through homebrew:
+
+```bash
+brew install --cask claude
+```
+
+Launch Claude (via Cmd+Space) and sign in.
+
+## Unreal Engine
+
+### Xcode setup
+
+Install Xcode from the Apple App Store, and run it for the first time to accept the license
+agreement.  You may skip the installation of the ~2GB+ predictive completion model.
+
+Then configure the command line tools, and add the metal toolchain:
+
+```bash
+sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+xcodebuild -downloadComponent MetalToolchain
+```
+
+### Epic Games Launcher
+
+Download and install the Epic Games Launcher from the
+[Unreal Engine download](https://www.unrealengine.com/download) page, and install Unreal Engine
+from the launcher.
 
 ## Fix monitor issue:
 
