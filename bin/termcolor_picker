@@ -4,10 +4,10 @@ set -euo pipefail
 # --- Global UI Constants ---
 readonly TUI_RESET="\033[0m"
 readonly TUI_BOLD="\033[1m"
-readonly TUI_KEY="\033[1;7m" # High-contrast inverted block for hotkey visual "buttons"
+readonly TUI_KEY="\033[1;7m"  # High-contrast inverted block for hotkey visual "buttons"
 
 readonly TUI_HEADER="${TUI_BOLD}=== Interactive TUI Xterm Color Picker ===${TUI_RESET}\n"
-readonly TUI_LEGEND=$"Controls:\n  ${TUI_KEY} [ ${TUI_RESET} / ${TUI_KEY} ] ${TUI_RESET} Hue Up/Down\n  ${TUI_KEY} ◀ ${TUI_RESET} / ${TUI_KEY} ▶ ${TUI_RESET} Saturation Down/Up\n  ${TUI_KEY} ▲ ${TUI_RESET} / ${TUI_KEY} ▼ ${TUI_RESET} Value Up/Down\n        ${TUI_KEY} Q ${TUI_RESET} Quit\n"
+readonly TUI_LEGEND="              Controls\n             ${TUI_KEY} [ ${TUI_RESET} / ${TUI_KEY} ] ${TUI_RESET} Hue Up/Down\n             ${TUI_KEY} ◀ ${TUI_RESET} / ${TUI_KEY} ▶ ${TUI_RESET} Saturation Down/Up\n             ${TUI_KEY} ▲ ${TUI_RESET} / ${TUI_KEY} ▼ ${TUI_RESET} Value Up/Down\n                   ${TUI_KEY} Q ${TUI_RESET} Quit\n"
 readonly TUI_DIVIDER="------------------------------------------------------------\n"
 
 # --- Color Conversion Helpers ---
@@ -16,16 +16,14 @@ readonly TUI_DIVIDER="----------------------------------------------------------
 # Inputs: H (0-360), S (0-100), V (0-100)
 # Outputs: Sets global variables R, G, B (0-255)
 hsv_to_rgb() {
-  local h=$1 local s=$2 local v=$3
-  if ((s == 0)); then
-    R=$((v * 255 / 100))
-    G=$R
-    B=$R
-    return
-  fi
+    local h=$1 local s=$2 local v=$3
+    if ((s == 0)); then
+        R=$((v * 255 / 100)) ; G=$R ; B=$R
+        return
+    fi
 
-  local raw_out
-  raw_out="$(awk -v h="$h" -v s="$s" -v v="$v" 'BEGIN {
+    local raw_out
+    raw_out="$(awk -v h="$h" -v s="$s" -v v="$v" 'BEGIN {
         h_scaled = h / 60 ; s_scaled = s / 100 ; v_scaled = v / 100
         i = int(h_scaled) ; f = h_scaled - i
         p = v_scaled * (1 - s_scaled)
@@ -40,174 +38,187 @@ hsv_to_rgb() {
         if (i == 5)           { r = v_scaled; g = p;        b = q; }
         printf "%.0f %.0f %.0f", r * 255, g * 255, b * 255
     }')"
-  IFS=' ' read -r R G B <<< "$raw_out"
+    IFS=' ' read -r R G B <<< "$raw_out"
 }
 
 # Finds the closest Xterm-256 color number from RGB coordinates
 rgb_to_xterm() {
-  local r=$1 local g=$2 local b=$3
-  if ((r == g && g == b)); then
-    if ((r < 8)); then
-      echo 16
-      return
+    local r=$1 local g=$2 local b=$3
+    if ((r == g && g == b)); then
+        if ((r < 8)); then echo 16 ; return ; fi
+        if ((r > 238)); then echo 231 ; return ; fi
+        echo "$((232 + (r - 8 + 5) / 10))" || true
+        return
     fi
-    if ((r > 238)); then
-      echo 231
-      return
-    fi
-    echo "$((232 + (r - 8 + 5) / 10))" || true
-    return
-  fi
-  local r_coord g_coord b_coord
-  r_coord=$((r < 48 ? 0 : (r - 35 + 20) / 40))
-  g_coord=$((g < 48 ? 0 : (g - 35 + 20) / 40))
-  b_coord=$((b < 48 ? 0 : (b - 35 + 20) / 40))
-  ((r_coord = r_coord > 5 ? 5 : r_coord)) || true
-  ((g_coord = g_coord > 5 ? 5 : g_coord)) || true
-  ((b_coord = b_coord > 5 ? 5 : b_coord)) || true
-  echo "$((16 + (36 * r_coord) + (6 * g_coord) + b_coord))" || true
+    local r_coord g_coord b_coord
+    r_coord=$((r < 48 ? 0 : (r - 35 + 20) / 40))
+    g_coord=$((g < 48 ? 0 : (g - 35 + 20) / 40))
+    b_coord=$((b < 48 ? 0 : (b - 35 + 20) / 40))
+    ((r_coord = r_coord > 5 ? 5 : r_coord)) || true
+    ((g_coord = g_coord > 5 ? 5 : g_coord)) || true
+    ((b_coord = b_coord > 5 ? 5 : b_coord)) || true
+    echo "$((16 + (36 * r_coord) + (6 * g_coord) + b_coord))" || true
 }
 
 # --- Core TUI Engine ---
 
 # Renders everything into a single variable buffer to completely prevent screen flicker
 render_screen() {
-  local current_h=$1 local current_s=$2 local current_v=$3
-  local r=$4 local g=$5 local b=$6 local code=$7
-  local hex
-  hex=$(printf "#%02x%02x%02x" "$r" "$g" "$b")
+    local current_h=$1 local current_s=$2 local current_v=$3
+    local r=$4 local g=$5 local b=$6 local code=$7
+    local hex
+    hex=$(printf "#%02x%02x%02x" "$r" "$g" "$b")
 
-  # Layout header configuration assembly
-  local buf=""
-  buf+="\033[H\033[J" # Move cursor home and clean viewport buffer
-  buf+="${TUI_HEADER}"
-  buf+="${TUI_LEGEND}"
-  buf+="${TUI_DIVIDER}"
+    # Layout header configuration assembly
+    local buf=""
+    buf+="\033[H\033[J" # Move cursor home and clean viewport buffer
+    buf+="${TUI_HEADER}"
+    buf+="${TUI_LEGEND}"
+    buf+="${TUI_DIVIDER}"
 
-  # Main Grid 10x10 Matrix Mapping
-  local vi si
-  for ((vi = 10; vi >= 1; vi--)); do
-    local loop_v=$((vi * 10))
+    # Top Level Label: Saturation Axis (Horizontal tracking above box area)
+    # Padded 12 characters to align perfectly above the 10x10 square
+    buf+="            ◀ Saturation ▶\n"
 
-    # Build Saturation items horizontally across the row (10 steps from 0 to 90)
-    for ((si = 0; si < 10; si++)); do
-      local loop_s=$((si * 10))
-
-      # Map background swatch color at this grid coordinate
-      hsv_to_rgb "$current_h" "$loop_s" "$loop_v"
-      local loop_code
-      loop_code=$(rgb_to_xterm "$R" "$G" "$B")
-
-      # Place white indicator dot if it matches current color state coordinates
-      if ((loop_s == current_s && loop_v == current_v)); then
-        buf+="\033[48;5;${loop_code}m\033[38;5;15m● \033[0m"
-      else
-        buf+="\033[48;5;${loop_code}m  \033[0m"
-      fi
+    # Main Grid 10x10 Matrix Mapping
+    local vi si
+    for ((vi = 10; vi >= 1; vi--)); do
+        local loop_v=$((vi * 10))
+        
+        # Left Side Label: Value Axis (Stacked vertically: ▲, Value, ▼)
+        if ((vi == 7)); then
+            buf+="   ▲    "
+        elif ((vi == 6)); then
+            buf+=" Value  "
+        elif ((vi == 5)); then
+            buf+="   ▼    "
+        else
+            buf+="        "
+        fi
+        
+        # Build Saturation items horizontally across the row (10 steps from 0 to 90)
+        for ((si = 0; si < 10; si++)); do
+            local loop_s=$((si * 10))
+            
+            # Map background swatch color at this grid coordinate
+            hsv_to_rgb "$current_h" "$loop_s" "$loop_v"
+            local loop_code
+            loop_code=$(rgb_to_xterm "$R" "$G" "$B")
+            
+            # Place white indicator dot if it matches current color state coordinates
+            if ((loop_s == current_s && loop_v == current_v)); then
+                buf+="\033[48;5;${loop_code}m\033[38;5;15m● \033[0m"
+            else
+                buf+="\033[48;5;${loop_code}m  \033[0m"
+            fi
+        done
+        
+        # Spacer padding between Saturation box and Hue track
+        buf+="    "
+        
+        # Build segment of Vertical Hue Bar (mapped down from 360, exactly 2 chars wide)
+        local loop_h=$(((vi - 1) * 36 + 18))
+        hsv_to_rgb "$loop_h" 100 100
+        local hue_code
+        hue_code=$(rgb_to_xterm "$R" "$G" "$B")
+        
+        # Track if active Hue falls within this segment. 
+        # Formatted into a fixed 12-character string to keep right-side Hue labels structurally locked in place.
+        local hue_pointer_str=""
+        local h_min=$(((vi - 1) * 36))
+        local h_max=$((vi * 36))
+        if ((current_h >= h_min && current_h < h_max)) || { ((vi == 10)) && ((current_h == 360)); }; then
+            hue_pointer_str=$(printf " ◀ Hue")
+        else
+            hue_pointer_str="            "
+        fi
+        
+        # Render the hue bar block and attach the fixed-width pointer
+        buf+="\033[48;5;${hue_code}m  \033[0m${hue_pointer_str}\n"
     done
 
-    # Spacer padding between Saturation box and Hue track
-    buf+="    "
+    # 1-character gap spacer before the preview swatch block
+    buf+="\n"
 
-    # Build segment of Vertical Hue Bar (mapped down from 360, exactly 2 chars wide)
-    local loop_h=$(((vi - 1) * 36 + 18))
-    hsv_to_rgb "$loop_h" 100 100
-    local hue_code
-    hue_code=$(rgb_to_xterm "$R" "$G" "$B")
+    # Solid Color Preview Swatch (Left margin entirely stripped per request)
+    buf+="Preview "
+    for ((si = 0; si < 10; si++)); do
+        buf+="\033[48;5;${code}m  \033[0m"
+    done
+    buf+="\n"
 
-    # Determine if active Hue falls within this track column segment block
-    local h_min=$(((vi - 1) * 36))
-    local h_max=$((vi * 36))
-    if ((current_h >= h_min && current_h < h_max)) || { ((vi == 10)) && ((current_h == 360)); }; then
-      buf+="\033[48;5;${hue_code}m  \033[0m ◀ (${current_h}°)\n"
-    else
-      buf+="\033[48;5;${hue_code}m  \033[0m\n"
-    fi
-  done
+    # Bottom Metadata readout panel with forced literal newlines (\\\\n) for buffer preservation
+    buf+="${TUI_DIVIDER}"
+    buf+=$(printf "HSV Spectrum: H:%3d° S:%3d%% V:%3d%%\\\\n" "$current_h" "$current_s" "$current_v")
+    buf+=$(printf "RGB Channels: R:%3d G:%3d B:%3d\\\\n" "$r" "$g" "$b")
+    buf+=$(printf "HEX Metric: %s\\\\n" "$hex")
+    buf+=$(printf "Vim Output: ctermfg=%d\\\\n\\\\n" "$code")
 
-  # 2-character gap spacer before the preview swatch block
-  buf+="\n\n"
-
-  # Solid Color Preview Swatch (1 character tall, 10 cells long * 2 characters wide = matches 10x10 square width)
-  buf+="  Preview: "
-  for ((si = 0; si < 10; si++)); do
-    buf+="\033[48;5;${code}m  \033[0m"
-  done
-  buf+="\n"
-
-  # Bottom Metadata readout panel with forced literal newlines (\\\\n) for buffer preservation
-  buf+="${TUI_DIVIDER}"
-  buf+=$(printf "HSV Spectrum: H:%3d°  S:%3d%%  V:%3d%%\\\\n" "$current_h" "$current_s" "$current_v")
-  buf+=$(printf "RGB Channels: R:%3d   G:%3d   B:%3d\\\\n" "$r" "$g" "$b")
-  buf+=$(printf "HEX Metric:   %s\\\\n" "$hex")
-  buf+=$(printf "Vim Output:   ctermfg=%d\\\\n\\\\n" "$code")
-
-  # Flush complete buffer stream cleanly
-  printf "%b" "$buf"
+    # Flush complete buffer stream cleanly
+    printf "%b" "$buf"
 }
 
 # Main event engine
 main() {
-  if ! command -v awk &> /dev/null; then
-    echo "Error: 'awk' utility is required but not installed." >&2
-    exit 1
-  fi
-
-  # Initialize configuration (Deep Sky Blue configuration baseline)
-  local hue=200
-  local saturation=70
-  local value=80
-
-  # Ensure initial values snap cleanly onto the new 10-step grid geometry bounds
-  ((saturation = (saturation / 10) * 10)) || true
-  ((value = (value / 10) * 10)) || true
-
-  # Dynamic target vectors modified by calculation functions
-  R=0
-  G=0
-  B=0
-  local key=""
-
-  # Conceal normal terminal block cursor
-  printf "\033[?25l"
-  trap 'printf "\033[?25h"; exit 0' INT TERM EXIT
-
-  while [[ "$key" != "q" && "$key" != "Q" ]]; do
-    # 1. Update main selected properties and track true terminal conversion mappings
-    hsv_to_rgb "$hue" "$saturation" "$value"
-    local xterm_code
-    xterm_code=$(rgb_to_xterm "$R" "$G" "$B")
-
-    # 2. Re-render display view from current parameters
-    render_screen "$hue" "$saturation" "$value" "$R" "$G" "$B" "$xterm_code"
-
-    # 3. Intercept input interactions instantly (read up to 3 chars for escape sequences)
-    read -r -s -n 1 key
-
-    # Catch ANSI escape codes for Arrow Keys (\033[A, \033[B, etc.)
-    if [[ "$key" == $'\033' ]]; then
-      read -r -s -n 2 -t 0.1 next_chars || true
-      case "$next_chars" in
-        "[A") key="UP" ;;
-        "[B") key="DOWN" ;;
-        "[C") key="RIGHT" ;;
-        "[D") key="LEFT" ;;
-      esac
+    if ! command -v awk &> /dev/null; then
+        echo "Error: 'awk' utility is required but not installed." >&2
+        exit 1
     fi
 
-    # 4. Enforce navigation mapping logic based on new key selections
-    case "$key" in
-      "[") hue=$(((hue + 5) % 360)) ;;
-      "]") hue=$(((hue - 5 + 360) % 360)) ;;
-      "UP") ((value = value < 100 ? value + 10 : 100)) || true ;;
-      "DOWN") ((value = value > 10 ? value - 10 : 10)) || true ;;
-      "RIGHT") ((saturation = saturation < 90 ? saturation + 10 : 90)) || true ;;
-      "LEFT") ((saturation = saturation > 0 ? saturation - 10 : 0)) || true ;;
-    esac
-  done
+    # Initialize configuration (Deep Sky Blue configuration baseline)
+    local hue=200
+    local saturation=70
+    local value=80
 
-  printf "\033[?25h\nDone.\n"
+    # Ensure initial values snap cleanly onto the new 10-step grid geometry bounds
+    ((saturation = (saturation / 10) * 10)) || true
+    ((value = (value / 10) * 10)) || true
+
+    # Dynamic target vectors modified by calculation functions
+    R=0 G=0 B=0
+    local key=""
+    
+    # Conceal normal terminal block cursor
+    printf "\033[?25l"
+    trap 'printf "\033[?25h"; exit 0' INT TERM EXIT
+
+    while [[ "$key" != "q" && "$key" != "Q" ]]; do
+        # 1. Update main selected properties and track true terminal conversion mappings
+        hsv_to_rgb "$hue" "$saturation" "$value"
+        local xterm_code
+        xterm_code=$(rgb_to_xterm "$R" "$G" "$B")
+
+        # 2. Re-render display view from current parameters
+        render_screen "$hue" "$saturation" "$value" "$R" "$G" "$B" "$xterm_code"
+
+        # 3. Intercept input interactions instantly (read up to 3 chars for escape sequences)
+        read -r -s -n 1 key
+
+        # Catch ANSI escape codes for Arrow Keys (\033[A, \033[B, etc.)
+        if [[ "$key" == $'\033' ]]; then
+            read -r -s -n 2 -t 0.1 next_chars || true
+            case "$next_chars" in
+                "[A") key="UP" ;;
+                "[B") key="DOWN" ;;
+                "[C") key="RIGHT" ;;
+                "[D") key="LEFT" ;;
+            esac
+        fi
+
+        # 4. Enforce navigation mapping logic based on new key selections
+        case "$key" in
+            "[") hue=$(((hue + 5) % 360)) ;;
+            "]") hue=$(((hue - 5 + 360) % 360)) ;;
+            "UP")    ((value = value < 100 ? value + 10 : 100)) || true ;;
+            "DOWN")  ((value = value > 10 ? value - 10 : 10)) || true ;; 
+            "RIGHT") ((saturation = saturation < 90 ? saturation + 10 : 90)) || true ;;
+            "LEFT")  ((saturation = saturation > 0 ? saturation - 10 : 0)) || true ;;
+        esac
+    done
+
+    printf "\033[?25h\nDone.\n"
 }
 
 # Run the program
 main
+
