@@ -18,14 +18,36 @@ map <ScrollWheelDown> j
 map <ScrollWheelUp> k
 set scrolloff=5
 
-highlight LineNr ctermfg=grey ctermbg=lightgrey
-highlight Italic ctermbg=lightgrey
-highlight BoldItalic ctermbg=lightgrey
-highlight ColorColumn ctermbg=lightgrey
-highlight DiffAdd ctermfg=black ctermbg=lightgreen
-highlight DiffDelete ctermfg=black ctermbg=red
-highlight DiffChange ctermfg=black ctermbg=lightmagenta
-highlight DiffText ctermfg=black ctermbg=magenta
+" Background-aware highlights: same vimrc must look decent against both a light
+" and a dark terminal (local + ssh, iTerm2 + WSL). Vim auto-detects &background
+" by querying the terminal (OSC 11), which tunnels through ssh. That query
+" answers asynchronously *after* this file runs, so the initial call below may
+" use the wrong background and then correct itself once the OptionSet autocmd
+" fires. Diff colors read fine on both, so they stay unconditional.
+function! s:ApplyMyColors() abort
+  if &background ==# 'dark'
+    highlight LineNr      ctermfg=darkgrey  ctermbg=NONE
+    highlight Italic      cterm=italic       ctermbg=NONE
+    highlight BoldItalic  cterm=bold,italic  ctermbg=NONE
+    highlight ColorColumn ctermbg=236
+  else
+    highlight LineNr      ctermfg=grey ctermbg=lightgrey
+    highlight Italic      ctermbg=lightgrey
+    highlight BoldItalic  ctermbg=lightgrey
+    highlight ColorColumn ctermbg=lightgrey
+  endif
+  highlight DiffAdd    ctermfg=black ctermbg=lightgreen
+  highlight DiffDelete ctermfg=black ctermbg=red
+  highlight DiffChange ctermfg=black ctermbg=lightmagenta
+  highlight DiffText   ctermfg=black ctermbg=magenta
+endfunction
+
+augroup MyColors
+  autocmd!
+  autocmd OptionSet background call s:ApplyMyColors()
+  autocmd ColorScheme  *       call s:ApplyMyColors()
+augroup END
+call s:ApplyMyColors()
 
 " disable auto-commenting:
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o noai nocin nosi inde=
