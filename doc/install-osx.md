@@ -407,6 +407,9 @@ rustup-init
 >   Customize the `rustup-init` installation to not modify the PATH since nucleus already does it
 >   in `~/.bash_profile.d/rust.sh`.
 
+```bash
+cargo install toml-fmt
+```
 
 ## gcloud sdk
 
