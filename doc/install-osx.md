@@ -240,6 +240,8 @@ pyenv shell 3.14.6
 pip install -U pip
 pip install -U virtualenv
 pyenv global 3.14.6
+
+pip install black isort yq
 ```
 
 
@@ -408,7 +410,7 @@ rustup-init
 >   in `~/.bash_profile.d/rust.sh`.
 
 ```bash
-cargo install toml-fmt
+cargo install taplo-cli
 ```
 
 ## gcloud sdk
