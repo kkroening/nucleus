@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- THIS FILE IS AUTO-GENERATED. DO NOT EDIT BY HAND. -->
+<!-- To use this file, open your system's Text Replacements configuration settings, then drag and drop this file into the modal. -->
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <array>
@@ -23,61 +24,61 @@
 	</dict>
 	<dict>
 		<key>phrase</key>
-		<string>₀</string>
+		<string>⁰</string>
 		<key>shortcut</key>
 		<string>:^0:</string>
 	</dict>
 	<dict>
 		<key>phrase</key>
-		<string>₁</string>
+		<string>¹</string>
 		<key>shortcut</key>
 		<string>:^1:</string>
 	</dict>
 	<dict>
 		<key>phrase</key>
-		<string>₂</string>
+		<string>²</string>
 		<key>shortcut</key>
 		<string>:^2:</string>
 	</dict>
 	<dict>
 		<key>phrase</key>
-		<string>₃</string>
+		<string>³</string>
 		<key>shortcut</key>
 		<string>:^3:</string>
 	</dict>
 	<dict>
 		<key>phrase</key>
-		<string>₄</string>
+		<string>⁴</string>
 		<key>shortcut</key>
 		<string>:^4:</string>
 	</dict>
 	<dict>
 		<key>phrase</key>
-		<string>₅</string>
+		<string>⁵</string>
 		<key>shortcut</key>
 		<string>:^5:</string>
 	</dict>
 	<dict>
 		<key>phrase</key>
-		<string>₆</string>
+		<string>⁶</string>
 		<key>shortcut</key>
 		<string>:^6:</string>
 	</dict>
 	<dict>
 		<key>phrase</key>
-		<string>₇</string>
+		<string>⁷</string>
 		<key>shortcut</key>
 		<string>:^7:</string>
 	</dict>
 	<dict>
 		<key>phrase</key>
-		<string>₈</string>
+		<string>⁸</string>
 		<key>shortcut</key>
 		<string>:^8:</string>
 	</dict>
 	<dict>
 		<key>phrase</key>
-		<string>₉</string>
+		<string>⁹</string>
 		<key>shortcut</key>
 		<string>:^9:</string>
 	</dict>

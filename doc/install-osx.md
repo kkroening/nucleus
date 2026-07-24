@@ -337,7 +337,8 @@ brew install \
   prettier \
   shfmt \
   wasm-tools \
-  watch
+  watch \
+  zstd
 ```
 
 
