@@ -40,6 +40,7 @@ nucleus::_setup_git_aliases() {
   alias gwR='git worktree remove'
 
   alias gh-kral='GH_CONFIG_DIR=~/.config/gh-kral gh'
+  alias gh-kroebot='GH_CONFIG_DIR=~/.config/gh-kroebot gh'
 }
 
 nucleus::_setup_git_aliases
